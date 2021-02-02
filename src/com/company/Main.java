@@ -1,45 +1,22 @@
 package com.company;
 
-public class Main{
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.java.JavaPlugin;
 
-    //TODO: empty data folder fix
-
-    public static void main(String [] args){
-
-        // start up routine plugin
-        System.out.println("Starting Datacraft plugin");
-
-        // start timing class
-        Timer timer = new Timer();
-        System.out.println("Current date and time is: "+ timer.getTimeAndDateFull());
-
-        // read in configuration of plugin
-        Config configuration = new Config();
-
-        // check if plugin has been used before
-        Statistics statistics = new Statistics();
-        statistics.loadStatistics();
-
-        // get the time to update and post out of the config file
-        String timeToPost = configuration.getUpdateConfig();
-            //timer.getTimeAndDateFull();
-            //System.out.println(timeToPost);
-        boolean check = timer.compareTime(timeToPost);
+public class Main extends JavaPlugin {
 
 
+    //run this code when plugin is started
+    @Override
+    public void onEnable(){
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterAnchievements plugin enabled");
+    }
 
 
-        if (check){
-
-            System.out.println("updating statistics");
-
-            statistics.updateStatistics();
-        }
-
-        // start or continue capturing new statistics
-        //statistics.logStatistics();
-
-
+    //run this code when plugin should be disabled
+    @Override
+    public void onDisable(){
+        getServer().getConsoleSender().sendMessage(ChatColor.RED + "BetterAnchievements plugin disabled");
     }
 
 }

@@ -1,0 +1,5 @@
+name: BetterAnchievements
+main: com.company.Main
+version: 1.0
+author: [Thomas Verschoor, Dieter Nuytemans]
+api-version: 1.16

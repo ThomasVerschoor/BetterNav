@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Datacraft_plugin:jar">
+    <output-path>$USER_HOME$/Desktop/Minecraft/bukkit/paper_server/plugins</output-path>
+    <root id="archive" name="Datacraft_plugin.jar">
+      <element id="module-output" name="Datacraft_plugin" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/Minecraft/bukkit/dependencies/spigot-api-1.16.5.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
