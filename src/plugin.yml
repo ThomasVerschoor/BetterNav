@@ -3,3 +3,12 @@ main: com.company.Main
 version: 1.0
 author: [Thomas Verschoor, Dieter Nuytemans]
 api-version: 1.16
+commands:
+  heal:
+    description: heals player to max health
+    usage: /<command>
+    aliases: [healing,healme,healmax]
+  feed:
+    description: feeds player to max
+    usage: :/<command>
+    aliases: [feedme,feed,feedmax]
