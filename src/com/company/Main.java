@@ -5,7 +5,10 @@ import com.events.Event_Handler;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
+
 public class Main extends JavaPlugin {
+
 
 
     //run this code when plugin is started
@@ -13,17 +16,23 @@ public class Main extends JavaPlugin {
     public void onEnable(){
         Commands_Handler commands = new Commands_Handler();
         getServer().getPluginManager().registerEvents(new Event_Handler(),this);
-        getCommand("heal").setExecutor(commands);
-        getCommand("feed").setExecutor(commands);
+        getCommand("bn").setExecutor(commands);
+        getCommand("getlocation").setExecutor(commands);
+        getCommand("savelocation").setExecutor(commands);
+        getCommand("showlocation").setExecutor(commands);
+        getCommand("showcoordinates").setExecutor(commands);
+        getCommand("nav").setExecutor(commands);
 
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterAnchievements plugin enabled");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
     }
 
 
     //run this code when plugin should be disabled
     @Override
     public void onDisable(){
-        getServer().getConsoleSender().sendMessage(ChatColor.RED + "BetterAnchievements plugin disabled");
+        getServer().getConsoleSender().sendMessage(ChatColor.RED + "BetterNav plugin disabled");
     }
+
+
 
 }
