@@ -1,0 +1,40 @@
+name: BetterNav
+main: com.company.Main
+version: 1.0
+author: Thomas Verschoor
+api-version: 1.16
+commands:
+  bn:
+    description: show explanation of commands
+    usage: /<command>
+    aliases: [about,help,bnhelp,bn-help]
+
+  getlocation:
+    description: show location of the player
+    usage: :/<command>
+    aliases: [whereiam,getlocation,getloc,me]
+
+  savelocation:
+    description: save location on map
+    usage: :/<command>
+    aliases: [savelocation, save, hold]
+
+  showlocation:
+    description: show locations saved
+    usage: :/<command>
+    aliases: [showlocations,showpossiblelocations]
+
+  showcoordinates:
+    description: show coordinates of saved location
+    usage: :/<command>
+    aliases: [showcoord, getcoord]
+
+  nav:
+    description: navigate to
+    usage: :/<command>
+    aliases: [nav,navto,goto]
+
+
+
+
+
