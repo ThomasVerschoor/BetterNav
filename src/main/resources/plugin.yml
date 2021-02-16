@@ -1,7 +1,7 @@
 name: BetterNav
-main: com.company.betternav.Main
+main: com.company.betternav.BetterNav
 version: ${project.version}
-author: Thomas Verschoor
+author: [Thomas Verschoor, Dieter Nuytemans]
 api-version: 1.16
 commands:
   bn:

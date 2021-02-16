@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
-    <artifactId>Datacraft_plugin</artifactId>
+    <groupId>com.company.betternav</groupId>
+    <artifactId>BetterNav</artifactId>
     <version>1.0.0</version>
 
     <!-- Force Maven to consistently use JDK 8 and UTF-8 encoding to prevent warnings -->
