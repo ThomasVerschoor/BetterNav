@@ -85,14 +85,14 @@ public class Event_Handler implements Listener {
         //System.out.println("Key: " + k + ", Value: " + goal);
         //player.sendMessage("Key"+ k +" value:" +goal);
 
-        String goalString = goal.getName();
+        String goalName = goal.getName();
 
         //get x value
-        String x = "" + goal.getLocation().getX();
+        double x = goal.getLocation().getX();
         //get z value
-        String z = "" + goal.getLocation().getZ();
+        double z = goal.getLocation().getZ();
 
-        navPlayer.sendMessage("UUID "+uuid +" is navigating to "+x +" "+z);
+        navPlayer.sendMessage("UUID "+uuid +" is navigating to " + goalName + " at (" +x +", "+z + ")");
 
 
         //get current coordinates
@@ -102,7 +102,7 @@ public class Event_Handler implements Listener {
 
         //calculate euclidean distance
 
-        double distance = Math.sqrt(Math.pow(((Integer.parseInt(x)-x_nav)),2)+(Math.pow((Integer.parseInt(z)-z_nav),2)));
+        double distance = Math.sqrt(Math.pow(((Math.round( x-x_nav ))),2)+(Math.pow(Math.round(z-z_nav),2)));
         distance = round(distance,2);
         navPlayer.sendMessage(String.valueOf(distance));
 
