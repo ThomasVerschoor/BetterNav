@@ -11,6 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,11 +41,13 @@ public class Commands_Handler implements CommandExecutor {
 
     private final PlayerGoals playerGoals;
 
-    String path = "/Users/thomasverschoor/Desktop/Minecraft/bukkit/paper_server/plugins/BetterNav/";
+    private final String path;
 
-    public Commands_Handler(PlayerGoals playerGoals)
+    public Commands_Handler(PlayerGoals playerGoals, JavaPlugin plugin)
     {
         this.playerGoals = playerGoals;
+        this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
+        System.out.println(this.path);
     }
 
     public void writeFile(String name, String X, String Z) {
