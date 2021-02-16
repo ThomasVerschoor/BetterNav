@@ -1,5 +1,7 @@
 package com.company.betternav.events;
 
+import com.company.betternav.Goal;
+import com.company.betternav.PlayerGoals;
 import com.company.betternav.commands.Commands_Handler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,7 +23,7 @@ import static java.lang.Integer.valueOf;
 
 public class Event_Handler implements Listener {
 
-    public static double round(double value, int places) {
+    public double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
         BigDecimal bd = BigDecimal.valueOf(value);
@@ -29,8 +31,16 @@ public class Event_Handler implements Listener {
         return bd.doubleValue();
     }
 
+    private final PlayerGoals playerGoals;
+
+    public Event_Handler( PlayerGoals playerGoals )
+    {
+        this.playerGoals = playerGoals;
+    }
+
+
     @EventHandler
-    public static void onPlayerJoin(PlayerJoinEvent event){
+    public void onPlayerJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
         player.sendMessage(ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help");
     }
@@ -39,9 +49,9 @@ public class Event_Handler implements Listener {
 
     //check if player has moved
     @EventHandler
-    public static void onPlayerWalk(PlayerMoveEvent event){
-        Commands_Handler comms = new Commands_Handler();
-        Player player = event.getPlayer();
+    public void onPlayerWalk(PlayerMoveEvent event){
+
+        // Early return if the player did not move in a relevant way (vertical/looks around)
 
         int prevX = event.getFrom().getBlockX();
         int prevZ = event.getFrom().getBlockZ();
@@ -63,57 +73,50 @@ public class Event_Handler implements Listener {
         //loop over the players that are navigating
 
         //playersNavigating.forEach((UUID,goal) -> player.sendMessage("User "+UUID +" navigated to" +goal.toString()));
-        for (HashMap.Entry<UUID, HashMap<String,String>> entry : playersNavigating.entrySet()) {
-            UUID k = entry.getKey();
-            HashMap<String,String> goal = entry.getValue();
-            //System.out.println("Key: " + k + ", Value: " + goal);
-            //player.sendMessage("Key"+ k +" value:" +goal);
 
-            String goalString = goal.toString();
+        UUID uuid = event.getPlayer().getUniqueId();
+        Goal goal = this.playerGoals.getPlayerGoal( uuid );
 
-            //remove first character
-            goalString = goalString.substring(1);
+        // Return if Player has no active goal
+        if (goal == null)
+            return;
 
-            //remove last character
-            goalString = goalString.substring(0, goalString.length() - 1);
+        //System.out.println("Key: " + k + ", Value: " + goal);
+        //player.sendMessage("Key"+ k +" value:" +goal);
 
-            //split the string
-            String[] Coordinates = goalString.split("=");
+        String goalString = goal.getName();
 
-            //get x value
-            String x = Coordinates[0];
-            //get z value
-            String z = Coordinates[1];
+        //get x value
+        String x = "" + goal.getLocation().getX();
+        //get z value
+        String z = "" + goal.getLocation().getZ();
 
 
 
-            Player navplayer = Bukkit.getPlayer(k);
+        Player navplayer = Bukkit.getPlayer(uuid);
 
-            navplayer.sendMessage("UUID "+k +" is navigating to "+x +" "+z);
-
-
-            //get current coordinates
-            int x_nav = navplayer.getLocation().getBlockX();
-            int y_nav = navplayer.getLocation().getBlockY();
-            int z_nav = navplayer.getLocation().getBlockZ();
-
-            //calculate euclidean distance
-
-            double distance = Math.sqrt(Math.pow(((Integer.parseInt(x)-x_nav)),2)+(Math.pow((Integer.parseInt(z)-z_nav),2)));
-            distance = round(distance,2);
-            navplayer.sendMessage(String.valueOf(distance));
-
-            if(distance < 2){
-
-                navplayer.sendMessage("You arrived at "+goal);
-
-                //delete player at navigating people
-                playersNavigating.remove(k);
-            }
+        navplayer.sendMessage("UUID "+uuid +" is navigating to "+x +" "+z);
 
 
+        //get current coordinates
+        int x_nav = navplayer.getLocation().getBlockX();
+        int y_nav = navplayer.getLocation().getBlockY();
+        int z_nav = navplayer.getLocation().getBlockZ();
 
+        //calculate euclidean distance
+
+        double distance = Math.sqrt(Math.pow(((Integer.parseInt(x)-x_nav)),2)+(Math.pow((Integer.parseInt(z)-z_nav),2)));
+        distance = round(distance,2);
+        navplayer.sendMessage(String.valueOf(distance));
+
+        if(distance < 2){
+
+            navplayer.sendMessage("You arrived at "+goal);
+
+            //delete player at navigating people
+            this.playerGoals.removePlayerGoal( uuid );
         }
+
 
 
 

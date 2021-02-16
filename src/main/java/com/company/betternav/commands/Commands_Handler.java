@@ -1,5 +1,9 @@
 package com.company.betternav.commands;
 
+import com.company.betternav.Goal;
+import com.company.betternav.PlayerGoals;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -34,10 +38,14 @@ import static java.lang.String.valueOf;
 public class Commands_Handler implements CommandExecutor {
 
 
-    public static HashMap<UUID,HashMap<String,String>> playersNavigating = new HashMap<>();
+    private final PlayerGoals playerGoals;
 
     String path = "/Users/thomasverschoor/Desktop/Minecraft/bukkit/paper_server/plugins/BetterNav/";
 
+    public Commands_Handler(PlayerGoals playerGoals)
+    {
+        this.playerGoals = playerGoals;
+    }
 
     public void writeFile(String name, String X, String Z) {
 
@@ -231,21 +239,15 @@ public class Commands_Handler implements CommandExecutor {
 
                     //get coordinates to the goal
                     String goal = coordinates.get(0);
-                    String x = coordinates.get(1);
-                    String z = coordinates.get(2);
+                    double x = Double.parseDouble( coordinates.get(1) );
+                    double z = Double.parseDouble( coordinates.get(2) );
+
+                    Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld("world"), x, 0, z ) );
 
                     player.sendMessage("Navigating to "+goal);
                     player.sendMessage("Navigating to "+x+" "+z);
 
-                    HashMap<String,String> goalMapping = new HashMap<>();
-                    goalMapping.put(x,z);
-
-                    playersNavigating.put(PlayersUUID,goalMapping);
-
-
-
-
-
+                    this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
 
                 } catch (IllegalArgumentException e) {
                     player.sendMessage("§c§l(!) §cThat is not a valid entity!");
