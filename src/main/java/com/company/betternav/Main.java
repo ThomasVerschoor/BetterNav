@@ -14,8 +14,11 @@ public class Main extends JavaPlugin {
     //run this code when plugin is started
     @Override
     public void onEnable(){
-        Commands_Handler commands = new Commands_Handler();
-        getServer().getPluginManager().registerEvents(new Event_Handler(),this);
+
+        final PlayerGoals playerGoals = new PlayerGoals();
+
+        Commands_Handler commands = new Commands_Handler( playerGoals );
+        getServer().getPluginManager().registerEvents(new Event_Handler( playerGoals ),this);
         getCommand("bn").setExecutor(commands);
         getCommand("getlocation").setExecutor(commands);
         getCommand("savelocation").setExecutor(commands);
