@@ -1,6 +1,5 @@
-package com.commands;
+package com.company.betternav.commands;
 
-import com.company.PlayersUUID;
 import org.bukkit.Server;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;

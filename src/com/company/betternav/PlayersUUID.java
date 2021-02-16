@@ -1,4 +1,4 @@
-package com.company;
+package com.company.betternav;
 
 
 import java.util.HashMap;

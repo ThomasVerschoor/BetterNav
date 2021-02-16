@@ -1,7 +1,7 @@
-package com.company;
+package com.company.betternav;
 
-import com.commands.Commands_Handler;
-import com.events.Event_Handler;
+import com.company.betternav.commands.Commands_Handler;
+import com.company.betternav.events.Event_Handler;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
