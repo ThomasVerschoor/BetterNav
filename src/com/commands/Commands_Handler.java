@@ -1,5 +1,6 @@
 package com.commands;
 
+import com.company.PlayersUUID;
 import org.bukkit.Server;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -13,7 +14,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.UUID;
 
 import static java.lang.String.valueOf;
 
@@ -31,12 +34,11 @@ import static java.lang.String.valueOf;
 
 public class Commands_Handler implements CommandExecutor {
 
-    public static boolean nav = false;
-    public static String goal ="";
-    public static String x_goal = "";
-    public static String z_goal = "";
+
+    public static HashMap<UUID,HashMap<String,String>> playersNavigating = new HashMap<>();
 
     String path = "/Users/thomasverschoor/Desktop/Minecraft/bukkit/paper_server/plugins/BetterNav/";
+
 
     public void writeFile(String name, String X, String Z) {
 
@@ -213,20 +215,17 @@ public class Commands_Handler implements CommandExecutor {
         // show coordinates of saved location
         else if (cmd.getName().equalsIgnoreCase("nav")) {
 
-            // get the UUID of the player
-            String UUID = player.getUniqueId().toString();
-
-            player.sendMessage(UUID);
-
-
 
             // if location provided
             if (args.length == 1) {
                 try {
 
-                    // the location needed
+                    // get the UUID of the player
+                    UUID PlayersUUID = player.getUniqueId();
+
+
+                    // get the location needed
                     String location = args[0];
-                    goal = location;
 
                     //read coordinates out of file
                     ArrayList<String> coordinates = readFile(location);
@@ -237,12 +236,14 @@ public class Commands_Handler implements CommandExecutor {
                     String z = coordinates.get(2);
 
                     player.sendMessage("Navigating to "+goal);
-                    player.sendMessage("Navigating to "+x);
-                    player.sendMessage("Navigating to "+z);
+                    player.sendMessage("Navigating to "+x+" "+z);
 
-                    nav = true;
-                    x_goal = x;
-                    z_goal = z;
+                    HashMap<String,String> goalMapping = new HashMap<>();
+                    goalMapping.put(x,z);
+
+                    playersNavigating.put(PlayersUUID,goalMapping);
+
+
 
 
 
@@ -263,16 +264,6 @@ public class Commands_Handler implements CommandExecutor {
 
     }
 
-
-    // get value of navigation boolean
-    public boolean getNav(){
-        return nav;
-    }
-
-    // set value of navigation boolean
-    public void setNav(boolean value){
-        nav = value;
-    }
 
 }
 
