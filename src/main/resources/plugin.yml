@@ -1,6 +1,6 @@
 name: BetterNav
-main: com.company.Main
-version: 1.0
+main: com.company.betternav.Main
+version: ${project.version}
 author: Thomas Verschoor
 api-version: 1.16
 commands:

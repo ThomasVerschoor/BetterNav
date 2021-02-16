@@ -1,6 +1,6 @@
-package com.events;
+package com.company.betternav.events;
 
-import com.commands.Commands_Handler;
+import com.company.betternav.commands.Commands_Handler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -14,10 +14,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
-import static com.commands.Commands_Handler.*;
+import static com.company.betternav.commands.Commands_Handler.*;
 import static java.lang.Integer.valueOf;
 
 public class Event_Handler implements Listener {
