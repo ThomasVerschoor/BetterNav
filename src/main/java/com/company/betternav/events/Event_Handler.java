@@ -74,7 +74,8 @@ public class Event_Handler implements Listener {
 
         //playersNavigating.forEach((UUID,goal) -> player.sendMessage("User "+UUID +" navigated to" +goal.toString()));
 
-        UUID uuid = event.getPlayer().getUniqueId();
+        Player navPlayer = event.getPlayer();
+        UUID uuid = navPlayer.getUniqueId();
         Goal goal = this.playerGoals.getPlayerGoal( uuid );
 
         // Return if Player has no active goal
@@ -91,27 +92,23 @@ public class Event_Handler implements Listener {
         //get z value
         String z = "" + goal.getLocation().getZ();
 
-
-
-        Player navplayer = Bukkit.getPlayer(uuid);
-
-        navplayer.sendMessage("UUID "+uuid +" is navigating to "+x +" "+z);
+        navPlayer.sendMessage("UUID "+uuid +" is navigating to "+x +" "+z);
 
 
         //get current coordinates
-        int x_nav = navplayer.getLocation().getBlockX();
-        int y_nav = navplayer.getLocation().getBlockY();
-        int z_nav = navplayer.getLocation().getBlockZ();
+        int x_nav = navPlayer.getLocation().getBlockX();
+        int y_nav = navPlayer.getLocation().getBlockY();
+        int z_nav = navPlayer.getLocation().getBlockZ();
 
         //calculate euclidean distance
 
         double distance = Math.sqrt(Math.pow(((Integer.parseInt(x)-x_nav)),2)+(Math.pow((Integer.parseInt(z)-z_nav),2)));
         distance = round(distance,2);
-        navplayer.sendMessage(String.valueOf(distance));
+        navPlayer.sendMessage(String.valueOf(distance));
 
         if(distance < 2){
 
-            navplayer.sendMessage("You arrived at "+goal);
+            navPlayer.sendMessage("You arrived at "+goal);
 
             //delete player at navigating people
             this.playerGoals.removePlayerGoal( uuid );
