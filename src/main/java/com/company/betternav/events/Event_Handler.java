@@ -92,7 +92,7 @@ public class Event_Handler implements Listener {
         //get z value
         double z = goal.getLocation().getZ();
 
-        navPlayer.sendMessage("UUID "+uuid +" is navigating to " + goalName + " at (" +x +", "+z + ")");
+        //navPlayer.sendMessage("UUID "+uuid +" is navigating to " + goalName + " at (" +x +", "+z + ")");
 
 
         //get current coordinates
@@ -108,42 +108,15 @@ public class Event_Handler implements Listener {
 
         if(distance < 2){
 
-            navPlayer.sendMessage("You arrived at "+goal);
+            String message = "You arrived at ";
+            String goalMessage = ChatColor.LIGHT_PURPLE + goal.getName();
+
+            navPlayer.sendMessage(message + goalMessage);
 
             //delete player at navigating people
             this.playerGoals.removePlayerGoal( uuid );
         }
 
-
-
-
-
-
-
-        //boolean navigating = comms.getNav();
-
-        /*
-        if(navigating){
-            //player.sendMessage("Navigating");
-
-            //get current coordinates
-            int x = player.getLocation().getBlockX();
-            int y = player.getLocation().getBlockY();
-            int z = player.getLocation().getBlockZ();
-
-            //calculate euclidean distance
-
-            double distance = Math.sqrt(Math.pow(((Integer.parseInt(x_goal)-x)),2)+(Math.pow((Integer.parseInt(z_goal)-z),2)));
-            player.sendMessage(String.valueOf(distance));
-
-            if(distance < 2){
-
-                comms.setNav(false);
-                player.sendMessage("You arrived at "+goal);
-            }
-
-        }
-        */
 
 
 

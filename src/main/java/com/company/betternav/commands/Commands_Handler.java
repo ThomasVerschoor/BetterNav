@@ -1,10 +1,15 @@
 package com.company.betternav.commands;
 
 import com.company.betternav.Goal;
+import com.company.betternav.LocationWorld;
 import com.company.betternav.PlayerGoals;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
+import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,80 +18,88 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.UUID;
+import java.io.*;
+import java.util.*;
 
 import static java.lang.String.valueOf;
 
-//world.getname() om wereld te krijgen -> meerdere werelden
-// derde y coordinaat enkel voor tp!
-//bstats?
-//maven toevoegen
-// https://www.youtube.com/watch?v=iwzzd10Ms9U
 
-//player object, player.isOp()
-//met permissions werken, regeltje true of false
-//-> player.betternav()
-// permission hoe veel locaties per speler
-// per speler apart?
-
+/*
+Command Handler for BetterNavigating Plugin
+ */
 public class Commands_Handler implements CommandExecutor {
 
-
+    // class PlayerGoals to store the player's information and their goal (where to navigate)
     private final PlayerGoals playerGoals;
 
+    // local path, where the files will need to be stored
     private final String path;
 
+    /**
+     *  Constructor for command handler
+     *
+     * @param playerGoals class
+     * @param plugin, to get the path extracted
+     */
     public Commands_Handler(PlayerGoals playerGoals, JavaPlugin plugin)
     {
         this.playerGoals = playerGoals;
+
+        // File.separator to get correct separation, depending on OS
         this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
-        System.out.println(this.path);
+
     }
 
+    /**
+     * To write the file that consists of the coordinates
+     * @param name name of the location
+     * @param X x coordinate to write
+     * @param Z z coordinate to write
+     */
     public void writeFile(String name, String X, String Z) {
 
+        Gson json = new GsonBuilder().setPrettyPrinting().create();
+
         try {
-            FileWriter myWriter = new FileWriter(path + name + ".txt");
-            myWriter.write(name + "\n" + X + "\n" + Z);
+            //write new file
+            FileWriter myWriter = new FileWriter(path + name + ".json");
+
+            // make map of coordinates and name to define it in json
+            LocationWorld coordinate = new LocationWorld("world",name,Integer.parseInt(X),0,Integer.parseInt(Z));
+
+            //write to Json file
+            json.toJson(coordinate,myWriter);
+
+            //close writer
             myWriter.close();
+
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred by writing a file for your coordinates");
             e.printStackTrace();
         }
 
     }
 
     // to read a file
-    public ArrayList<String> readFile(String location) {
+    public LocationWorld readFile(String location) {
+
 
         // get arraylist for coordinates
-        ArrayList<String> locations = new ArrayList<String>();
+        //ArrayList<String> locations = new ArrayList<String>();
 
-        try {
+        Gson gson = new Gson();
 
-            File myObj = new File(path+location + ".txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                locations.add(data);
-                //System.out.println(data);
-            }
-            myReader.close();
-            return locations;
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+        try (Reader reader = new FileReader(path+location + ".json")) {
+
+            // Convert JSON File to Java Object
+            LocationWorld location_coordinates = gson.fromJson(reader, LocationWorld.class);
+            return location_coordinates;
+
+        } catch (IOException e) {
             e.printStackTrace();
-
         }
 
-        return locations;
+     return null;
 
     }
 
@@ -138,7 +151,7 @@ public class Commands_Handler implements CommandExecutor {
                 if (file.isFile()) {
 
                     // get full filename of file
-                    String[] fileName = file.getName().split(".txt");
+                    String[] fileName = file.getName().split(".json");
 
                     // location name will be first part
                     String location = fileName[0];
@@ -206,12 +219,13 @@ public class Commands_Handler implements CommandExecutor {
                     String location = args[0];
 
                     //read coordinates out of file
-                    ArrayList<String> coordinates = readFile(location);
+                    LocationWorld coordinates = readFile(location);
 
                     //send coordinates to the player
-                    player.sendMessage(coordinates.get(0));
-                    player.sendMessage(coordinates.get(1));
-                    player.sendMessage(coordinates.get(2));
+                    player.sendMessage(coordinates.getName());
+                    player.sendMessage(String.valueOf(coordinates.getX()));
+                    player.sendMessage(String.valueOf(coordinates.getZ()));
+
 
 
                 } catch (IllegalArgumentException e) {
@@ -238,12 +252,12 @@ public class Commands_Handler implements CommandExecutor {
                     String location = args[0];
 
                     //read coordinates out of file
-                    ArrayList<String> coordinates = readFile(location);
+                    LocationWorld coordinates = readFile(location);
 
                     //get coordinates to the goal
-                    String goal = coordinates.get(0);
-                    double x = Double.parseDouble( coordinates.get(1) );
-                    double z = Double.parseDouble( coordinates.get(2) );
+                    String goal = coordinates.getName();
+                    double x = coordinates.getX();
+                    double z = coordinates.getZ();
 
                     Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld("world"), x, 0, z ) );
 
