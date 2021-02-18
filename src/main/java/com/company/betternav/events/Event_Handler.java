@@ -2,10 +2,8 @@ package com.company.betternav.events;
 
 import com.company.betternav.Goal;
 import com.company.betternav.PlayerGoals;
-import com.company.betternav.PlayersBossBar;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,15 +11,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.UUID;
 
-import static java.lang.Integer.valueOf;
 
 public class Event_Handler implements Listener {
 
@@ -65,19 +59,13 @@ public class Event_Handler implements Listener {
 
 
 
+
+        /*
         // Early return if the player did not move in a relevant way (vertical/looks around)
 
         int prevX = event.getFrom().getBlockX();
         int prevZ = event.getFrom().getBlockZ();
 
-
-        Location loc = event.getTo();
-        if(loc == null) {
-            return;
-        }
-
-
-        /*
         int currX = loc.getBlockX();
         int currZ = loc.getBlockZ();
 
@@ -86,6 +74,11 @@ public class Event_Handler implements Listener {
             return;
         }
         */
+
+        Location loc = event.getTo();
+        if(loc == null) {
+            return;
+        }
 
 
 

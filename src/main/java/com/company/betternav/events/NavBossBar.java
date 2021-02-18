@@ -31,12 +31,30 @@ public class NavBossBar {
     }
 
     public void createBar(String goal, double distance){
-        bar = Bukkit.createBossBar(format("&cDestination: "+ChatColor.GREEN +goal + " &cDistance: "+ChatColor.GREEN + distance), BarColor.BLUE, BarStyle.SOLID);
+
+        String destination = ChatColor.BLUE + "Destination : ";
+        String g = ChatColor.GREEN + goal;
+        String distanceString = ChatColor.BLUE + " Distance : ";
+        String d = ChatColor.GREEN + Double.toString(distance);
+
+        String msg = destination + g + distanceString + d;
+
+        //bar = Bukkit.createBossBar(format("&cDestination: "+ChatColor.GREEN +goal + " &cDistance: "+ChatColor.GREEN + distance), BarColor.BLUE, BarStyle.SOLID);
+        bar = Bukkit.createBossBar(msg,BarColor.BLUE,BarStyle.SOLID);
         bar.setVisible(true);
     }
 
     public void updateDistance(String goal,double distance){
-        bar.setTitle(format("&cDestination: "+ChatColor.GREEN +goal + " Distance: "+ChatColor.GREEN + distance));
+
+        String destination = ChatColor.BLUE + "Destination : ";
+        String g = ChatColor.GREEN + goal;
+        String distanceString = ChatColor.BLUE + " Distance : ";
+        String d = ChatColor.GREEN + Double.toString(distance);
+
+        String msg = destination + g + distanceString + d;
+
+        //bar.setTitle(format("&cDestination: "+ChatColor.GREEN +goal + " Distance: "+ChatColor.GREEN + distance));
+        bar.setTitle(msg);
     }
 
     public void setProgress(double progress){
