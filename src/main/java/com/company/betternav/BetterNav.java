@@ -18,7 +18,7 @@ public class BetterNav extends JavaPlugin {
         final PlayerGoals playerGoals = new PlayerGoals();
 
         Commands_Handler commands = new Commands_Handler( playerGoals, this );
-        getServer().getPluginManager().registerEvents(new Event_Handler( playerGoals ),this);
+        getServer().getPluginManager().registerEvents(new Event_Handler( playerGoals,this ),this);
         getCommand("bn").setExecutor(commands);
         getCommand("getlocation").setExecutor(commands);
         getCommand("savelocation").setExecutor(commands);

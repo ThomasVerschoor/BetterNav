@@ -8,9 +8,11 @@ public class PlayerGoals {
 
     private final Map<UUID, Goal> playerGoals;
 
+
     public PlayerGoals()
     {
         this.playerGoals = new HashMap<>();
+
     }
 
 
@@ -50,5 +52,6 @@ public class PlayerGoals {
     {
         return playerGoals.remove( uuid );
     }
+
 
 }

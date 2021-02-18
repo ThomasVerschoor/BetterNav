@@ -2,26 +2,32 @@ package com.company.betternav.events;
 
 import com.company.betternav.Goal;
 import com.company.betternav.PlayerGoals;
-import com.company.betternav.commands.Commands_Handler;
-import org.bukkit.Bukkit;
+import com.company.betternav.PlayersBossBar;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 
-import static com.company.betternav.commands.Commands_Handler.*;
 import static java.lang.Integer.valueOf;
 
 public class Event_Handler implements Listener {
+
+
+    HashMap<UUID, NavBossBar> bblist = new HashMap<>();
+
 
     public double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -32,10 +38,14 @@ public class Event_Handler implements Listener {
     }
 
     private final PlayerGoals playerGoals;
+    private final JavaPlugin plugin;
 
-    public Event_Handler( PlayerGoals playerGoals )
+    public Event_Handler(PlayerGoals playerGoals, JavaPlugin plugin)
     {
         this.playerGoals = playerGoals;
+        this.plugin = plugin;
+
+
     }
 
 
@@ -47,20 +57,27 @@ public class Event_Handler implements Listener {
 
 
 
+
+
     //check if player has moved
     @EventHandler
     public void onPlayerWalk(PlayerMoveEvent event){
+
+
 
         // Early return if the player did not move in a relevant way (vertical/looks around)
 
         int prevX = event.getFrom().getBlockX();
         int prevZ = event.getFrom().getBlockZ();
 
+
         Location loc = event.getTo();
         if(loc == null) {
             return;
         }
 
+
+        /*
         int currX = loc.getBlockX();
         int currZ = loc.getBlockZ();
 
@@ -68,6 +85,8 @@ public class Event_Handler implements Listener {
         if (currX==prevX && prevZ == currZ){
             return;
         }
+        */
+
 
 
         //loop over the players that are navigating
@@ -82,9 +101,7 @@ public class Event_Handler implements Listener {
         if (goal == null)
             return;
 
-        //System.out.println("Key: " + k + ", Value: " + goal);
-        //player.sendMessage("Key"+ k +" value:" +goal);
-
+        //get name of the goal
         String goalName = goal.getName();
 
         //get x value
@@ -104,25 +121,97 @@ public class Event_Handler implements Listener {
 
         double distance = Math.sqrt(Math.pow(((Math.round( x-x_nav ))),2)+(Math.pow(Math.round(z-z_nav),2)));
         distance = round(distance,2);
-        navPlayer.sendMessage(String.valueOf(distance));
+        //navPlayer.sendMessage(String.valueOf(distance));
+
+
+
+        //create new bossbar
+
+        NavBossBar bb = new NavBossBar(plugin);
+
+
+        //check if player exists
+        if(bblist.containsKey(uuid)){
+
+            // get bossbar of player
+            NavBossBar navbb = bblist.get(uuid);
+
+            // update the distance to the goal
+            navbb.updateDistance(goalName,distance);
+
+            // get vector of the player
+            Vector directionPlayer = navPlayer.getLocation().getDirection();
+
+            //System.out.println(directionPlayer.getX());
+            //System.out.println(directionPlayer.getZ());
+
+            // get viewing direction vector
+            Vector viewingDirection = new Vector(directionPlayer.getX(),0,directionPlayer.getZ());
+
+            // normalize the vector
+            viewingDirection = viewingDirection.normalize();
+
+            // calculate the vector between current loc and navigation loc
+            double x_vector = x_nav - x;
+            double y_vector = 0;
+            double z_vector = z_nav - z;
+
+            // create new vector with xyz
+            Vector distanceDirection = new Vector(x_vector,y_vector,z_vector);
+
+            // normalize the direction
+            distanceDirection = distanceDirection.normalize();
+
+            // calculate the angle between the vectors
+            float angle = viewingDirection.angle(distanceDirection);
+
+            // calculate the mapping to the barlevel
+            double barlevel = angle/Math.PI;
+
+            //System.out.println(angle2);
+
+            // update the progress on the bar
+            navbb.setProgress(barlevel);
+
+        }
+
+        //else create bossbar
+        else
+        {
+            // put the bar on the list
+            bblist.put(uuid,bb);
+
+            // create a bar
+            bb.createBar(goalName,distance);
+
+            // add player to the bar
+            bb.addPlayer(navPlayer);
+
+        }
 
         if(distance < 2){
 
+            // set welcome message
             String message = "You arrived at ";
-            String goalMessage = ChatColor.LIGHT_PURPLE + goal.getName();
 
+            // set locationname in different color
+            String goalMessage = ChatColor.LIGHT_PURPLE + goalName;
+
+            // send player the message
             navPlayer.sendMessage(message + goalMessage);
 
-            //delete player at navigating people
+            // delete player at navigating people
             this.playerGoals.removePlayerGoal( uuid );
+
+            // delete the bossbar
+            NavBossBar delbb = bblist.get(uuid);
+            delbb.delete(navPlayer);
+
+            // remove the bar of the list
+            bblist.remove(navPlayer.getUniqueId());
+
         }
 
-
-
-
-
     }
-
-
 
 }
