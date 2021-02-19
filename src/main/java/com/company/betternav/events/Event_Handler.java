@@ -4,6 +4,8 @@ import com.company.betternav.Goal;
 import com.company.betternav.IBossBarCalculator;
 import com.company.betternav.PlayerGoals;
 import com.company.betternav.bossbarcalculators.AdvancedBossbarCalculator;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -18,6 +20,8 @@ import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.UUID;
 
+import static java.lang.String.valueOf;
+
 
 public class Event_Handler implements Listener {
 
@@ -27,6 +31,7 @@ public class Event_Handler implements Listener {
     private final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
 
     private final IBossBarCalculator bossBarCalculator;
+    private HashMap<UUID,Boolean> actionbarplayers = new HashMap<>();
 
 
     public double round(double value, int places) {
@@ -38,10 +43,11 @@ public class Event_Handler implements Listener {
     }
 
 
-    public Event_Handler(PlayerGoals playerGoals, JavaPlugin plugin)
+    public Event_Handler(PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers)
     {
         this.playerGoals = playerGoals;
         this.plugin = plugin;
+        this.actionbarplayers = actionbarplayers;
 
         this.bossBarCalculator = new AdvancedBossbarCalculator();
     }
@@ -60,6 +66,7 @@ public class Event_Handler implements Listener {
     //check if player has moved
     @EventHandler
     public void onPlayerWalk(PlayerMoveEvent event){
+
 
 
 
@@ -92,6 +99,32 @@ public class Event_Handler implements Listener {
 
         Player navPlayer = event.getPlayer();
         UUID uuid = navPlayer.getUniqueId();
+
+        // check for action bar
+
+        if (actionbarplayers.containsKey(uuid)){
+
+            // get boolean for player
+            boolean actionbar = actionbarplayers.get(uuid);
+            if(actionbar){
+                int X_Coordinate = navPlayer.getLocation().getBlockX();
+                int Y_Coordinate = navPlayer.getLocation().getBlockY();
+                int Z_Coordinate = navPlayer.getLocation().getBlockZ();
+
+                String X = valueOf(X_Coordinate);
+                String Y = valueOf(Y_Coordinate);
+                String Z = valueOf(Z_Coordinate);
+
+                //player.sendMessage("Your current location is X " + X + " Z " + Z);
+                navPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.WHITE+"X "+X +"          Y "+ Y + "          Z " + Z));
+            }
+        }
+
+
+
+
+
+        //check for bossbar
         Goal goal = this.playerGoals.getPlayerGoal( uuid );
 
         // Return if Player has no active goal

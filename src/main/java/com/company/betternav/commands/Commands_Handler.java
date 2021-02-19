@@ -3,6 +3,7 @@ package com.company.betternav.commands;
 import com.company.betternav.Goal;
 import com.company.betternav.LocationWorld;
 import com.company.betternav.PlayerGoals;
+import com.company.betternav.PlayersActionBar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -37,18 +38,22 @@ public class Commands_Handler implements CommandExecutor {
     // local path, where the files will need to be stored
     private final String path;
 
+    private HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
+
     /**
      *  Constructor for command handler
      *
      * @param playerGoals class
      * @param plugin, to get the path extracted
      */
-    public Commands_Handler(PlayerGoals playerGoals, JavaPlugin plugin)
+    public Commands_Handler(PlayerGoals playerGoals, JavaPlugin plugin,HashMap<UUID,Boolean> actionbarplayers)
     {
         this.playerGoals = playerGoals;
 
         // File.separator to get correct separation, depending on OS
         this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
+
+        this.actionbarplayers = actionbarplayers;
 
     }
 
@@ -141,6 +146,32 @@ public class Commands_Handler implements CommandExecutor {
         // get current location of the player
         else if (cmd.getName().equalsIgnoreCase("getlocation")) {
 
+            // get the UUID of the player
+            UUID PlayersUUID = player.getUniqueId();
+
+
+
+            // check if player is on list
+            if(actionbarplayers.containsKey(PlayersUUID)){
+
+            }
+            else{
+                // put player on the list
+                actionbarplayers.put(PlayersUUID,false);
+            }
+
+            // get the boolean
+            boolean en = actionbarplayers.get(PlayersUUID);
+
+            // toggle the boolean
+            en = !en;
+
+            // set the toggled value
+            actionbarplayers.remove(PlayersUUID);
+            actionbarplayers.put(PlayersUUID,en);
+
+            /*
+
             // get x and z location (string)
             int X_Coordinate = player.getLocation().getBlockX();
             int Y_Coordinate = player.getLocation().getBlockY();
@@ -152,7 +183,10 @@ public class Commands_Handler implements CommandExecutor {
 
             //player.sendMessage("Your current location is X " + X + " Z " + Z);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("X "+X +" Y "+ Y + " Z " + Z));
+
+            */
         }
+
 
         // get list of locations
         else if (cmd.getName().equalsIgnoreCase("showlocation")) {
