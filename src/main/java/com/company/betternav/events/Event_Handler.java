@@ -1,7 +1,10 @@
 package com.company.betternav.events;
 
 import com.company.betternav.Goal;
+import com.company.betternav.IBossBarCalculator;
 import com.company.betternav.PlayerGoals;
+import com.company.betternav.bossbarcalculators.AccurateCalculator;
+import com.company.betternav.bossbarcalculators.BasicCalculator;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -10,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -19,8 +22,12 @@ import java.util.UUID;
 
 public class Event_Handler implements Listener {
 
+    private final JavaPlugin plugin;
 
-    HashMap<UUID, NavBossBar> bblist = new HashMap<>();
+    private final PlayerGoals playerGoals;
+    private final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
+
+    private final IBossBarCalculator bossBarCalculator;
 
 
     public double round(double value, int places) {
@@ -31,15 +38,13 @@ public class Event_Handler implements Listener {
         return bd.doubleValue();
     }
 
-    private final PlayerGoals playerGoals;
-    private final JavaPlugin plugin;
 
     public Event_Handler(PlayerGoals playerGoals, JavaPlugin plugin)
     {
         this.playerGoals = playerGoals;
         this.plugin = plugin;
 
-
+        this.bossBarCalculator = new BasicCalculator();
     }
 
 
@@ -133,38 +138,12 @@ public class Event_Handler implements Listener {
             navbb.updateDistance(goalName,distance);
 
             // get vector of the player
-            Vector directionPlayer = navPlayer.getLocation().getDirection();
-
-            //System.out.println(directionPlayer.getX());
-            //System.out.println(directionPlayer.getZ());
-
-            // get viewing direction vector
-            Vector viewingDirection = new Vector(directionPlayer.getX(),0,directionPlayer.getZ());
-
-            // normalize the vector
-            viewingDirection = viewingDirection.normalize();
-
-            // calculate the vector between current loc and navigation loc
-            double x_vector = x_nav - x;
-            double y_vector = 0;
-            double z_vector = z_nav - z;
-
-            // create new vector with xyz
-            Vector distanceDirection = new Vector(x_vector,y_vector,z_vector);
-
-            // normalize the direction
-            distanceDirection = distanceDirection.normalize();
-
-            // calculate the angle between the vectors
-            float angle = viewingDirection.angle(distanceDirection);
-
-            // calculate the mapping to the barlevel
-            double barlevel = angle/Math.PI;
+            double barLevel = this.bossBarCalculator.calculateBarLevel( navPlayer, goal.getLocation() );
 
             //System.out.println(angle2);
 
             // update the progress on the bar
-            navbb.setProgress(barlevel);
+            navbb.setProgress(barLevel);
 
         }
 
