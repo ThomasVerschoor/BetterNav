@@ -18,6 +18,18 @@ public class NavBossBar {
     private final JavaPlugin plugin;
     private BossBar bar;
 
+    public String createMsg(String goal,double distance){
+
+        String destination = ChatColor.BLUE + "Destination : ";
+        String g = ChatColor.GREEN + goal;
+        String distanceString = ChatColor.BLUE + " Distance : ";
+        String d = ChatColor.GREEN + Double.toString(distance);
+
+        String msg = destination + g + distanceString + d;
+
+        return msg;
+    }
+
     public NavBossBar(JavaPlugin plugin){
         this.plugin = plugin;
     }
@@ -32,12 +44,7 @@ public class NavBossBar {
 
     public void createBar(String goal, double distance){
 
-        String destination = ChatColor.BLUE + "Destination : ";
-        String g = ChatColor.GREEN + goal;
-        String distanceString = ChatColor.BLUE + " Distance : ";
-        String d = ChatColor.GREEN + Double.toString(distance);
-
-        String msg = destination + g + distanceString + d;
+        String msg = createMsg(goal,distance);
 
         //bar = Bukkit.createBossBar(format("&cDestination: "+ChatColor.GREEN +goal + " &cDistance: "+ChatColor.GREEN + distance), BarColor.BLUE, BarStyle.SOLID);
         bar = Bukkit.createBossBar(msg,BarColor.BLUE,BarStyle.SOLID);
@@ -46,12 +53,7 @@ public class NavBossBar {
 
     public void updateDistance(String goal,double distance){
 
-        String destination = ChatColor.BLUE + "Destination : ";
-        String g = ChatColor.GREEN + goal;
-        String distanceString = ChatColor.BLUE + " Distance : ";
-        String d = ChatColor.GREEN + Double.toString(distance);
-
-        String msg = destination + g + distanceString + d;
+        String msg = createMsg(goal,distance);
 
         //bar.setTitle(format("&cDestination: "+ChatColor.GREEN +goal + " Distance: "+ChatColor.GREEN + distance));
         bar.setTitle(msg);

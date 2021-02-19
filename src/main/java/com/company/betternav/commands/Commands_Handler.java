@@ -6,6 +6,8 @@ import com.company.betternav.PlayerGoals;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -141,12 +143,15 @@ public class Commands_Handler implements CommandExecutor {
 
             // get x and z location (string)
             int X_Coordinate = player.getLocation().getBlockX();
+            int Y_Coordinate = player.getLocation().getBlockY();
             int Z_Coordinate = player.getLocation().getBlockZ();
 
             String X = valueOf(X_Coordinate);
+            String Y = valueOf(Y_Coordinate);
             String Z = valueOf(Z_Coordinate);
 
-            player.sendMessage("Your current location is X " + X + " Z " + Z);
+            //player.sendMessage("Your current location is X " + X + " Z " + Z);
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("X "+X +" Y "+ Y + " Z " + Z));
         }
 
         // get list of locations
@@ -187,9 +192,11 @@ public class Commands_Handler implements CommandExecutor {
 
                     // get x and z location (string)
                     int X_Coordinate = player.getLocation().getBlockX();
+                    int Y_Coordinate = player.getLocation().getBlockY();
                     int Z_Coordinate = player.getLocation().getBlockZ();
 
                     String X = valueOf(X_Coordinate);
+                    String Y = valueOf(Y_Coordinate);
                     String Z = valueOf(Z_Coordinate);
 
                     player.sendMessage("§c§l(!) §c Location " + location + " saved on: " + X + " " + Z);
