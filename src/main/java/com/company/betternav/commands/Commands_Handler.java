@@ -61,8 +61,20 @@ public class Commands_Handler implements CommandExecutor {
         Gson json = new GsonBuilder().setPrettyPrinting().create();
 
         try {
+
+            System.out.println(path + name + ".json");
+
+            // Create missing folder
+            File folder = new File(path);
+            if (!folder.exists()) folder.mkdir();
+
+            // Create missing file
+            File file = new File(path + name + ".json");
+            if (!file.exists()) file.createNewFile();
+
             //write new file
             FileWriter myWriter = new FileWriter(path + name + ".json");
+
 
             // make map of coordinates and name to define it in json
             LocationWorld coordinate = new LocationWorld("world",name,Integer.parseInt(X),0,Integer.parseInt(Z));
