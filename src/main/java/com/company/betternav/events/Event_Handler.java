@@ -3,8 +3,7 @@ package com.company.betternav.events;
 import com.company.betternav.Goal;
 import com.company.betternav.IBossBarCalculator;
 import com.company.betternav.PlayerGoals;
-import com.company.betternav.bossbarcalculators.AccurateCalculator;
-import com.company.betternav.bossbarcalculators.BasicCalculator;
+import com.company.betternav.bossbarcalculators.AdvancedBossbarCalculator;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -44,7 +43,7 @@ public class Event_Handler implements Listener {
         this.playerGoals = playerGoals;
         this.plugin = plugin;
 
-        this.bossBarCalculator = new BasicCalculator();
+        this.bossBarCalculator = new AdvancedBossbarCalculator();
     }
 
 
