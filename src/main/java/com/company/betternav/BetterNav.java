@@ -29,6 +29,7 @@ public class BetterNav extends JavaPlugin {
         getCommand("showlocation").setExecutor(commands);
         getCommand("showcoordinates").setExecutor(commands);
         getCommand("nav").setExecutor(commands);
+        getCommand("del").setExecutor(commands);
 
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
     }

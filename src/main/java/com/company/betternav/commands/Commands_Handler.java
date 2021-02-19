@@ -122,6 +122,21 @@ public class Commands_Handler implements CommandExecutor {
 
     }
 
+    public boolean deleteFile(String location){
+
+        // create new file object
+        File file = new File(path+location+".json");
+
+        if(file.delete()){
+
+            return true;
+        }else {
+            return false;
+        }
+
+
+    }
+
 
 
 
@@ -259,6 +274,27 @@ public class Commands_Handler implements CommandExecutor {
                 player.sendMessage("§c§l(!) §c/savelocation <name of your location> ");
                 player.sendMessage("§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> ");
             }
+        }
+
+        else if(cmd.getName().equalsIgnoreCase("del")){
+            // if location to delete provided
+            if (args.length == 1) {
+                try {
+                    String location = args[0];
+                    boolean deleted = deleteFile(location);
+                    if(deleted){
+                        player.sendMessage(location+" is deleted");
+                    }
+                    else{
+                        player.sendMessage("Could not delete location "+location);
+                    }
+
+                }catch (IllegalArgumentException e){
+                    player.sendMessage("§c§l(!) §cThat is not a valid entity!");
+                }
+
+            }
+
         }
 
         // show coordinates of saved location

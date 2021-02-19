@@ -34,6 +34,10 @@ commands:
     usage: :/<command>
     aliases: [nav,navto,goto]
 
+  del:
+    description: delete
+    usage: :/<command>
+
 
 
 
