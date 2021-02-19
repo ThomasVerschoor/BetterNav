@@ -23,22 +23,36 @@ public class AdvancedBossbarCalculator implements IBossBarCalculator {
         double x_vector = goal.getX() - playerLocation.getX();
         double y_vector = 0;
         double z_vector = goal.getZ() - playerLocation.getZ();
-        Vector distanceDirection = new Vector(x_vector,y_vector,z_vector).normalize();
+        Vector goalDirection = new Vector(x_vector,y_vector,z_vector).normalize();
 
         // calculate the angle between the vectors
         // See: https://stackoverflow.com/questions/53970131/how-to-find-the-clockwise-angle-between-two-vectors-in-python
-//        double a = viewingDirection.getX() * playerDirection.getZ() - viewingDirection.getZ() * playerDirection.getX();
         double theta = -Math.asin(
                 (
-                        viewingDirection.getX() * distanceDirection.getZ() -
-                        viewingDirection.getZ() * distanceDirection.getX()
+                        viewingDirection.getX() * goalDirection.getZ() -
+                        viewingDirection.getZ() * goalDirection.getX()
                 ) / (
-                    viewingDirection.length() * distanceDirection.length()
+                    viewingDirection.length() * goalDirection.length()
                     )
         );
 
-        player.sendMessage("angle: " + theta);
-        return (theta + Math.PI/2) / (Math.PI);
+        // Apply the desired range
+        theta = (theta + Math.PI/2) / (Math.PI);
+
+        double bossbarLevel;
+        boolean isInversed = viewingDirection.dot( goalDirection ) < 0;
+        if (isInversed)
+        {
+            if (theta < 0.5)
+                bossbarLevel = 0;
+            else
+                bossbarLevel = 1;
+        }else
+        {
+            bossbarLevel = theta;
+        }
+
+        return bossbarLevel;
     }
 
 }
