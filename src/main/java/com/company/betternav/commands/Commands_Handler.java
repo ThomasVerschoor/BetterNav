@@ -3,24 +3,15 @@ package com.company.betternav.commands;
 import com.company.betternav.Goal;
 import com.company.betternav.LocationWorld;
 import com.company.betternav.PlayerGoals;
-import com.company.betternav.PlayersActionBar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.World;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import java.io.*;
 import java.util.*;
 
@@ -38,6 +29,7 @@ public class Commands_Handler implements CommandExecutor {
     // local path, where the files will need to be stored
     private final String path;
 
+    // hashmap to hold the players with action bar enabled or not
     private HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
 
     /**
@@ -63,7 +55,7 @@ public class Commands_Handler implements CommandExecutor {
      * @param X x coordinate to write
      * @param Z z coordinate to write
      */
-    public void writeFile(String name, String X, String Z) {
+    public void writeFile(String name, String X, String Z,Player player) {
 
         Gson json = new GsonBuilder().setPrettyPrinting().create();
 
@@ -71,16 +63,31 @@ public class Commands_Handler implements CommandExecutor {
 
             System.out.println(path + name + ".json");
 
-            // Create missing folder
+            // Create missing folder Betternav
             File folder = new File(path);
             if (!folder.exists()) folder.mkdir();
 
-            // Create missing file
-            File file = new File(path + name + ".json");
-            if (!file.exists()) file.createNewFile();
+            //get player uuid
+            UUID uuid = player.getUniqueId();
+            String id = uuid.toString();
 
+            String newPath = path+id;
+
+            //System.out.println(path);
+            //System.out.println(newPath);
+
+            File folder2 = new File(newPath);
+            if (!folder2.exists()) folder2.mkdir();
+
+            // Create missing file
+            //File file = new File(newPath+File.separator+name+".json");
+            //if (!file.exists()) file.createNewFile();
+
+
+            String filename = newPath+File.separator+name+".json";
             //write new file
-            FileWriter myWriter = new FileWriter(path + name + ".json");
+            FileWriter myWriter = new FileWriter(filename);
+            //System.out.println(filename);
 
 
             // make map of coordinates and name to define it in json
@@ -249,7 +256,7 @@ public class Commands_Handler implements CommandExecutor {
                     String Z = valueOf(Z_Coordinate);
 
                     player.sendMessage("§c§l(!) §c Location " + location + " saved on: " + X + " " + Z);
-                    writeFile(location, X, Z);
+                    writeFile(location, X, Z,player);
 
 
                 } catch (IllegalArgumentException e) {
@@ -262,7 +269,7 @@ public class Commands_Handler implements CommandExecutor {
                     String Z = args[2];
 
                     player.sendMessage("§c§l(!) §c Location " + location + " saved on: " + X + " " + Z);
-                    writeFile(location, X, Z);
+                    writeFile(location, X, Z,player);
 
 
                 } catch (IllegalArgumentException e) {
