@@ -107,7 +107,7 @@ public class Commands_Handler implements CommandExecutor {
     }
 
     // to read a file
-    public LocationWorld readFile(String location) {
+    public LocationWorld readFile(String location,Player player) {
 
 
         // get arraylist for coordinates
@@ -115,7 +115,10 @@ public class Commands_Handler implements CommandExecutor {
 
         Gson gson = new Gson();
 
-        try (Reader reader = new FileReader(path+location + ".json")) {
+        String uuid = player.getUniqueId().toString();
+
+
+        try (Reader reader = new FileReader(path+File.separator+uuid+File.separator+location + ".json")) {
 
             // Convert JSON File to Java Object
             LocationWorld location_coordinates = gson.fromJson(reader, LocationWorld.class);
@@ -129,10 +132,12 @@ public class Commands_Handler implements CommandExecutor {
 
     }
 
-    public boolean deleteFile(String location){
+    public boolean deleteFile(String location,Player player){
+
+        String id = player.getUniqueId().toString();
 
         // create new file object
-        File file = new File(path+location+".json");
+        File file = new File(path+File.separator+id+File.separator+location+".json");
 
         if(file.delete()){
 
@@ -216,7 +221,9 @@ public class Commands_Handler implements CommandExecutor {
 
             player.sendMessage("saved locations: ");
 
-            File folder = new File(path);
+            String id = player.getUniqueId().toString();
+
+            File folder = new File(path+File.separator+id+File.separator);
             File[] listOfFiles = folder.listFiles();
 
             assert listOfFiles != null;
@@ -288,7 +295,7 @@ public class Commands_Handler implements CommandExecutor {
             if (args.length == 1) {
                 try {
                     String location = args[0];
-                    boolean deleted = deleteFile(location);
+                    boolean deleted = deleteFile(location,player);
                     if(deleted){
                         player.sendMessage(location+" is deleted");
                     }
@@ -315,7 +322,7 @@ public class Commands_Handler implements CommandExecutor {
                     String location = args[0];
 
                     //read coordinates out of file
-                    LocationWorld coordinates = readFile(location);
+                    LocationWorld coordinates = readFile(location,player);
 
                     //send coordinates to the player
                     player.sendMessage(coordinates.getName());
@@ -348,7 +355,7 @@ public class Commands_Handler implements CommandExecutor {
                     String location = args[0];
 
                     //read coordinates out of file
-                    LocationWorld coordinates = readFile(location);
+                    LocationWorld coordinates = readFile(location,player);
 
                     //get coordinates to the goal
                     String goal = coordinates.getName();
