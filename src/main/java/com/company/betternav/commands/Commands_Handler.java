@@ -32,6 +32,13 @@ public class Commands_Handler implements CommandExecutor {
     // hashmap to hold the players with action bar enabled or not
     private HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
 
+    public void makeDirectory(String newPath){
+
+        // Create missing folder at path
+        File folder = new File(newPath);
+        if (!folder.exists()) folder.mkdir();
+    }
+
     /**
      *  Constructor for command handler
      *
@@ -61,37 +68,38 @@ public class Commands_Handler implements CommandExecutor {
 
         try {
 
-            System.out.println(path + name + ".json");
+
+
+            //System.out.println(path + name + ".json");
 
             // Create missing folder Betternav
-            File folder = new File(path);
-            if (!folder.exists()) folder.mkdir();
+            makeDirectory(path);
+
+            String world = player.getWorld().getName();
+            String worldPath = path+File.separator+world;
+
+            // create missing folder world
+            makeDirectory(worldPath);
 
             //get player uuid
             UUID uuid = player.getUniqueId();
             String id = uuid.toString();
 
-            String newPath = path+id;
+            String PlayerPath = worldPath+File.separator+id;
 
             //System.out.println(path);
             //System.out.println(newPath);
 
-            File folder2 = new File(newPath);
-            if (!folder2.exists()) folder2.mkdir();
+            makeDirectory(PlayerPath);
 
-            // Create missing file
-            //File file = new File(newPath+File.separator+name+".json");
-            //if (!file.exists()) file.createNewFile();
-
-
-            String filename = newPath+File.separator+name+".json";
+            String filename = PlayerPath+File.separator+name+".json";
             //write new file
             FileWriter myWriter = new FileWriter(filename);
             //System.out.println(filename);
 
 
             // make map of coordinates and name to define it in json
-            LocationWorld coordinate = new LocationWorld("world",name,Integer.parseInt(X),0,Integer.parseInt(Z));
+            LocationWorld coordinate = new LocationWorld(world,name,Integer.parseInt(X),0,Integer.parseInt(Z));
 
             //write to Json file
             json.toJson(coordinate,myWriter);
@@ -115,10 +123,11 @@ public class Commands_Handler implements CommandExecutor {
 
         Gson gson = new Gson();
 
+        String world = player.getWorld().getName();
         String uuid = player.getUniqueId().toString();
 
 
-        try (Reader reader = new FileReader(path+File.separator+uuid+File.separator+location + ".json")) {
+        try (Reader reader = new FileReader(path+File.separator+world+File.separator+uuid+File.separator+location + ".json")) {
 
             // Convert JSON File to Java Object
             LocationWorld location_coordinates = gson.fromJson(reader, LocationWorld.class);
@@ -135,9 +144,10 @@ public class Commands_Handler implements CommandExecutor {
     public boolean deleteFile(String location,Player player){
 
         String id = player.getUniqueId().toString();
+        String world = player.getWorld().getName();
 
         // create new file object
-        File file = new File(path+File.separator+id+File.separator+location+".json");
+        File file = new File(path+File.separator+world+File.separator+id+File.separator+location+".json");
 
         if(file.delete()){
 
@@ -222,26 +232,34 @@ public class Commands_Handler implements CommandExecutor {
             player.sendMessage("saved locations: ");
 
             String id = player.getUniqueId().toString();
+            String world = player.getWorld().getName();
 
-            File folder = new File(path+File.separator+id+File.separator);
+            File folder = new File(path+File.separator+world+File.separator+id+File.separator);
             File[] listOfFiles = folder.listFiles();
 
-            assert listOfFiles != null;
-            for (File file : listOfFiles) {
-                if (file.isFile()) {
+            if (listOfFiles.length==0){
+                player.sendMessage("There are no saved locations.");
+            }
 
-                    // get full filename of file
-                    String[] fileName = file.getName().split(".json");
+            else{
+                for (File file : listOfFiles) {
+                    if (file.isFile()) {
 
-                    // location name will be first part
-                    String location = fileName[0];
-                    //System.out.println(file.getName());
+                        // get full filename of file
+                        String[] fileName = file.getName().split(".json");
 
-                    //send message to the player
-                    player.sendMessage("§c§l - §c " + location);
+                        // location name will be first part
+                        String location = fileName[0];
+                        //System.out.println(file.getName());
 
+                        //send message to the player
+                        player.sendMessage("§c§l - §c " + location);
+
+                    }
                 }
             }
+
+
         }
 
 
