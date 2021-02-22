@@ -7,22 +7,22 @@ commands:
   bn:
     description: show explanation of commands
     usage: /<command>
-    aliases: [about,help,bnhelp,bn-help]
+    aliases: [help]
 
   getlocation:
     description: show location of the player
     usage: :/<command>
-    aliases: [whereiam,getlocation,getloc,me]
+    aliases: [toggle]
 
   savelocation:
     description: save location on map
     usage: :/<command>
-    aliases: [savelocation, save, hold]
+    aliases: [savelocation, save]
 
   showlocation:
     description: show locations saved
     usage: :/<command>
-    aliases: [showlocations,showpossiblelocations]
+    aliases: [showpossiblelocations]
 
   showcoordinates:
     description: show coordinates of saved location
@@ -32,7 +32,7 @@ commands:
   nav:
     description: navigate to
     usage: :/<command>
-    aliases: [nav,navto,goto]
+    aliases: [nav,goto]
 
   del:
     description: delete

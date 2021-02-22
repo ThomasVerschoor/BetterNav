@@ -2,6 +2,7 @@ package com.company.betternav.commands;
 
 import com.company.betternav.Goal;
 import com.company.betternav.LocationWorld;
+import com.company.betternav.PlayerGoal;
 import com.company.betternav.PlayerGoals;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -422,10 +423,10 @@ public class Commands_Handler implements CommandExecutor {
 
 
 
-                    Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld(world), x, 0, z ) );
+                    PlayerGoal playerGoal = new PlayerGoal( goal, navto);
 
                     player.sendMessage("Navigating to "+goal);
-                    player.sendMessage("Navigating to "+x+" "+z);
+
 
                     this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
 

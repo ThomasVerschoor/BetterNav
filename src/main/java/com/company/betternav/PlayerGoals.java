@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class PlayerGoals {
 
-    private final Map<UUID, Goal> playerGoals;
+    private final Map<UUID, Goal > playerGoals;
 
 
     public PlayerGoals()
