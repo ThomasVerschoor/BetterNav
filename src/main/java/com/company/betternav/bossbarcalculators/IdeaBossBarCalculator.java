@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class AdvancedBossbarCalculator implements IBossBarCalculator {
+public class IdeaBossBarCalculator implements IBossBarCalculator {
 
 
     @Override
@@ -29,10 +29,10 @@ public class AdvancedBossbarCalculator implements IBossBarCalculator {
         double theta = -Math.asin(
                 (
                         viewingDirection.getX() * goalDirection.getZ() -
-                        viewingDirection.getZ() * goalDirection.getX()
+                                viewingDirection.getZ() * goalDirection.getX()
                 ) / (
-                    viewingDirection.length() * goalDirection.length()
-                    )
+                        viewingDirection.length() * goalDirection.length()
+                )
         );
 
         // Apply the desired range
@@ -51,7 +51,7 @@ public class AdvancedBossbarCalculator implements IBossBarCalculator {
             bossbarLevel = theta;
         }
 
-        return bossbarLevel;
+        return 1-bossbarLevel;
     }
 
 }

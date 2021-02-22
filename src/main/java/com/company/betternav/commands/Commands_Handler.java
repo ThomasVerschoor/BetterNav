@@ -372,7 +372,7 @@ public class Commands_Handler implements CommandExecutor {
                     // get the location needed
                     String location = args[0];
 
-                    //read coordinates out of file
+                    // read coordinates out of file
                     LocationWorld coordinates = readFile(location,player);
 
                     //get coordinates to the goal
@@ -381,6 +381,48 @@ public class Commands_Handler implements CommandExecutor {
                     double z = coordinates.getZ();
 
                     Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld("world"), x, 0, z ) );
+
+                    player.sendMessage("Navigating to "+goal);
+                    player.sendMessage("Navigating to "+x+" "+z);
+
+                    this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
+
+                } catch (IllegalArgumentException e) {
+                    player.sendMessage("§c§l(!) §cThat is not a valid entity!");
+                }
+            }
+
+        }
+
+        // show coordinates of saved location
+        else if (cmd.getName().equalsIgnoreCase("navplayer")) {
+
+
+            // if location provided
+            if (args.length == 1) {
+                try {
+
+                    // get the UUID of the player
+                    UUID PlayersUUID = player.getUniqueId();
+
+                    // get world of the player
+                    String world = player.getWorld().getName();
+
+
+                    // get the location needed
+                    String playerName = args[0];
+
+                    Player navto = Bukkit.getPlayer(playerName);
+
+                    //get coordinates to the goal
+                    String goal = playerName;
+
+                    double x = navto.getLocation().getX();
+                    double z = navto.getLocation().getZ();
+
+
+
+                    Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld(world), x, 0, z ) );
 
                     player.sendMessage("Navigating to "+goal);
                     player.sendMessage("Navigating to "+x+" "+z);

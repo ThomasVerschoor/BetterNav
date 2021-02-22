@@ -4,6 +4,8 @@ import com.company.betternav.Goal;
 import com.company.betternav.IBossBarCalculator;
 import com.company.betternav.PlayerGoals;
 import com.company.betternav.bossbarcalculators.AdvancedBossbarCalculator;
+import com.company.betternav.bossbarcalculators.BasicCalculator;
+import com.company.betternav.bossbarcalculators.IdeaBossBarCalculator;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -49,7 +51,9 @@ public class Event_Handler implements Listener {
         this.plugin = plugin;
         this.actionbarplayers = actionbarplayers;
 
-        this.bossBarCalculator = new AdvancedBossbarCalculator();
+        this.bossBarCalculator = new IdeaBossBarCalculator();
+        //this.bossBarCalculator = new BasicCalculator();
+        //this.bossBarCalculator = new AdvancedBossbarCalculator();
     }
 
 

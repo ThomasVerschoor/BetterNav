@@ -38,6 +38,11 @@ commands:
     description: delete
     usage: :/<command>
 
+  navplayer:
+    description: navigate to player
+    usage: :/<command>
+
+
 
 
 
