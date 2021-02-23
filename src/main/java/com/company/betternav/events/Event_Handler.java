@@ -37,6 +37,9 @@ public class Event_Handler implements Listener {
     private HashMap<UUID,Boolean> actionbarplayers = new HashMap<>();
 
     private final ConfigYaml config;
+    private int distance_to_goal;
+
+
 
 
 
@@ -71,6 +74,8 @@ public class Event_Handler implements Listener {
         else{
             this.bossBarCalculator = new AdvancedBossbarCalculator();
         }
+
+        distance_to_goal = config.getConfiguration().getInt("Distance");
 
     }
 
@@ -227,7 +232,7 @@ public class Event_Handler implements Listener {
 
         }
 
-        if(distance < 2){
+        if(distance < distance_to_goal){
 
             // set welcome message
             String message = "You arrived at ";
