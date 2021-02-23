@@ -17,9 +17,9 @@ commands:
   savelocation:
     description: save location on map
     usage: :/<command>
-    aliases: [savelocation, save]
+    aliases: [save]
 
-  showlocation:
+  showlocations:
     description: show locations saved
     usage: :/<command>
     aliases: [showpossiblelocations]
@@ -28,7 +28,7 @@ commands:
   showcoordinates:
     description: show coordinates of saved location
     usage: :/<command>
-    aliases: [showcoord, getcoord]
+    aliases: [getcoordinates]
 
   nav:
     description: navigate to

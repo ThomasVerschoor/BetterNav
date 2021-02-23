@@ -339,7 +339,7 @@ public class Commands_Handler implements CommandExecutor {
 
 
         // get list of locations
-        else if (cmd.getName().equalsIgnoreCase("showlocation")) {
+        else if (cmd.getName().equalsIgnoreCase("showlocations")) {
 
 
             player.sendMessage("saved locations: ");

@@ -34,7 +34,7 @@ public class BetterNav extends JavaPlugin {
         getCommand("bn").setExecutor(commands);
         getCommand("getlocation").setExecutor(commands);
         getCommand("savelocation").setExecutor(commands);
-        getCommand("showlocation").setExecutor(commands);
+        getCommand("showlocations").setExecutor(commands);
         getCommand("showcoordinates").setExecutor(commands);
         getCommand("nav").setExecutor(commands);
         getCommand("del").setExecutor(commands);
