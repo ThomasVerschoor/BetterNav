@@ -302,7 +302,7 @@ public class Commands_Handler implements CommandExecutor {
             String command7 = ChatColor.RED+" /navplayer <player>";
             String explanation7 = ChatColor.GREEN+" start navigating to player";
 
-            String command8 = ChatColor.RED+" /stop";
+            String command8 = ChatColor.RED+" /stopnav";
             String explanation8 = ChatColor.GREEN+" stop navigation";
 
 
@@ -573,7 +573,7 @@ public class Commands_Handler implements CommandExecutor {
         }
 
         // stop navigation
-        else if (cmd.getName().equalsIgnoreCase("stop")) {
+        else if (cmd.getName().equalsIgnoreCase("stopnav")) {
 
 
             try {
