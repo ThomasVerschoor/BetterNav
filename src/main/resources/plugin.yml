@@ -24,6 +24,7 @@ commands:
     usage: :/<command>
     aliases: [showpossiblelocations]
 
+
   showcoordinates:
     description: show coordinates of saved location
     usage: :/<command>
@@ -40,6 +41,10 @@ commands:
 
   navplayer:
     description: navigate to player
+    usage: :/<command>
+
+  stop:
+    description: stop navigation
     usage: :/<command>
 
 

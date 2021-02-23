@@ -2,15 +2,19 @@ package com.company.betternav;
 
 import com.company.betternav.commands.Commands_Handler;
 import com.company.betternav.events.Event_Handler;
+import com.company.betternav.events.NavBossBar;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
 
 public class BetterNav extends JavaPlugin {
+
+    //todo: fix verschillende wereld, fix afsluiten , toevoegen verwijderen navigatie
 
 
 
@@ -18,11 +22,14 @@ public class BetterNav extends JavaPlugin {
     @Override
     public void onEnable(){
 
+
+
         final PlayerGoals playerGoals = new PlayerGoals();
         final HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
+        final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
 
-        Commands_Handler commands = new Commands_Handler( playerGoals, this,actionbarplayers );
-        getServer().getPluginManager().registerEvents(new Event_Handler( playerGoals,this ,actionbarplayers),this);
+        Commands_Handler commands = new Commands_Handler( playerGoals, this,actionbarplayers,bblist );
+        getServer().getPluginManager().registerEvents(new Event_Handler( playerGoals,this ,actionbarplayers,bblist),this);
         getCommand("bn").setExecutor(commands);
         getCommand("getlocation").setExecutor(commands);
         getCommand("savelocation").setExecutor(commands);
@@ -31,6 +38,7 @@ public class BetterNav extends JavaPlugin {
         getCommand("nav").setExecutor(commands);
         getCommand("del").setExecutor(commands);
         getCommand("navplayer").setExecutor(commands);
+        getCommand("stop").setExecutor(commands);
 
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
     }

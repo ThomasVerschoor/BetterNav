@@ -1,12 +1,11 @@
 package com.company.betternav.commands;
 
-import com.company.betternav.Goal;
-import com.company.betternav.LocationWorld;
-import com.company.betternav.PlayerGoal;
-import com.company.betternav.PlayerGoals;
+import com.company.betternav.*;
+import com.company.betternav.events.NavBossBar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,8 +13,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
+import static com.sun.tools.attach.VirtualMachine.list;
 import static java.lang.String.valueOf;
 
 
@@ -33,6 +36,11 @@ public class Commands_Handler implements CommandExecutor {
     // hashmap to hold the players with action bar enabled or not
     private HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
 
+    private HashMap<UUID, NavBossBar> bblist;
+
+    private final ConfigYaml config;
+
+
     public void makeDirectory(String newPath){
 
         // Create missing folder at path
@@ -46,7 +54,7 @@ public class Commands_Handler implements CommandExecutor {
      * @param playerGoals class
      * @param plugin, to get the path extracted
      */
-    public Commands_Handler(PlayerGoals playerGoals, JavaPlugin plugin,HashMap<UUID,Boolean> actionbarplayers)
+    public Commands_Handler(PlayerGoals playerGoals, JavaPlugin plugin,HashMap<UUID,Boolean> actionbarplayers,HashMap<UUID, NavBossBar> bblist)
     {
         this.playerGoals = playerGoals;
 
@@ -54,16 +62,17 @@ public class Commands_Handler implements CommandExecutor {
         this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
 
         this.actionbarplayers = actionbarplayers;
+        this.config = new ConfigYaml(plugin);
+        this.bblist = bblist;
+
 
     }
 
     /**
      * To write the file that consists of the coordinates
      * @param name name of the location
-     * @param X x coordinate to write
-     * @param Z z coordinate to write
      */
-    public void writeFile(String name, String X, String Z,Player player) {
+    public void writeFile(String name,Player player) {
 
         Gson json = new GsonBuilder().setPrettyPrinting().create();
 
@@ -76,37 +85,84 @@ public class Commands_Handler implements CommandExecutor {
             // Create missing folder Betternav
             makeDirectory(path);
 
+            boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+
             String world = player.getWorld().getName();
             String worldPath = path+File.separator+world;
 
             // create missing folder world
             makeDirectory(worldPath);
 
-            //get player uuid
-            UUID uuid = player.getUniqueId();
-            String id = uuid.toString();
+            String PlayerPath = worldPath;
 
-            String PlayerPath = worldPath+File.separator+id;
+            if(privateWayPoints){
 
-            //System.out.println(path);
-            //System.out.println(newPath);
+                //get player uuid
+                UUID uuid = player.getUniqueId();
+                String id = uuid.toString();
+
+                PlayerPath = worldPath+File.separator+id;
+
+            }
+
+            else{
+
+                //create shared directory
+                PlayerPath = PlayerPath+File.separator+"shared";
+            }
+
+
+
+
 
             makeDirectory(PlayerPath);
+            int maximumWayPoints = config.getConfiguration().getInt("maximumWaypoints");
 
             String filename = PlayerPath+File.separator+name+".json";
             //write new file
-            FileWriter myWriter = new FileWriter(filename);
+
             //System.out.println(filename);
 
 
-            // make map of coordinates and name to define it in json
-            LocationWorld coordinate = new LocationWorld(world,name,Integer.parseInt(X),0,Integer.parseInt(Z));
 
-            //write to Json file
-            json.toJson(coordinate,myWriter);
 
-            //close writer
-            myWriter.close();
+            File directory = new File(PlayerPath);
+            int fileCount = directory.list().length;
+
+            System.out.println(PlayerPath);
+            System.out.println(fileCount);
+
+
+
+            if(fileCount<=maximumWayPoints){
+
+                // get x and z location (string)
+                int X_Coordinate = player.getLocation().getBlockX();
+                int Y_Coordinate = player.getLocation().getBlockY();
+                int Z_Coordinate = player.getLocation().getBlockZ();
+
+                String X = valueOf(X_Coordinate);
+                String Y = valueOf(Y_Coordinate);
+                String Z = valueOf(Z_Coordinate);
+
+                FileWriter myWriter = new FileWriter(filename);
+
+                // make map of coordinates and name to define it in json
+                LocationWorld coordinate = new LocationWorld(world,name,Integer.parseInt(X),0,Integer.parseInt(Z));
+
+                //write to Json file
+                json.toJson(coordinate,myWriter);
+
+                //close writer
+                myWriter.close();
+
+                player.sendMessage("§c§l(!) §c Location " + name + " saved on: " + X + " " + Z);
+            }
+
+            else{
+                player.sendMessage("Maximum amount of "+maximumWayPoints +" waypoints reached");
+            }
+
 
         } catch (IOException e) {
             System.out.println("An error occurred by writing a file for your coordinates");
@@ -127,18 +183,38 @@ public class Commands_Handler implements CommandExecutor {
         String world = player.getWorld().getName();
         String uuid = player.getUniqueId().toString();
 
+        String worldPath = path+File.separator+world+File.separator;
 
-        try (Reader reader = new FileReader(path+File.separator+world+File.separator+uuid+File.separator+location + ".json")) {
+        boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+        if(privateWayPoints){
+            String playerPath = worldPath+uuid;
+            worldPath = playerPath;
+        }
+
+        else{
+            //create shared directory
+            worldPath = worldPath+File.separator+"shared";
+        }
+
+        makeDirectory(worldPath);
+
+
+
+        String readPath = worldPath+File.separator+location+".json";
+
+
+        try (Reader reader = new FileReader(readPath)) {
 
             // Convert JSON File to Java Object
             LocationWorld location_coordinates = gson.fromJson(reader, LocationWorld.class);
             return location_coordinates;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            player.sendMessage("Could not find waypoint "+location +", maybe you mean navplayer <player>?");
+            return null;
+            //e.printStackTrace();
         }
 
-     return null;
 
     }
 
@@ -147,8 +223,26 @@ public class Commands_Handler implements CommandExecutor {
         String id = player.getUniqueId().toString();
         String world = player.getWorld().getName();
 
+        boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+
+        String readPath = path+File.separator+world+File.separator;
+
+        if(privateWayPoints){
+            readPath = readPath + id + File.separator;
+        }
+
+        else{
+            //create shared directory
+            readPath = readPath+"shared"+File.separator;
+        }
+
+        makeDirectory(readPath);
+
+        readPath = readPath + location+".json";
+
+
         // create new file object
-        File file = new File(path+File.separator+world+File.separator+id+File.separator+location+".json");
+        File file = new File(readPath);
 
         if(file.delete()){
 
@@ -177,7 +271,27 @@ public class Commands_Handler implements CommandExecutor {
         // shows up information about the plugin
         if (cmd.getName().equalsIgnoreCase("bn")) {
 
-            player.sendMessage("Helpfile");
+            String command = ChatColor.RED+"/getlocation";
+            String explanation = ChatColor.GREEN+" toggles the coordinates, shows your current location";
+            String command2 = ChatColor.RED+"/showlocation";
+            String explanation2 = ChatColor.GREEN+" shows list of all saved waypoints";
+            String command3 = ChatColor.RED+"/addlocation <waypoint>";
+            String explanation3 = ChatColor.GREEN+" saves waypoint";
+            String command4 = ChatColor.RED+ "/nav <waypoint>";
+            String explanation4 = ChatColor.GREEN+" start navigation to waypoint";
+            String command5 = ChatColor.RED+" /navplayer <player>";
+            String explanation5 = ChatColor.GREEN+" start navigating to player";
+            String command6 = ChatColor.RED+" /stop";
+            String explanation6 = ChatColor.GREEN+" stop navigation";
+
+
+            player.sendMessage(command+explanation);
+            player.sendMessage(command2+explanation2);
+            player.sendMessage(command3+explanation3);
+            player.sendMessage(command4+explanation4);
+            player.sendMessage(command5+explanation5);
+            player.sendMessage(command6+explanation6);
+
             return true;
         }
 
@@ -235,7 +349,21 @@ public class Commands_Handler implements CommandExecutor {
             String id = player.getUniqueId().toString();
             String world = player.getWorld().getName();
 
-            File folder = new File(path+File.separator+world+File.separator+id+File.separator);
+
+            String readPath = path+File.separator+world+File.separator;
+            boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+            if(privateWayPoints){
+                readPath = readPath+id+File.separator;
+
+            }
+            else{
+                //create shared directory
+                readPath = readPath+File.separator+"shared";
+            }
+
+
+
+            File folder = new File(readPath);
             File[] listOfFiles = folder.listFiles();
 
             if (listOfFiles.length==0){
@@ -272,17 +400,7 @@ public class Commands_Handler implements CommandExecutor {
                 try {
                     String location = args[0];
 
-                    // get x and z location (string)
-                    int X_Coordinate = player.getLocation().getBlockX();
-                    int Y_Coordinate = player.getLocation().getBlockY();
-                    int Z_Coordinate = player.getLocation().getBlockZ();
-
-                    String X = valueOf(X_Coordinate);
-                    String Y = valueOf(Y_Coordinate);
-                    String Z = valueOf(Z_Coordinate);
-
-                    player.sendMessage("§c§l(!) §c Location " + location + " saved on: " + X + " " + Z);
-                    writeFile(location, X, Z,player);
+                    writeFile(location,player);
 
 
                 } catch (IllegalArgumentException e) {
@@ -295,7 +413,7 @@ public class Commands_Handler implements CommandExecutor {
                     String Z = args[2];
 
                     player.sendMessage("§c§l(!) §c Location " + location + " saved on: " + X + " " + Z);
-                    writeFile(location, X, Z,player);
+                    writeFile(location,player);
 
 
                 } catch (IllegalArgumentException e) {
@@ -343,6 +461,11 @@ public class Commands_Handler implements CommandExecutor {
                     //read coordinates out of file
                     LocationWorld coordinates = readFile(location,player);
 
+                    if(coordinates==null){
+                        player.sendMessage("/bn to get information about how to use bn commands");
+                        return true;
+                    }
+
                     //send coordinates to the player
                     player.sendMessage(coordinates.getName());
                     player.sendMessage(String.valueOf(coordinates.getX()));
@@ -376,6 +499,12 @@ public class Commands_Handler implements CommandExecutor {
                     // read coordinates out of file
                     LocationWorld coordinates = readFile(location,player);
 
+                    // error handling when location is wrong
+                    if(coordinates==null){
+                        player.sendMessage("/bn to get information about how to use bn commands");
+                        return true;
+                    }
+
                     //get coordinates to the goal
                     String goal = coordinates.getName();
                     double x = coordinates.getX();
@@ -406,20 +535,19 @@ public class Commands_Handler implements CommandExecutor {
                     // get the UUID of the player
                     UUID PlayersUUID = player.getUniqueId();
 
-                    // get world of the player
-                    String world = player.getWorld().getName();
-
 
                     // get the location needed
                     String playerName = args[0];
 
                     Player navto = Bukkit.getPlayer(playerName);
 
+                    if(navto==null){
+                        player.sendMessage("Could not find player "+playerName);
+                        return true;
+                    }
+
                     //get coordinates to the goal
                     String goal = playerName;
-
-                    double x = navto.getLocation().getX();
-                    double z = navto.getLocation().getZ();
 
 
 
@@ -434,6 +562,36 @@ public class Commands_Handler implements CommandExecutor {
                     player.sendMessage("§c§l(!) §cThat is not a valid entity!");
                 }
             }
+
+        }
+
+        // stop navigation
+        else if (cmd.getName().equalsIgnoreCase("stop")) {
+
+
+            try {
+
+                // delete player at navigating people
+                this.playerGoals.removePlayerGoal(player.getUniqueId());
+
+                // delete the bossbar
+                NavBossBar delbb = bblist.remove(player.getUniqueId());
+                delbb.delete(player);
+
+                // remove the bar of the list
+                bblist.remove(player.getUniqueId());
+
+                // set locationname in different color
+                String endMessage = ChatColor.LIGHT_PURPLE + "ending navigation";
+
+                // send player the message
+                player.sendMessage(endMessage);
+            }catch (Exception e){
+                player.sendMessage("Cannot end navigation");
+            }
+
+
+
 
         }
 

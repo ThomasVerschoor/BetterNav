@@ -71,6 +71,7 @@ public class NavBossBar {
     public void delete(Player player){
         bar.removePlayer(player);
 
+
     }
 
 

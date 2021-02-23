@@ -1,5 +1,6 @@
 package com.company.betternav.events;
 
+import com.company.betternav.ConfigYaml;
 import com.company.betternav.Goal;
 import com.company.betternav.IBossBarCalculator;
 import com.company.betternav.PlayerGoals;
@@ -30,10 +31,14 @@ public class Event_Handler implements Listener {
     private final JavaPlugin plugin;
 
     private final PlayerGoals playerGoals;
-    private final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
+    private HashMap<UUID, NavBossBar> bblist = new HashMap<>();
 
     private final IBossBarCalculator bossBarCalculator;
     private HashMap<UUID,Boolean> actionbarplayers = new HashMap<>();
+
+    private final ConfigYaml config;
+
+
 
 
     public double round(double value, int places) {
@@ -45,22 +50,43 @@ public class Event_Handler implements Listener {
     }
 
 
-    public Event_Handler(PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers)
+    public Event_Handler(PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers,HashMap<UUID,NavBossBar> bblist)
     {
         this.playerGoals = playerGoals;
         this.plugin = plugin;
         this.actionbarplayers = actionbarplayers;
 
-        this.bossBarCalculator = new IdeaBossBarCalculator();
-        //this.bossBarCalculator = new BasicCalculator();
-        //this.bossBarCalculator = new AdvancedBossbarCalculator();
+        this.bblist = bblist;
+        this.config = new ConfigYaml(plugin);
+        int bbcalc = config.getConfiguration().getInt("BossBar");
+
+        if(bbcalc==1){
+            this.bossBarCalculator = new IdeaBossBarCalculator();
+
+
+        }
+        else if (bbcalc==2){
+            this.bossBarCalculator = new BasicCalculator();
+        }
+        else{
+            this.bossBarCalculator = new AdvancedBossbarCalculator();
+        }
+
     }
 
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
-        Player player = event.getPlayer();
-        player.sendMessage(ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help");
+
+        boolean message = config.getConfiguration().getBoolean("welcomeMessage");
+
+        if(message){
+            Player player = event.getPlayer();
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help");
+
+        }
+
+
     }
 
 
@@ -71,24 +97,6 @@ public class Event_Handler implements Listener {
     @EventHandler
     public void onPlayerWalk(PlayerMoveEvent event){
 
-
-
-
-
-        /*
-        // Early return if the player did not move in a relevant way (vertical/looks around)
-
-        int prevX = event.getFrom().getBlockX();
-        int prevZ = event.getFrom().getBlockZ();
-
-        int currX = loc.getBlockX();
-        int currZ = loc.getBlockZ();
-
-
-        if (currX==prevX && prevZ == currZ){
-            return;
-        }
-        */
 
         Location loc = event.getTo();
         if(loc == null) {
