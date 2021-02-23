@@ -80,11 +80,33 @@ public class Event_Handler implements Listener {
 
         boolean message = config.getConfiguration().getBoolean("welcomeMessage");
 
+        Player player = event.getPlayer();
         if(message){
-            Player player = event.getPlayer();
+
             player.sendMessage(ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help");
 
         }
+
+        Goal hadNav = playerGoals.getPlayerGoal(player.getUniqueId());
+        if(hadNav!=null){
+
+            NavBossBar bb = new NavBossBar(plugin);
+
+            // put the bar on the list
+            bblist.put(player.getUniqueId(),bb);
+
+            double distance = Math.sqrt(Math.pow(((Math.round( player.getLocation().getBlockX()-hadNav.getLocation().getBlockX() ))),2)+(Math.pow(Math.round(player.getLocation().getBlockX()-hadNav.getLocation().getBlockX()),2)));
+            distance = round(distance,2);
+
+            // create a bar
+            bb.createBar(hadNav.getName(),distance);
+
+            // add player to the bar
+            bb.addPlayer(player);
+
+        }
+
+
 
 
     }

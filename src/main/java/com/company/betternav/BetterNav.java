@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class BetterNav extends JavaPlugin {
 
-    //todo: fix verschillende wereld, fix afsluiten , toevoegen verwijderen navigatie
+    //todo: fix verschillende wereld,
 
 
 
