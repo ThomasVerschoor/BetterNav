@@ -33,7 +33,7 @@ commands:
   nav:
     description: navigate to
     usage: :/<command>
-    aliases: [nav,goto]
+    aliases: [goto]
 
   del:
     description: delete

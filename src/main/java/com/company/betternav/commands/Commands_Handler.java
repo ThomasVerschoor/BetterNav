@@ -270,25 +270,52 @@ public class Commands_Handler implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("bn")) {
 
             String command = ChatColor.RED+"/getlocation";
+            String command_1 = ChatColor.WHITE+" or";
+            String command_11 = ChatColor.RED+" /toggle";
             String explanation = ChatColor.GREEN+" toggles the coordinates, shows your current location";
-            String command2 = ChatColor.RED+"/showlocation";
-            String explanation2 = ChatColor.GREEN+" shows list of all saved waypoints";
-            String command3 = ChatColor.RED+"/addlocation <waypoint>";
-            String explanation3 = ChatColor.GREEN+" saves waypoint";
-            String command4 = ChatColor.RED+ "/nav <waypoint>";
-            String explanation4 = ChatColor.GREEN+" start navigation to waypoint";
-            String command5 = ChatColor.RED+" /navplayer <player>";
-            String explanation5 = ChatColor.GREEN+" start navigating to player";
-            String command6 = ChatColor.RED+" /stop";
-            String explanation6 = ChatColor.GREEN+" stop navigation";
+
+            String command2 = ChatColor.RED+"/savelocation <location>";
+            String command_2 = ChatColor.WHITE+" or";
+            String command_21 = ChatColor.RED+" /save";
+            String explanation2 = ChatColor.GREEN+" saves waypoint";
+
+            String command3 = ChatColor.RED+"/showlocations";
+            String command_3 = ChatColor.WHITE+" or";
+            String command_31 = ChatColor.RED+" /showpossiblelocations";
+            String explanation3 = ChatColor.GREEN+" shows list of all saved locations";
+
+            String command4 = ChatColor.RED+"/showcoordinates <location>";
+            String command_4 = ChatColor.WHITE+" or";
+            String command_41 = ChatColor.RED+" /getcoordinates <location>";
+            String explanation4 = ChatColor.GREEN+" shows coordinates of saved location";
+
+            String command5 = ChatColor.RED+"/del <location>";
+            String explanation5 = ChatColor.GREEN+" deletes a location";
 
 
-            player.sendMessage(command+explanation);
-            player.sendMessage(command2+explanation2);
-            player.sendMessage(command3+explanation3);
-            player.sendMessage(command4+explanation4);
+            String command6 = ChatColor.RED+ "/nav <location>";
+            String command_6 = ChatColor.WHITE+" or";
+            String command_61 = ChatColor.RED+" /goto <location>";
+            String explanation6 = ChatColor.GREEN+" start navigation to location";
+
+
+            String command7 = ChatColor.RED+" /navplayer <player>";
+            String explanation7 = ChatColor.GREEN+" start navigating to player";
+
+            String command8 = ChatColor.RED+" /stop";
+            String explanation8 = ChatColor.GREEN+" stop navigation";
+
+
+            player.sendMessage(command+command_1+command_11 + explanation);
+            player.sendMessage(command2+command_2+command_21+explanation2);
+            player.sendMessage(command3+command_3+command_31+explanation3);
+            player.sendMessage(command4+command_4+command_41+explanation4);
             player.sendMessage(command5+explanation5);
-            player.sendMessage(command6+explanation6);
+            player.sendMessage(command6+command_6+command_61+explanation6);
+            player.sendMessage(command7+explanation7);
+            player.sendMessage(command8+explanation8);
+
+
 
             return true;
         }
@@ -320,21 +347,6 @@ public class Commands_Handler implements CommandExecutor {
             actionbarplayers.remove(PlayersUUID);
             actionbarplayers.put(PlayersUUID,en);
 
-            /*
-
-            // get x and z location (string)
-            int X_Coordinate = player.getLocation().getBlockX();
-            int Y_Coordinate = player.getLocation().getBlockY();
-            int Z_Coordinate = player.getLocation().getBlockZ();
-
-            String X = valueOf(X_Coordinate);
-            String Y = valueOf(Y_Coordinate);
-            String Z = valueOf(Z_Coordinate);
-
-            //player.sendMessage("Your current location is X " + X + " Z " + Z);
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("X "+X +" Y "+ Y + " Z " + Z));
-
-            */
         }
 
 
