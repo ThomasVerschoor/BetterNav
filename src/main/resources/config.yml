@@ -18,7 +18,7 @@ maximumWaypoints : 10
 welcomeMessage : true
 
 # BossBar Navigating style
-BossBar : 2
+BossBar : 1
 
 # Distance to waypoint before ending navigation
 Distance: 5

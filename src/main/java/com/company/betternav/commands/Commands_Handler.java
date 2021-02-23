@@ -376,6 +376,11 @@ public class Commands_Handler implements CommandExecutor {
             File folder = new File(readPath);
             File[] listOfFiles = folder.listFiles();
 
+            if(listOfFiles==null){
+                player.sendMessage("There are no saved locations.");
+                return true;
+            }
+
             if (listOfFiles.length==0){
                 player.sendMessage("There are no saved locations.");
             }

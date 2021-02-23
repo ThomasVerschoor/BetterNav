@@ -8,102 +8,67 @@ commands:
     description: show explanation of commands
     usage: /<command>
     aliases: [bnhelp]
-    permission: betternav.bn
+
 
   getlocation:
     description: show location of the player
     usage: :/<command>
     aliases: [toggle]
-    permission: betternav.getlocation
+
 
   savelocation:
     description: save location on map
     usage: :/<command>
     aliases: [save]
-    permission: betternav.savelocation
+
 
   showlocations:
     description: show locations saved
     usage: :/<command>
     aliases: [showpossiblelocations]
-    permission: betternav.showlocations
+
 
 
   showcoordinates:
     description: show coordinates of saved location
     usage: :/<command>
     aliases: [getcoordinates]
-    permission: betternav.showcoordinates
+
 
   nav:
     description: navigate to
     usage: :/<command>
     aliases: [goto]
-    permission: betternav.nav
+
 
   del:
     description: delete
     usage: :/<command>
-    permission: betternav.del
+
 
   navplayer:
     description: navigate to player
     usage: :/<command>
-    permission: betternav.navplayer
+
 
   stopnav:
     description: stop navigation
     usage: :/<command>
-    permission: betternav.stopnav
-
-  permissions:
-    betternav.bn:
-      description: Allows bn command
-      default: true
-
-    betternav.getlocation:
-      description: Allows getlocation command
-      default: true
-
-    betternav.savelocation:
-      description: Allows savelocation command
-      default: true
-
-    betternav.showlocations:
-      description: Allows showlocations command
-      default: true
-
-    betternav.showcoordinates:
-      description: Allows showcoordinates command
-      default: true
-
-    betternav.nav:
-      description: Allows nav command
-      default: true
-
-    betternav.del:
-      description: Allows del command
-      default: true
-
-    betternav.navplayer:
-      description: Allows navplayer command
-      default: true
-
-    betternav.stopnav:
-      desciption: Allows stopnav command
-      default: true
 
 
-    betternav.*:
-      description: permission for all commands
-      default: op
-      children:
-        betternav.bn: true
-        betternav.getlocation: true
-        betternav.savelocation: true
-        betternav.showlocations: true
-        betternav.showcoordinates: true
-        betternav.nav: true
-        betternav.del: true
-        betternav.navplayer: true
-        betternav.stopnav: true
+
+
+
+    #betternav.*:
+    #  description: permission for all commands
+    #  default: op
+    #  children:
+    #    betternav.bn: true
+    #    betternav.getlocation: true
+    #    betternav.savelocation: true
+    #    betternav.showlocations: true
+    #    betternav.showcoordinates: true
+    #    betternav.nav: true
+    #    betternav.del: true
+    #    betternav.navplayer: true
+    #    betternav.stopnav: true
