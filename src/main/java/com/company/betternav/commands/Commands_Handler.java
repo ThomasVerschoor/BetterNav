@@ -129,8 +129,6 @@ public class Commands_Handler implements CommandExecutor {
             File directory = new File(PlayerPath);
             int fileCount = directory.list().length;
 
-            System.out.println(PlayerPath);
-            System.out.println(fileCount);
 
 
 
@@ -165,8 +163,8 @@ public class Commands_Handler implements CommandExecutor {
 
 
         } catch (IOException e) {
-            System.out.println("An error occurred by writing a file for your coordinates");
-            e.printStackTrace();
+            player.sendMessage("An error occurred by writing a file for your coordinates");
+
         }
 
     }
@@ -467,10 +465,7 @@ public class Commands_Handler implements CommandExecutor {
                     }
 
                     //send coordinates to the player
-                    player.sendMessage(coordinates.getName());
-                    player.sendMessage(String.valueOf(coordinates.getX()));
-                    player.sendMessage(String.valueOf(coordinates.getZ()));
-
+                    player.sendMessage(coordinates.getName()+ " has coordinates X: "+String.valueOf(coordinates.getX())+ " and Z: "+String.valueOf(coordinates.getZ()));
 
 
                 } catch (IllegalArgumentException e) {

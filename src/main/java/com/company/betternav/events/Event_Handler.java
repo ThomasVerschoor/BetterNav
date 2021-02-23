@@ -173,6 +173,28 @@ public class Event_Handler implements Listener {
         //get name of the goal
         String goalName = goal.getName();
 
+        String ownWorld = navPlayer.getWorld().getName();
+        String worldGoal = goal.getLocation().getWorld().getName();
+
+        // if on different world
+        if(ownWorld!=worldGoal){
+            navPlayer.sendMessage("Target on different world");
+            // delete player at navigating people
+            this.playerGoals.removePlayerGoal( uuid );
+
+            try {
+                // delete the bossbar
+                NavBossBar delbb = bblist.get(uuid);
+                delbb.delete(navPlayer);
+
+                // remove the bar of the list
+                bblist.remove(navPlayer.getUniqueId());
+            }catch(Exception e){
+
+            }
+            return;
+        }
+
         //get x value
         double x = goal.getLocation().getX();
         //get z value

@@ -4,17 +4,18 @@ import com.company.betternav.commands.Commands_Handler;
 import com.company.betternav.events.Event_Handler;
 import com.company.betternav.events.NavBossBar;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.Callable;
 
 
 public class BetterNav extends JavaPlugin {
-
-    //todo: fix verschillende wereld,
 
 
 
@@ -41,6 +42,16 @@ public class BetterNav extends JavaPlugin {
         getCommand("stop").setExecutor(commands);
 
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
+
+        //bstats
+        int pluginId = 10444; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
+
+
+
+
+
+
     }
 
 
