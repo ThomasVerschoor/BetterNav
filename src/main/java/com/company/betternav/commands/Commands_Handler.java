@@ -272,7 +272,7 @@ public class Commands_Handler implements CommandExecutor {
             String command = ChatColor.RED+"/getlocation";
             String command_1 = ChatColor.WHITE+" or";
             String command_11 = ChatColor.RED+" /toggle";
-            String explanation = ChatColor.GREEN+" toggles the coordinates, shows your current location";
+            String explanation = ChatColor.GREEN+" shows or hides your current location";
 
             String command2 = ChatColor.RED+"/savelocation <location>";
             String command_2 = ChatColor.WHITE+" or";
