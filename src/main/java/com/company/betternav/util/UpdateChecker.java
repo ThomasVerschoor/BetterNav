@@ -1,6 +1,7 @@
 package com.company.betternav.util;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,12 +13,19 @@ import java.util.Objects;
 
 public class UpdateChecker extends Thread {
 
+    private final Plugin plugin;
+
+    public UpdateChecker(Plugin plugin)
+    {
+        this.plugin = plugin;
+    }
+
     @Override
     public void run()
     {
         URL url = null;
         try {
-            url = new URL("https://api.spigotmc.org/legacy/update.php?resource={RESOURCE_ID_HIER}");
+            url = new URL("https://api.spigotmc.org/legacy/update.php?resource=89438");
         } catch (MalformedURLException ignored) {}
 
         URLConnection conn = null;
@@ -31,9 +39,9 @@ public class UpdateChecker extends Thread {
             BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(conn).getInputStream()));
             String latestVersion = reader.readLine();
 
-            String currentVersion = "${project.version}";
+            String currentVersion = plugin.getDescription().getVersion();
             if(latestVersion.equalsIgnoreCase(currentVersion))
-                Bukkit.getLogger().info("You are up to date");
+                Bukkit.getLogger().info("You are up to date. You are using " + currentVersion + ".");
             else
                 Bukkit.getLogger().info("You are using " + currentVersion + " and the latest release is " + latestVersion);
 

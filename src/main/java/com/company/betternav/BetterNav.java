@@ -3,6 +3,7 @@ package com.company.betternav;
 import com.company.betternav.commands.Commands_Handler;
 import com.company.betternav.events.Event_Handler;
 import com.company.betternav.events.NavBossBar;
+import com.company.betternav.util.UpdateChecker;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import org.bstats.bukkit.Metrics;
@@ -70,10 +71,9 @@ public class BetterNav extends JavaPlugin {
         metrics.addCustomChart(new SimplePie("welcome_message",()-> String.valueOf(welcome_message)));
 
 
-
-
-
-
+//        Start UpdateChecker in a seperate thread to not completely block the server
+//        Thread updateChecker = new UpdateChecker(this);
+//        updateChecker.start();
 
     }
 
