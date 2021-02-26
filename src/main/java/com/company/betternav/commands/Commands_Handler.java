@@ -1,7 +1,11 @@
 package com.company.betternav.commands;
 
-import com.company.betternav.*;
 import com.company.betternav.events.NavBossBar;
+import com.company.betternav.navigation.Goal;
+import com.company.betternav.navigation.LocationWorld;
+import com.company.betternav.navigation.PlayerGoal;
+import com.company.betternav.navigation.PlayerGoals;
+import com.company.betternav.util.ConfigYaml;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.Bukkit;
@@ -13,12 +17,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
-import static com.sun.tools.attach.VirtualMachine.list;
 import static java.lang.String.valueOf;
 
 

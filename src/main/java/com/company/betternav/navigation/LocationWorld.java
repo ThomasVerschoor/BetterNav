@@ -1,4 +1,4 @@
-package com.company.betternav;
+package com.company.betternav.navigation;
 
 public class LocationWorld {
 

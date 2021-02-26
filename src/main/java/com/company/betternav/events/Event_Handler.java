@@ -1,9 +1,9 @@
 package com.company.betternav.events;
 
-import com.company.betternav.ConfigYaml;
-import com.company.betternav.Goal;
-import com.company.betternav.IBossBarCalculator;
-import com.company.betternav.PlayerGoals;
+import com.company.betternav.util.ConfigYaml;
+import com.company.betternav.navigation.Goal;
+import com.company.betternav.bossbarcalculators.IBossBarCalculator;
+import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.bossbarcalculators.AdvancedBossbarCalculator;
 import com.company.betternav.bossbarcalculators.BasicCalculator;
 import com.company.betternav.bossbarcalculators.IdeaBossBarCalculator;

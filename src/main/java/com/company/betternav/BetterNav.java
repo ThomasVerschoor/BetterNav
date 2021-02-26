@@ -2,6 +2,8 @@ package com.company.betternav;
 import com.company.betternav.commands.Commands_Handler;
 import com.company.betternav.events.Event_Handler;
 import com.company.betternav.events.NavBossBar;
+import com.company.betternav.navigation.PlayerGoals;
+import com.company.betternav.util.ConfigYaml;
 import com.company.betternav.util.UpdateChecker;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -77,9 +79,9 @@ public class BetterNav extends JavaPlugin {
         metrics.addCustomChart(new SimplePie("welcome_message",()-> String.valueOf(welcome_message)));
 
 
-//        Start UpdateChecker in a seperate thread to not completely block the server
-//        Thread updateChecker = new UpdateChecker(this);
-//        updateChecker.start();
+        //Start UpdateChecker in a seperate thread to not completely block the server
+        Thread updateChecker = new UpdateChecker(this);
+        updateChecker.start();
 
     }
 

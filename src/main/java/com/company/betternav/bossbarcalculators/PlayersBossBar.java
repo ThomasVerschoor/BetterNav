@@ -1,4 +1,4 @@
-package com.company.betternav;
+package com.company.betternav.bossbarcalculators;
 
 import com.company.betternav.events.NavBossBar;
 import org.bukkit.boss.BossBar;

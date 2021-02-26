@@ -1,6 +1,5 @@
 package com.company.betternav.bossbarcalculators;
 
-import com.company.betternav.IBossBarCalculator;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;

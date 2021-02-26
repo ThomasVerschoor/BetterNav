@@ -1,4 +1,4 @@
-package com.company.betternav;
+package com.company.betternav.bossbarcalculators;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
