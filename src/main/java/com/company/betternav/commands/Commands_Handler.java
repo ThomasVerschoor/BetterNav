@@ -36,10 +36,16 @@ public class Commands_Handler implements CommandExecutor {
     // hashmap to hold the players with action bar enabled or not
     private HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
 
+    // hashmap to keep track of players with their bossbar
     private HashMap<UUID, NavBossBar> bblist;
 
+    // config file
     private final ConfigYaml config;
 
+
+   /**
+    * Makes a directory in the certain path if the directory doesn't exist
+    */
 
     public void makeDirectory(String newPath){
 
@@ -53,17 +59,17 @@ public class Commands_Handler implements CommandExecutor {
      *
      * @param playerGoals class
      * @param plugin, to get the path extracted
+     *
      */
     public Commands_Handler(PlayerGoals playerGoals, JavaPlugin plugin,HashMap<UUID,Boolean> actionbarplayers,HashMap<UUID, NavBossBar> bblist)
     {
         this.playerGoals = playerGoals;
-
-        // File.separator to get correct separation, depending on OS
-        this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
-
         this.actionbarplayers = actionbarplayers;
         this.config = new ConfigYaml(plugin);
         this.bblist = bblist;
+
+        // File.separator to get correct separation, depending on OS
+        this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
 
 
     }
@@ -74,64 +80,68 @@ public class Commands_Handler implements CommandExecutor {
      */
     public void writeFile(String name,Player player) {
 
+        // initiale json parser Gson
         Gson json = new GsonBuilder().setPrettyPrinting().create();
+
 
         try {
 
-
-
-            //System.out.println(path + name + ".json");
-
-            // Create missing folder Betternav
+            // if it does not exist: create missing folder Betternav
             makeDirectory(path);
 
+            // read if private waypoints is enabled or not
             boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
 
+            // get the worldname where the player is active
             String world = player.getWorld().getName();
+
+            // attach the world path to the original path
             String worldPath = path+File.separator+world;
 
             // create missing folder world
             makeDirectory(worldPath);
 
+            // put the world path equal to the player path
             String PlayerPath = worldPath;
 
+
+            // if private waypoints is enabled, attach player information
             if(privateWayPoints){
 
-                //get player uuid
+                // get player uuid
                 UUID uuid = player.getUniqueId();
+
+                // get the uuid of the player
                 String id = uuid.toString();
 
+                // put the player path equal to the original path + uuid
                 PlayerPath = worldPath+File.separator+id;
 
             }
 
+            // use the shared directory
             else{
 
-                //create shared directory
+                // create/use the shared directory
                 PlayerPath = PlayerPath+File.separator+"shared";
             }
 
-
-
-
-
+            // create playerPath if it doesn't exist
             makeDirectory(PlayerPath);
+
+            // get the maximum of waypoints in the configuration file
             int maximumWayPoints = config.getConfiguration().getInt("maximumWaypoints");
 
+            // create new file string in the directory with filename: name
             String filename = PlayerPath+File.separator+name+".json";
-            //write new file
 
-            //System.out.println(filename);
-
-
-
-
+            // create the file
             File directory = new File(PlayerPath);
+
+            // check for the length of files in the directory
             int fileCount = directory.list().length;
 
-
-
-
+            // check if the number of files
             if(fileCount<=maximumWayPoints){
 
                 // get x and z location (string)
@@ -139,125 +149,178 @@ public class Commands_Handler implements CommandExecutor {
                 int Y_Coordinate = player.getLocation().getBlockY();
                 int Z_Coordinate = player.getLocation().getBlockZ();
 
+                // create string value of locations (to send message later on)
                 String X = valueOf(X_Coordinate);
                 String Y = valueOf(Y_Coordinate);
                 String Z = valueOf(Z_Coordinate);
 
+                //make a filewriter
                 FileWriter myWriter = new FileWriter(filename);
 
                 // make map of coordinates and name to define it in json
-                LocationWorld coordinate = new LocationWorld(world,name,Integer.parseInt(X),0,Integer.parseInt(Z));
+                LocationWorld coordinate = new LocationWorld(world,name,Integer.parseInt(X),Integer.parseInt(Y),Integer.parseInt(Z));
 
-                //write to Json file
+                // write to Json file
                 json.toJson(coordinate,myWriter);
 
-                //close writer
+                // close writer
                 myWriter.close();
 
-                player.sendMessage("§c§l(!) §c Location " + name + " saved on: " + X + " " + Z);
+                // send player verification message
+                player.sendMessage("§c§l(!) §c Location " + name + " saved on: X " + X + " Y "+Y+" Z " + Z);
             }
 
             else{
+
+                // send player message if limit is reached
                 player.sendMessage("Maximum amount of "+maximumWayPoints +" waypoints reached");
             }
 
 
         } catch (IOException e) {
+            // send player message if error occurred
             player.sendMessage("An error occurred by writing a file for your coordinates");
 
         }
 
     }
 
-    // to read a file
+
+    /**
+     *
+     * Used to read a file
+     *
+     * @param location the location the player wants to have
+     * @param player the player who did the action
+     * @return object of class LocationWorld
+     */
+
     public LocationWorld readFile(String location,Player player) {
 
-
-        // get arraylist for coordinates
-        //ArrayList<String> locations = new ArrayList<String>();
-
+        // start a new json parser Gson
         Gson gson = new Gson();
 
+        // get the world the player is active on
         String world = player.getWorld().getName();
+
+        // get the uuid of the player who did the command
         String uuid = player.getUniqueId().toString();
 
+        // make up the world path
         String worldPath = path+File.separator+world+File.separator;
 
+        // get the config of privatewaypoins
         boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+
+        // if it is enabled: PlayerPath will be needed the uuid of the player
         if(privateWayPoints){
+
+            // add the uuid of the player
             String playerPath = worldPath+uuid;
+
+            // make up the world path out of the player path
             worldPath = playerPath;
         }
 
         else{
+
             //create shared directory
             worldPath = worldPath+File.separator+"shared";
         }
 
+        // make a directory of the world path
         makeDirectory(worldPath);
 
-
-
+        // create a string of the path of the file to be read
         String readPath = worldPath+File.separator+location+".json";
 
-
+        // try to read the file (if exists)
         try (Reader reader = new FileReader(readPath)) {
 
             // Convert JSON File to Java Object
             LocationWorld location_coordinates = gson.fromJson(reader, LocationWorld.class);
+
+            // return the class
             return location_coordinates;
 
         } catch (IOException e) {
+
+            // send player error message if the waypoint couldn't be found
             player.sendMessage("Could not find waypoint "+location +", maybe you mean navplayer <player>?");
             return null;
-            //e.printStackTrace();
-        }
 
+        }
 
     }
 
+
+    /**
+     *
+     * To delete a waypoint
+     *
+     * @param location the location to be deleted
+     * @param player the player who did execute the deletion
+     * @return boolean if the file is gone
+     */
     public boolean deleteFile(String location,Player player){
 
+        // get the player id and world
         String id = player.getUniqueId().toString();
         String world = player.getWorld().getName();
 
+        // check if the waypoints are private or not
         boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
 
+
+        // add the world name to the file path
         String readPath = path+File.separator+world+File.separator;
 
+
+        // if private enabled, add uuid of player
         if(privateWayPoints){
             readPath = readPath + id + File.separator;
         }
 
         else{
-            //create shared directory
+
+            //use shared directory
             readPath = readPath+"shared"+File.separator;
         }
 
+        // create the directory
         makeDirectory(readPath);
 
+        // create the full path to be read
         readPath = readPath + location+".json";
-
 
         // create new file object
         File file = new File(readPath);
 
+        // if the file is deleted
         if(file.delete()){
 
             return true;
-        }else {
-            return false;
-        }
 
+        }else {
+
+            return false;
+
+        }
 
     }
 
-
-
-
-
+    /**
+     *
+     * @param sender sender of the command
+     * @param cmd commands
+     * @param s message
+     * @param args arguments
+     * @return
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+
+        // check if a player was the sender of the command
         if (!(sender instanceof Player)) {
             sender.sendMessage("only players can use that command");
 
@@ -315,8 +378,6 @@ public class Commands_Handler implements CommandExecutor {
             player.sendMessage(command7+explanation7);
             player.sendMessage(command8+explanation8);
 
-
-
             return true;
         }
 
@@ -325,8 +386,6 @@ public class Commands_Handler implements CommandExecutor {
 
             // get the UUID of the player
             UUID PlayersUUID = player.getUniqueId();
-
-
 
             // check if player is on list
             if(actionbarplayers.containsKey(PlayersUUID)){
