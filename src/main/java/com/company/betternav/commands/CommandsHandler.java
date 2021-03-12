@@ -1,26 +1,16 @@
 package com.company.betternav.commands;
 
-import com.company.betternav.BetterNav;
 import com.company.betternav.commands.betternavcommands.*;
 import com.company.betternav.events.NavBossBar;
-import com.company.betternav.navigation.Goal;
-import com.company.betternav.navigation.LocationWorld;
-import com.company.betternav.navigation.PlayerGoal;
 import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.util.ConfigYaml;
 import com.company.betternav.util.FileHandler;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import java.io.*;
 import java.util.*;
-
-import static java.lang.String.valueOf;
 
 
 /*
