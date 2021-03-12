@@ -1,5 +1,5 @@
 package com.company.betternav;
-import com.company.betternav.commands.Commands_Handler;
+import com.company.betternav.commands.CommandsHandler;
 import com.company.betternav.events.Event_Handler;
 import com.company.betternav.events.NavBossBar;
 import com.company.betternav.navigation.PlayerGoals;
@@ -29,7 +29,7 @@ public class BetterNav extends JavaPlugin {
         final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
 
         // start command handler
-        Commands_Handler commands = new Commands_Handler( playerGoals, this,actionbarplayers,bblist );
+        CommandsHandler commands = new CommandsHandler( playerGoals, this,actionbarplayers,bblist );
         getServer().getPluginManager().registerEvents(new Event_Handler( playerGoals,this ,actionbarplayers,bblist),this);
 
         // set executor for the commands
