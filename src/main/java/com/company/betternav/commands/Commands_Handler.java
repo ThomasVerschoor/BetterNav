@@ -6,8 +6,7 @@ import com.company.betternav.navigation.LocationWorld;
 import com.company.betternav.navigation.PlayerGoal;
 import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.util.ConfigYaml;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.company.betternav.util.FileHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,9 +29,6 @@ public class Commands_Handler implements CommandExecutor {
     // class PlayerGoals to store the player's information and their goal (where to navigate)
     private final PlayerGoals playerGoals;
 
-    // local path, where the files will need to be stored
-    private final String path;
-
     // hashmap to hold the players with action bar enabled or not
     private HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
 
@@ -42,17 +38,7 @@ public class Commands_Handler implements CommandExecutor {
     // config file
     private final ConfigYaml config;
 
-
-   /**
-    * Makes a directory in the certain path if the directory doesn't exist
-    */
-
-    public void makeDirectory(String newPath){
-
-        // Create missing folder at path
-        File folder = new File(newPath);
-        if (!folder.exists()) folder.mkdir();
-    }
+    private final FileHandler fileHandler;
 
     /**
      *  Constructor for command handler
@@ -68,245 +54,7 @@ public class Commands_Handler implements CommandExecutor {
         this.config = new ConfigYaml(plugin);
         this.bblist = bblist;
 
-        // File.separator to get correct separation, depending on OS
-        this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
-
-
-    }
-
-    /**
-     * To write the file that consists of the coordinates
-     * @param name name of the location
-     */
-    public void writeFile(String name,Player player) {
-
-        // initiale json parser Gson
-        Gson json = new GsonBuilder().setPrettyPrinting().create();
-
-
-        try {
-
-            // if it does not exist: create missing folder Betternav
-            makeDirectory(path);
-
-            // read if private waypoints is enabled or not
-            boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
-
-            // get the worldname where the player is active
-            String world = player.getWorld().getName();
-
-            // attach the world path to the original path
-            String worldPath = path+File.separator+world;
-
-            // create missing folder world
-            makeDirectory(worldPath);
-
-            // put the world path equal to the player path
-            String PlayerPath = worldPath;
-
-
-            // if private waypoints is enabled, attach player information
-            if(privateWayPoints){
-
-                // get player uuid
-                UUID uuid = player.getUniqueId();
-
-                // get the uuid of the player
-                String id = uuid.toString();
-
-                // put the player path equal to the original path + uuid
-                PlayerPath = worldPath+File.separator+id;
-
-            }
-
-            // use the shared directory
-            else{
-
-                // create/use the shared directory
-                PlayerPath = PlayerPath+File.separator+"shared";
-            }
-
-            // create playerPath if it doesn't exist
-            makeDirectory(PlayerPath);
-
-            // get the maximum of waypoints in the configuration file
-            int maximumWayPoints = config.getConfiguration().getInt("maximumWaypoints");
-
-            // create new file string in the directory with filename: name
-            String filename = PlayerPath+File.separator+name+".json";
-
-            // create the file
-            File directory = new File(PlayerPath);
-
-            // check for the length of files in the directory
-            int fileCount = directory.list().length;
-
-            // check if the number of files
-            if(fileCount<=maximumWayPoints){
-
-                // get x and z location (string)
-                int X_Coordinate = player.getLocation().getBlockX();
-                int Y_Coordinate = player.getLocation().getBlockY();
-                int Z_Coordinate = player.getLocation().getBlockZ();
-
-                // create string value of locations (to send message later on)
-                String X = valueOf(X_Coordinate);
-                String Y = valueOf(Y_Coordinate);
-                String Z = valueOf(Z_Coordinate);
-
-                //make a filewriter
-                FileWriter myWriter = new FileWriter(filename);
-
-                // make map of coordinates and name to define it in json
-                LocationWorld coordinate = new LocationWorld(world,name,Integer.parseInt(X),Integer.parseInt(Y),Integer.parseInt(Z));
-
-                // write to Json file
-                json.toJson(coordinate,myWriter);
-
-                // close writer
-                myWriter.close();
-
-                // send player verification message
-                player.sendMessage("§c§l(!) §c Location " + name + " saved on: X " + X + " Y "+Y+" Z " + Z);
-            }
-
-            else{
-
-                // send player message if limit is reached
-                player.sendMessage("Maximum amount of "+maximumWayPoints +" waypoints reached");
-            }
-
-
-        } catch (IOException e) {
-            // send player message if error occurred
-            player.sendMessage("An error occurred by writing a file for your coordinates");
-
-        }
-
-    }
-
-
-    /**
-     *
-     * Used to read a file
-     *
-     * @param location the location the player wants to have
-     * @param player the player who did the action
-     * @return object of class LocationWorld
-     */
-
-    public LocationWorld readFile(String location,Player player) {
-
-        // start a new json parser Gson
-        Gson gson = new Gson();
-
-        // get the world the player is active on
-        String world = player.getWorld().getName();
-
-        // get the uuid of the player who did the command
-        String uuid = player.getUniqueId().toString();
-
-        // make up the world path
-        String worldPath = path+File.separator+world+File.separator;
-
-        // get the config of privatewaypoins
-        boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
-
-        // if it is enabled: PlayerPath will be needed the uuid of the player
-        if(privateWayPoints){
-
-            // add the uuid of the player
-            String playerPath = worldPath+uuid;
-
-            // make up the world path out of the player path
-            worldPath = playerPath;
-        }
-
-        else{
-
-            //create shared directory
-            worldPath = worldPath+File.separator+"shared";
-        }
-
-        // make a directory of the world path
-        makeDirectory(worldPath);
-
-        // create a string of the path of the file to be read
-        String readPath = worldPath+File.separator+location+".json";
-
-        // try to read the file (if exists)
-        try (Reader reader = new FileReader(readPath)) {
-
-            // Convert JSON File to Java Object
-            LocationWorld location_coordinates = gson.fromJson(reader, LocationWorld.class);
-
-            // return the class
-            return location_coordinates;
-
-        } catch (IOException e) {
-
-            // send player error message if the waypoint couldn't be found
-            player.sendMessage("Could not find waypoint "+location +", maybe you mean navplayer <player>?");
-            return null;
-
-        }
-
-    }
-
-
-    /**
-     *
-     * To delete a waypoint
-     *
-     * @param location the location to be deleted
-     * @param player the player who did execute the deletion
-     * @return boolean if the file is gone
-     */
-    public boolean deleteFile(String location,Player player){
-
-        // get the player id and world
-        String id = player.getUniqueId().toString();
-        String world = player.getWorld().getName();
-
-        // check if the waypoints are private or not
-        boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
-
-
-        // add the world name to the file path
-        String readPath = path+File.separator+world+File.separator;
-
-
-        // if private enabled, add uuid of player
-        if(privateWayPoints){
-            readPath = readPath + id + File.separator;
-        }
-
-        else{
-
-            //use shared directory
-            readPath = readPath+"shared"+File.separator;
-        }
-
-        // create the directory
-        makeDirectory(readPath);
-
-        // create the full path to be read
-        readPath = readPath + location+".json";
-
-        // create new file object
-        File file = new File(readPath);
-
-        // if the file is deleted
-        if(file.delete()){
-
-            return true;
-
-        }else {
-
-            return false;
-
-        }
-
+        this.fileHandler = new FileHandler(plugin, config);
     }
 
     /**
@@ -419,7 +167,7 @@ public class Commands_Handler implements CommandExecutor {
             String world = player.getWorld().getName();
 
 
-            String readPath = path+File.separator+world+File.separator;
+            String readPath = fileHandler.getPath() + File.separator+world+File.separator;
             boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
             if(privateWayPoints){
                 readPath = readPath+id+File.separator;
@@ -474,7 +222,7 @@ public class Commands_Handler implements CommandExecutor {
                 try {
                     String location = args[0];
 
-                    writeFile(location,player);
+                    fileHandler.writeFile(location,player);
 
 
                 } catch (IllegalArgumentException e) {
@@ -487,7 +235,7 @@ public class Commands_Handler implements CommandExecutor {
                     String Z = args[2];
 
                     player.sendMessage("§c§l(!) §c Location " + location + " saved on: " + X + " " + Z);
-                    writeFile(location,player);
+                    fileHandler.writeFile(location,player);
 
 
                 } catch (IllegalArgumentException e) {
@@ -506,7 +254,7 @@ public class Commands_Handler implements CommandExecutor {
             if (args.length == 1) {
                 try {
                     String location = args[0];
-                    boolean deleted = deleteFile(location,player);
+                    boolean deleted = fileHandler.deleteFile(location,player);
                     if(deleted){
                         player.sendMessage(location+" is deleted");
                     }
@@ -533,7 +281,7 @@ public class Commands_Handler implements CommandExecutor {
                     String location = args[0];
 
                     //read coordinates out of file
-                    LocationWorld coordinates = readFile(location,player);
+                    LocationWorld coordinates = fileHandler.readFile(location,player);
 
                     if(coordinates==null){
                         player.sendMessage("/bn to get information about how to use bn commands");
@@ -568,7 +316,7 @@ public class Commands_Handler implements CommandExecutor {
                     String location = args[0];
 
                     // read coordinates out of file
-                    LocationWorld coordinates = readFile(location,player);
+                    LocationWorld coordinates = fileHandler.readFile(location,player);
 
                     // error handling when location is wrong
                     if(coordinates==null){

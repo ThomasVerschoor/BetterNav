@@ -2,3 +2,4 @@
 target/
 BetterNav.iml
 .DS_Store
+.out/
