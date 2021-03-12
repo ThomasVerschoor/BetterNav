@@ -3,6 +3,8 @@ package com.company.betternav.util;
 import com.company.betternav.navigation.LocationWorld;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -134,7 +136,114 @@ public class FileHandler {
                 myWriter.close();
 
                 // send player verification message
-                player.sendMessage("§c§l(!) §c Location " + name + " saved on: X " + X + " Y "+Y+" Z " + Z);
+                player.sendMessage("§c§l(!) §c Location " + name + " saved on: X: " + X + " Y: "+Y+" Z: " + Z);
+            }
+
+            else{
+
+                // send player message if limit is reached
+                player.sendMessage("Maximum amount of "+maximumWayPoints +" waypoints reached");
+            }
+
+
+        } catch (IOException e) {
+            // send player message if error occurred
+            player.sendMessage("An error occurred by writing a file for your coordinates");
+
+        }
+
+    }
+
+    public void writeLocationFile(String name, Player player, Location loc) {
+
+        // initiale json parser Gson
+        Gson json = new GsonBuilder().setPrettyPrinting().create();
+
+
+        try {
+
+            // if it does not exist: create missing folder Betternav
+            makeDirectory(path);
+
+            // read if private waypoints is enabled or not
+            boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+
+            // get the worldname where the player is active
+            String world = player.getWorld().getName();
+
+            // attach the world path to the original path
+            String worldPath = path+File.separator+world;
+
+            // create missing folder world
+            makeDirectory(worldPath);
+
+            // put the world path equal to the player path
+            String PlayerPath = worldPath;
+
+
+            // if private waypoints is enabled, attach player information
+            if(privateWayPoints){
+
+                // get player uuid
+                UUID uuid = player.getUniqueId();
+
+                // get the uuid of the player
+                String id = uuid.toString();
+
+                // put the player path equal to the original path + uuid
+                PlayerPath = worldPath+File.separator+id;
+
+            }
+
+            // use the shared directory
+            else{
+
+                // create/use the shared directory
+                PlayerPath = PlayerPath+File.separator+"shared";
+            }
+
+            // create playerPath if it doesn't exist
+            makeDirectory(PlayerPath);
+
+            // get the maximum of waypoints in the configuration file
+            int maximumWayPoints = config.getConfiguration().getInt("maximumWaypoints");
+
+            // create new file string in the directory with filename: name
+            String filename = PlayerPath+File.separator+name+".json";
+
+            // create the file
+            File directory = new File(PlayerPath);
+
+            // check for the length of files in the directory
+            int fileCount = directory.list().length;
+
+            // check if the number of files
+            if(fileCount<=maximumWayPoints){
+
+                // get x and z location (string)
+                int X_Coordinate = loc.getBlockX();
+                int Y_Coordinate = loc.getBlockY();
+                int Z_Coordinate = loc.getBlockZ();
+
+                // create string value of locations (to send message later on)
+                String X = valueOf(X_Coordinate);
+                String Y = valueOf(Y_Coordinate);
+                String Z = valueOf(Z_Coordinate);
+
+                //make a filewriter
+                FileWriter myWriter = new FileWriter(filename);
+
+                // make map of coordinates and name to define it in json
+                LocationWorld coordinate = new LocationWorld(world,name,Integer.parseInt(X),Integer.parseInt(Y),Integer.parseInt(Z));
+
+                // write to Json file
+                json.toJson(coordinate,myWriter);
+
+                // close writer
+                myWriter.close();
+
+                // send player verification message
+                player.sendMessage("§c§l(!) §c Location " + name + " saved on: X: " + X + " Y: "+Y+" Z: " + Z);
             }
 
             else{

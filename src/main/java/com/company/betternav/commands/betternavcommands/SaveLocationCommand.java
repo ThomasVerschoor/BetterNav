@@ -2,8 +2,11 @@ package com.company.betternav.commands.betternavcommands;
 
 import com.company.betternav.commands.BetterNavCommand;
 import com.company.betternav.util.FileHandler;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+
+import static java.lang.Double.parseDouble;
 
 public class SaveLocationCommand extends BetterNavCommand {
 
@@ -29,12 +32,20 @@ public class SaveLocationCommand extends BetterNavCommand {
             }
         } else if (args.length > 1) {
             try {
-                String location = args[0];
-                String X = args[1];
-                String Z = args[2];
 
-                player.sendMessage("§c§l(!) §c Location " + location + " saved on: " + X + " " + Z);
-                fileHandler.writeFile(location,player);
+                // get the location name
+                String location = args[0];
+
+                String X = args[1];
+                String Y = args[2];
+                String Z = args[3];
+
+                Location saveloc = new Location(player.getWorld(),parseDouble(X),parseDouble(Y),parseDouble(Z));
+
+
+
+                player.sendMessage("§c§l(!) §c Location " + location + " saved on: " +X+ " "+Y+" "+Z);
+                fileHandler.writeLocationFile(location,player,saveloc);
 
 
             } catch (IllegalArgumentException e) {
