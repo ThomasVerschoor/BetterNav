@@ -1,6 +1,8 @@
 package com.company.betternav.commands.betternavcommands;
 
 import com.company.betternav.commands.BetterNavCommand;
+import com.company.betternav.navigation.Goal;
+import com.company.betternav.navigation.PlayerGoal;
 import com.company.betternav.util.FileHandler;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -24,7 +26,10 @@ public class SaveLocationCommand extends BetterNavCommand {
             try {
                 String location = args[0];
 
-                fileHandler.writeFile(location,player);
+                Goal saveloc = new Goal(location,player.getLocation());
+
+                fileHandler.writeLocationFile(player,saveloc);
+
 
 
             } catch (IllegalArgumentException e) {
@@ -42,10 +47,9 @@ public class SaveLocationCommand extends BetterNavCommand {
 
                 Location saveloc = new Location(player.getWorld(),parseDouble(X),parseDouble(Y),parseDouble(Z));
 
+                Goal pg = new Goal(location,saveloc);
 
-
-                player.sendMessage("§c§l(!) §c Location " + location + " saved on: " +X+ " "+Y+" "+Z);
-                fileHandler.writeLocationFile(location,player,saveloc);
+                fileHandler.writeLocationFile(player,pg);
 
 
             } catch (IllegalArgumentException e) {
