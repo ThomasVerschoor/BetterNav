@@ -17,6 +17,7 @@ public class ShowCoordinatesCommand extends BetterNavCommand {
 
     @Override
     public boolean execute(Player player, Command cmd, String s, String[] args) {
+
         // if location provided
         if (args.length == 1) {
             try {
@@ -33,7 +34,7 @@ public class ShowCoordinatesCommand extends BetterNavCommand {
                 }
 
                 //send coordinates to the player
-                player.sendMessage(coordinates.getName()+ " has coordinates X: "+String.valueOf(coordinates.getX())+ " and Z: "+String.valueOf(coordinates.getZ()));
+                player.sendMessage(coordinates.getName()+ " has coordinates X: "+String.valueOf(coordinates.getX())+ " Y:"+String.valueOf(coordinates.getY())+" and Z: "+String.valueOf(coordinates.getZ()));
 
 
             } catch (IllegalArgumentException e) {
