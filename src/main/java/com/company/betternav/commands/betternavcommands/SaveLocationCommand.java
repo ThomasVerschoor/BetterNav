@@ -26,11 +26,13 @@ public class SaveLocationCommand extends BetterNavCommand {
             try {
                 String location = args[0];
 
+                //check for illegal characters
+                location = location.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
+
+
                 Goal saveloc = new Goal(location,player.getLocation());
 
                 fileHandler.writeLocationFile(player,saveloc);
-
-
 
             } catch (IllegalArgumentException e) {
                 player.sendMessage("§c§l(!) §cThat is not a valid entity!");
@@ -40,6 +42,9 @@ public class SaveLocationCommand extends BetterNavCommand {
 
                 // get the location name
                 String location = args[0];
+
+                //check for illegal characters
+                location = location.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
 
                 String X = args[1];
                 String Y = args[2];

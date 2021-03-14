@@ -49,7 +49,7 @@ public class NavCommand extends BetterNavCommand {
                 double x = coordinates.getX();
                 double z = coordinates.getZ();
 
-                Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld("world"), x, 0, z ) );
+                Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld(player.getWorld().getName()), x, 0, z ) );
 
                 player.sendMessage("Navigating to "+goal);
                 player.sendMessage("Navigating to "+x+" "+z);
