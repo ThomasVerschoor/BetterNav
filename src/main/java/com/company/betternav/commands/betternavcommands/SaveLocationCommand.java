@@ -37,7 +37,7 @@ public class SaveLocationCommand extends BetterNavCommand {
             } catch (IllegalArgumentException e) {
                 player.sendMessage("§c§l(!) §cThat is not a valid entity!");
             }
-        } else if (args.length > 1) {
+        } else if (args.length == 4) {
             try {
 
                 // get the location name
