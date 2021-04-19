@@ -7,10 +7,14 @@ import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.bossbarcalculators.AdvancedBossbarCalculator;
 import com.company.betternav.bossbarcalculators.BasicCalculator;
 import com.company.betternav.bossbarcalculators.IdeaBossBarCalculator;
+import com.company.betternav.util.animation.Animation;
+import com.company.betternav.util.animation.SpiralAnimation;
+import com.company.betternav.util.animation.location.PlayerLocation;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -38,9 +42,6 @@ public class Event_Handler implements Listener {
 
     private final ConfigYaml config;
     private int distance_to_goal;
-
-
-
 
 
 
@@ -110,9 +111,6 @@ public class Event_Handler implements Listener {
             bb.addPlayer(player);
 
         }
-
-
-
 
     }
 
@@ -274,6 +272,12 @@ public class Event_Handler implements Listener {
 
             // remove the bar of the list
             bblist.remove(navPlayer.getUniqueId());
+
+            new SpiralAnimation(
+                    new PlayerLocation( navPlayer ),
+                    Particle.COMPOSTER,
+                    1.3,1.8,5000, 1000,5
+            ).startAnimation();
 
         }
 

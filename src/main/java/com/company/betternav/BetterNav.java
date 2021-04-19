@@ -19,10 +19,18 @@ import java.util.UUID;
  */
 public class BetterNav extends JavaPlugin {
 
+    private static BetterNav instance;
+
+    public static BetterNav getInstance()
+    {
+        return instance;
+    }
 
     // run this code when plugin is started
     @Override
     public void onEnable(){
+
+        BetterNav.instance = this;
 
         final PlayerGoals playerGoals = new PlayerGoals();
         final HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
