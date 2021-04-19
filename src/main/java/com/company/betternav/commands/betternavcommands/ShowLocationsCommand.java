@@ -1,9 +1,9 @@
 package com.company.betternav.commands.betternavcommands;
 
 import com.company.betternav.commands.BetterNavCommand;
-import com.company.betternav.util.ConfigYaml;
 import com.company.betternav.util.FileHandler;
 import org.bukkit.command.Command;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -11,9 +11,9 @@ import java.io.File;
 public class ShowLocationsCommand extends BetterNavCommand {
 
     private final FileHandler fileHandler;
-    private final ConfigYaml config;
+    private final YamlConfiguration config;
 
-    public ShowLocationsCommand(FileHandler fileHandler, ConfigYaml config)
+    public ShowLocationsCommand(FileHandler fileHandler, YamlConfiguration config)
     {
         this.fileHandler = fileHandler;
         this.config = config;
@@ -29,7 +29,7 @@ public class ShowLocationsCommand extends BetterNavCommand {
 
 
         String readPath = fileHandler.getPath() + File.separator+world+File.separator;
-        boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+        boolean privateWayPoints = config.getBoolean("privateWayPoints");
         if(privateWayPoints){
             readPath = readPath+id+File.separator;
 

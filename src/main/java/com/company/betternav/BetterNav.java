@@ -1,14 +1,17 @@
 package com.company.betternav;
+import be.dezijwegel.betteryaml.BetterYaml;
 import com.company.betternav.commands.CommandsHandler;
 import com.company.betternav.events.Event_Handler;
 import com.company.betternav.events.NavBossBar;
 import com.company.betternav.navigation.PlayerGoals;
-import com.company.betternav.util.ConfigYaml;
 import com.company.betternav.util.UpdateChecker;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -32,13 +35,21 @@ public class BetterNav extends JavaPlugin {
 
         BetterNav.instance = this;
 
+        YamlConfiguration config = new YamlConfiguration();
+        try {
+            BetterYaml betterYaml = new BetterYaml("config.yml", this, true);
+            config = betterYaml.getYamlConfiguration();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         final PlayerGoals playerGoals = new PlayerGoals();
         final HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
         final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
 
         // start command handler
-        CommandsHandler commands = new CommandsHandler( playerGoals, this,actionbarplayers,bblist );
-        getServer().getPluginManager().registerEvents(new Event_Handler( playerGoals,this ,actionbarplayers,bblist),this);
+        CommandsHandler commands = new CommandsHandler( config, playerGoals, this, actionbarplayers, bblist );
+        getServer().getPluginManager().registerEvents(new Event_Handler( config, playerGoals,this ,actionbarplayers,bblist),this);
 
         // set executor for the commands
         getCommand("bn").setExecutor(commands);
@@ -54,9 +65,6 @@ public class BetterNav extends JavaPlugin {
         // display a plugin enabled message
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
 
-        // get the configuration file for some statistics
-        ConfigYaml configuration = new ConfigYaml(this);
-
 
         // bstats addon
         int pluginId = 10444; // <-- Replace with the id of your plugin!
@@ -67,23 +75,23 @@ public class BetterNav extends JavaPlugin {
          */
 
         // get distance to goal set and add SimplePie chart
-        int distance = configuration.getConfiguration().getInt("Distance");
+        int distance = config.getInt("Distance");
         metrics.addCustomChart(new SimplePie("distance_to_goal", () -> String.valueOf(distance)));
 
         // get maximum of locations and add SimplePie chart
-        int maxlocations = configuration.getConfiguration().getInt("maximumWaypoints");
+        int maxlocations = config.getInt("maximumWaypoints");
         metrics.addCustomChart(new SimplePie("maximum_locations", () -> String.valueOf(maxlocations)));
 
         // get navbarmode and add SimplePie chart
-        int navbarmode = configuration.getConfiguration().getInt("BossBar");
+        int navbarmode = config.getInt("BossBar");
         metrics.addCustomChart(new SimplePie("navbar_mode", () -> String.valueOf(navbarmode)));
 
         // get number of private waypoints and add SimplePie chart
-        boolean privatewaypoints = configuration.getConfiguration().getBoolean("privateWayPoints");
+        boolean privatewaypoints = config.getBoolean("privateWayPoints");
         metrics.addCustomChart(new SimplePie("private_waypoints", () -> String.valueOf(privatewaypoints)));
 
         // get the setting if the welcome message is enabled and add SimplePie chart
-        boolean welcome_message = configuration.getConfiguration().getBoolean("welcomeMessage");
+        boolean welcome_message = config.getBoolean("welcomeMessage");
         metrics.addCustomChart(new SimplePie("welcome_message",()-> String.valueOf(welcome_message)));
 
 

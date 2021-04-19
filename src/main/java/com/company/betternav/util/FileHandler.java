@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,9 +21,9 @@ public class FileHandler {
 
     // local path, where the files will need to be stored
     private final String path;
-    private final ConfigYaml config;
+    private final YamlConfiguration config;
 
-    public FileHandler(JavaPlugin plugin, ConfigYaml config)
+    public FileHandler(JavaPlugin plugin, YamlConfiguration config)
     {
         // File.separator to get correct separation, depending on OS
         this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
@@ -64,7 +65,7 @@ public class FileHandler {
             makeDirectory(path);
 
             // read if private waypoints is enabled or not
-            boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+            boolean privateWayPoints = config.getBoolean("privateWayPoints");
 
             // get the worldname where the player is active
             String world = player.getWorld().getName();
@@ -104,7 +105,7 @@ public class FileHandler {
             makeDirectory(PlayerPath);
 
             // get the maximum of waypoints in the configuration file
-            int maximumWayPoints = config.getConfiguration().getInt("maximumWaypoints");
+            int maximumWayPoints = config.getInt("maximumWaypoints");
 
             // create new file string in the directory with filename: name
             String filename = PlayerPath+File.separator+playerGoal.getName()+".json";
@@ -175,7 +176,7 @@ public class FileHandler {
         String world = player.getWorld().getName();
 
         // check if the waypoints are private or not
-        boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+        boolean privateWayPoints = config.getBoolean("privateWayPoints");
 
 
         // add the world name to the file path
@@ -239,7 +240,7 @@ public class FileHandler {
         String worldPath = path+File.separator+world+File.separator;
 
         // get the config of privatewaypoins
-        boolean privateWayPoints = config.getConfiguration().getBoolean("privateWayPoints");
+        boolean privateWayPoints = config.getBoolean("privateWayPoints");
 
         // if it is enabled: PlayerPath will be needed the uuid of the player
         if(privateWayPoints){
