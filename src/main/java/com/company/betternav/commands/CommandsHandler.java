@@ -1,15 +1,18 @@
 package com.company.betternav.commands;
 
+import be.dezijwegel.betteryaml.BetterYaml;
 import com.company.betternav.commands.betternavcommands.*;
 import com.company.betternav.events.NavBossBar;
 import com.company.betternav.navigation.PlayerGoals;
-import com.company.betternav.util.ConfigYaml;
 import com.company.betternav.util.FileHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.IOException;
 import java.util.*;
 
 
@@ -27,16 +30,15 @@ public class CommandsHandler implements CommandExecutor {
      * @param plugin, to get the path extracted
      *
      */
-    public CommandsHandler(PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist)
+    public CommandsHandler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist)
     {
-
-        ConfigYaml config = new ConfigYaml(plugin);
         FileHandler fileHandler = new FileHandler(plugin, config);
 
+        YamlConfiguration finalConfig = config;
         this.commandMap = new HashMap<String, BetterNavCommand>(){{
             put("bn",               new BnCommand());
             put("getlocation",      new GetLocationCommand(actionbarplayers));
-            put("showlocations",    new ShowLocationsCommand(fileHandler, config));
+            put("showlocations",    new ShowLocationsCommand(fileHandler, finalConfig));
             put("savelocation",     new SaveLocationCommand(fileHandler));
             put("del",              new DelCommand(fileHandler));
             put("showcoordinates",  new ShowCoordinatesCommand(fileHandler));

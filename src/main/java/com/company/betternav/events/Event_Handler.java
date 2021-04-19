@@ -1,16 +1,21 @@
 package com.company.betternav.events;
 
-import com.company.betternav.util.ConfigYaml;
+import be.dezijwegel.betteryaml.BetterYaml;
 import com.company.betternav.navigation.Goal;
 import com.company.betternav.bossbarcalculators.IBossBarCalculator;
 import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.bossbarcalculators.AdvancedBossbarCalculator;
 import com.company.betternav.bossbarcalculators.BasicCalculator;
 import com.company.betternav.bossbarcalculators.IdeaBossBarCalculator;
+import com.company.betternav.util.animation.SpiralAnimation;
+import com.company.betternav.util.animation.location.PlayerLocation;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +23,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -36,11 +42,8 @@ public class Event_Handler implements Listener {
     private final IBossBarCalculator bossBarCalculator;
     private HashMap<UUID,Boolean> actionbarplayers = new HashMap<>();
 
-    private final ConfigYaml config;
-    private int distance_to_goal;
-
-
-
+    private final YamlConfiguration config;
+    private final int distance_to_goal;
 
 
 
@@ -53,15 +56,16 @@ public class Event_Handler implements Listener {
     }
 
 
-    public Event_Handler(PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers,HashMap<UUID,NavBossBar> bblist)
+    public Event_Handler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers,HashMap<UUID,NavBossBar> bblist)
     {
+        this.config = config;
         this.playerGoals = playerGoals;
         this.plugin = plugin;
         this.actionbarplayers = actionbarplayers;
 
         this.bblist = bblist;
-        this.config = new ConfigYaml(plugin);
-        int bbcalc = config.getConfiguration().getInt("BossBar");
+
+        int bbcalc = config.getInt("BossBar");
 
         if(bbcalc==1){
             this.bossBarCalculator = new IdeaBossBarCalculator();
@@ -75,7 +79,7 @@ public class Event_Handler implements Listener {
             this.bossBarCalculator = new AdvancedBossbarCalculator();
         }
 
-        distance_to_goal = config.getConfiguration().getInt("Distance");
+        distance_to_goal = config.getInt("Distance");
 
     }
 
@@ -83,7 +87,7 @@ public class Event_Handler implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
 
-        boolean message = config.getConfiguration().getBoolean("welcomeMessage");
+        boolean message = config.getBoolean("welcomeMessage");
 
         Player player = event.getPlayer();
         if(message){
@@ -110,9 +114,6 @@ public class Event_Handler implements Listener {
             bb.addPlayer(player);
 
         }
-
-
-
 
     }
 
@@ -274,6 +275,14 @@ public class Event_Handler implements Listener {
 
             // remove the bar of the list
             bblist.remove(navPlayer.getUniqueId());
+
+            // Spawn particle effects when enabled
+            if (config.getBoolean("enableAnimations"))
+                new SpiralAnimation(
+                        new PlayerLocation( navPlayer ),
+                        Particle.COMPOSTER,
+                        1.3,1.8,5000, 1000,5
+                ).startAnimation();
 
         }
 
