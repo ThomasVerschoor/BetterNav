@@ -6,6 +6,7 @@ import org.bukkit.Location;
 public abstract class Animation {
 
     private final IVariableLocation location;
+    protected boolean isPlaying = false;
 
     public Animation(IVariableLocation location)
     {
@@ -17,6 +18,14 @@ public abstract class Animation {
         return location.getLocation();
     }
 
-    public abstract void startAnimation();
+    public void startAnimation()
+    {
+        this.isPlaying = true;
+    }
+
+    public void stopAnimation()
+    {
+        this.isPlaying = false;
+    }
 
 }

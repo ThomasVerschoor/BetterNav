@@ -34,15 +34,14 @@ public class CommandsHandler implements CommandExecutor {
     {
         FileHandler fileHandler = new FileHandler(plugin, config);
 
-        YamlConfiguration finalConfig = config;
         this.commandMap = new HashMap<String, BetterNavCommand>(){{
             put("bn",               new BnCommand());
             put("getlocation",      new GetLocationCommand(actionbarplayers));
-            put("showlocations",    new ShowLocationsCommand(fileHandler, finalConfig));
+            put("showlocations",    new ShowLocationsCommand(fileHandler, config));
             put("savelocation",     new SaveLocationCommand(fileHandler));
             put("del",              new DelCommand(fileHandler));
             put("showcoordinates",  new ShowCoordinatesCommand(fileHandler));
-            put("nav",              new NavCommand(fileHandler, playerGoals));
+            put("nav",              new NavCommand(fileHandler, playerGoals, config));
             put("navplayer",        new NavPlayerCommand(playerGoals));
             put("stopnav",          new StopNavCommand(playerGoals, bblist));
         }};

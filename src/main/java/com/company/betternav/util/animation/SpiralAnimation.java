@@ -30,6 +30,10 @@ public class SpiralAnimation extends Animation {
     @Override
     public void startAnimation()
     {
+        // Handle the isPlaying variable
+        super.startAnimation();
+
+        // Do calculations async
         Bukkit.getScheduler().runTaskAsynchronously(BetterNav.getInstance(), () -> {
             double tIncrement = 2*Math.PI / numParticlesPerRevolution;
             double numSpawns = (height / (yIncrement * numParticlesPerRevolution)) * numParticlesPerRevolution;
@@ -39,6 +43,9 @@ public class SpiralAnimation extends Animation {
             while( yOffset <= height)
             {
                 for (double t = 0; t < 2 * Math.PI && yOffset <= height; t += tIncrement) {
+
+                    // Stop execution when the animation is stopped
+                    if (!super.isPlaying) return;
 
                     Location origin = getOrigin();
                     World world = origin.getWorld();
@@ -62,6 +69,9 @@ public class SpiralAnimation extends Animation {
                     }
                 }
             }
+
+            // Mark the animation as finished
+            super.isPlaying = false;
         });
     }
 }
