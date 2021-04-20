@@ -16,6 +16,16 @@ public class SpiralAnimation extends Animation {
     private final int numParticlesPerRevolution;
     private final double yIncrement;
 
+    /**
+     * Creates a spiralling animation around a IVariableLocation (can be a moving location)
+     * @param location The reference location, can be any IVariableLocation
+     * @param particle The particle to be spawned in this animation
+     * @param radius The radius of the spiral, 1.0 is the length of a whole block
+     * @param height The height of the spiral, 1.8 is the player height
+     * @param durationMilliseconds The duration of the complete animation in milliseconds, determines the delay between particle spawns
+     * @param numParticlesPerRevolution The amount of particles that are spawned in each full animated circle
+     * @param numCircles The amount of revolutions this animation will make from start to end
+     */
     public SpiralAnimation(IVariableLocation location, Particle particle, double radius, double height, int durationMilliseconds, int numParticlesPerRevolution, double numCircles)
     {
         super(location);

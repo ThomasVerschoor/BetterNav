@@ -26,11 +26,22 @@ public class LineAnimation extends Animation {
         this(location, goal, particle, length, stepSize, 0.0, durationMilliseconds, 0);
     }
 
-    public LineAnimation(IVariableLocation location, IVariableLocation goal, Particle particle, double length, double stepSize, double offset, int durationMilliseconds, int iterations)
+    /**
+     * This animation will animate a line of particles between two given locations (IVariableLocation so moving locations are supported).
+     * @param start The starting location of the animation
+     * @param end The ending location of this animation
+     * @param particle The Particle that will be spawned
+     * @param length How long the animated line must be
+     * @param stepSize The distance between each spawned particle, has no effect on animation duration
+     * @param offset How far from the player the first particle should spawn
+     * @param durationMilliseconds Duration of the full animation, determines the delay between particle spawns
+     * @param iterations The number of times that the full animation is ran before stopping
+     */
+    public LineAnimation(IVariableLocation start, IVariableLocation end, Particle particle, double length, double stepSize, double offset, int durationMilliseconds, int iterations)
     {
-        super(location);
+        super(start);
 
-        this.goal = goal;
+        this.goal = end;
 
         this.particle = particle;
         this.length = length;
