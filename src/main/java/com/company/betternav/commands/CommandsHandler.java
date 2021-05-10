@@ -40,7 +40,7 @@ public class CommandsHandler implements CommandExecutor {
             put("del",              new DelCommand(fileHandler));
             put("showcoordinates",  new ShowCoordinatesCommand(fileHandler));
             put("nav",              new NavCommand(fileHandler, playerGoals, config));
-            put("navplayer",        new NavPlayerCommand(playerGoals));
+            put("navplayer",        new NavPlayerCommand(config, playerGoals));
             put("stopnav",          new StopNavCommand(playerGoals, bblist));
         }};
     }

@@ -3,22 +3,31 @@ package com.company.betternav.commands.betternavcommands;
 import com.company.betternav.commands.BetterNavCommand;
 import com.company.betternav.navigation.PlayerGoal;
 import com.company.betternav.navigation.PlayerGoals;
+import com.company.betternav.util.animation.LineAnimation;
+import com.company.betternav.util.animation.location.PlayerLocation;
+import com.company.betternav.util.animation.location.StaticLocation;
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
 import org.bukkit.command.Command;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
 public class NavPlayerCommand extends BetterNavCommand {
 
+    private final YamlConfiguration config;
     private final PlayerGoals playerGoals;
 
-    public NavPlayerCommand(PlayerGoals playerGoals) {
+    public NavPlayerCommand(YamlConfiguration config, PlayerGoals playerGoals)
+    {
+        this.config = config;
         this.playerGoals = playerGoals;
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args)
+    {
         // if location provided
         if (args.length == 1) {
             try {
@@ -44,6 +53,12 @@ public class NavPlayerCommand extends BetterNavCommand {
 
 
                 this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
+
+                if (config.getBoolean("enableAnimations"))
+                    new LineAnimation(
+                            new PlayerLocation(player), new StaticLocation(playerGoal.getLocation()),
+                            Particle.COMPOSTER, 7.0, 0.05, 0.5, 500, 3
+                    ).startAnimation();
 
             } catch (IllegalArgumentException e) {
                 player.sendMessage("§c§l(!) §cThat is not a valid entity!");
