@@ -117,10 +117,6 @@ public class Event_Handler implements Listener {
 
     }
 
-
-
-
-
     //check if player has moved
     @EventHandler
     public void onPlayerWalk(PlayerMoveEvent event){
@@ -198,6 +194,10 @@ public class Event_Handler implements Listener {
 
         //get x value
         double x = goal.getLocation().getX();
+
+        // get y value
+        double y = goal.getLocation().getY();
+
         //get z value
         double z = goal.getLocation().getZ();
 
@@ -215,12 +215,9 @@ public class Event_Handler implements Listener {
         distance = round(distance,2);
         //navPlayer.sendMessage(String.valueOf(distance));
 
-
-
         //create new bossbar
 
         NavBossBar bb = new NavBossBar(plugin);
-
 
         //check if player exists
         if(bblist.containsKey(uuid)){
@@ -265,6 +262,30 @@ public class Event_Handler implements Listener {
 
             // send player the message
             navPlayer.sendMessage(message + goalMessage);
+
+            // calculate absolute height
+            double height = y_nav-y;
+            double absheight = Math.abs(height);
+
+            // if target is more than 5 levels higher or lower
+            if(absheight>5)
+            {
+                // if lower
+                if(height>0)
+                {
+                    String messageHeight = "Your goal is "+absheight+" blocks lower";
+                    navPlayer.sendMessage(messageHeight);
+
+                }
+
+                // else higher
+                else
+                {
+                    String messageHeight = "Your goal is "+absheight+" blocks higher";
+                    navPlayer.sendMessage(messageHeight);
+                }
+
+            }
 
             // delete player at navigating people
             this.playerGoals.removePlayerGoal( uuid );
