@@ -3,8 +3,14 @@ package com.company.betternav.util.animation.location;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class PlayerLocation implements IVariableLocation{
+/*
 
+    Return dynamic player location
+
+ */
+
+public class PlayerLocation implements IVariableLocation
+{
     private final Player player;
 
     public PlayerLocation(Player player)

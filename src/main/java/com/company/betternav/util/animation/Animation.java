@@ -3,7 +3,14 @@ package com.company.betternav.util.animation;
 import com.company.betternav.util.animation.location.IVariableLocation;
 import org.bukkit.Location;
 
-public abstract class Animation {
+/*
+
+    Abstract class : animation template
+
+ */
+
+public abstract class Animation
+{
 
     private final IVariableLocation location;
     protected boolean isPlaying = false;

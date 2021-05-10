@@ -2,7 +2,14 @@ package com.company.betternav.util.animation.location;
 
 import org.bukkit.Location;
 
-public class StaticLocation implements IVariableLocation {
+/*
+
+    Return static location
+
+ */
+
+public class StaticLocation implements IVariableLocation
+{
 
     private final Location location;
 
