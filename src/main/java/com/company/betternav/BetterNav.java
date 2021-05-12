@@ -1,12 +1,12 @@
 package com.company.betternav;
+
 import be.dezijwegel.betteryaml.BetterYaml;
 import com.company.betternav.commands.CommandsHandler;
 import com.company.betternav.events.Event_Handler;
 import com.company.betternav.events.NavBossBar;
 import com.company.betternav.navigation.PlayerGoals;
+import com.company.betternav.util.BstatsImplementation;
 import com.company.betternav.util.UpdateChecker;
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.SimplePie;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,11 +15,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
-
-/*
+/**
 * BetterNav plugin
 * @author Thomas Verschoor & Dieter Nuytemans
- */
+**/
+
 public class BetterNav extends JavaPlugin {
 
     private static BetterNav instance;
@@ -35,6 +35,7 @@ public class BetterNav extends JavaPlugin {
 
         BetterNav.instance = this;
 
+        // BetterYaml-config implementation
         YamlConfiguration config = new YamlConfiguration();
         try {
             BetterYaml betterYaml = new BetterYaml("config.yml", this, true);
@@ -65,35 +66,9 @@ public class BetterNav extends JavaPlugin {
         // display a plugin enabled message
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
 
-
-        // bstats addon
-        int pluginId = 10444; // <-- Replace with the id of your plugin!
-        Metrics metrics = new Metrics(this, pluginId);
-
-        /*
-         *custom bstats added
-         */
-
-        // get distance to goal set and add SimplePie chart
-        int distance = config.getInt("Distance");
-        metrics.addCustomChart(new SimplePie("distance_to_goal", () -> String.valueOf(distance)));
-
-        // get maximum of locations and add SimplePie chart
-        int maxlocations = config.getInt("maximumWaypoints");
-        metrics.addCustomChart(new SimplePie("maximum_locations", () -> String.valueOf(maxlocations)));
-
-        // get navbarmode and add SimplePie chart
-        int navbarmode = config.getInt("BossBar");
-        metrics.addCustomChart(new SimplePie("navbar_mode", () -> String.valueOf(navbarmode)));
-
-        // get number of private waypoints and add SimplePie chart
-        boolean privatewaypoints = config.getBoolean("privateWayPoints");
-        metrics.addCustomChart(new SimplePie("private_waypoints", () -> String.valueOf(privatewaypoints)));
-
-        // get the setting if the welcome message is enabled and add SimplePie chart
-        boolean welcome_message = config.getBoolean("welcomeMessage");
-        metrics.addCustomChart(new SimplePie("welcome_message",()-> String.valueOf(welcome_message)));
-
+        // implement bstats
+        BstatsImplementation bstatsImplementation = new BstatsImplementation(this,config);
+        bstatsImplementation.run();
 
         //Start UpdateChecker in a seperate thread to not completely block the server
         Thread updateChecker = new UpdateChecker(this);
