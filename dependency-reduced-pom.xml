@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.company.betternav</groupId>
   <artifactId>BetterNav</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <build>
     <resources>
       <resource>
@@ -74,6 +74,10 @@
         <exclusion>
           <artifactId>bungeecord-chat</artifactId>
           <groupId>net.md-5</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>snakeyaml</artifactId>
+          <groupId>org.yaml</groupId>
         </exclusion>
       </exclusions>
     </dependency>

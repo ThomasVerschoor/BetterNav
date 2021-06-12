@@ -1,5 +1,6 @@
 package com.company.betternav;
 
+import be.dezijwegel.betteryaml.BetterLang;
 import be.dezijwegel.betteryaml.BetterYaml;
 import com.company.betternav.commands.CommandsHandler;
 import com.company.betternav.events.Event_Handler;
@@ -13,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -44,6 +46,13 @@ public class BetterNav extends JavaPlugin {
             e.printStackTrace();
         }
 
+        // BetterLang-language implementation
+        // Auto-updates the config on the server and loads a YamlConfiguration and File. Optionally, a boolean can be passed, which enables or disables logging.
+        BetterLang messaging = new BetterLang("langTemplate.yml", "template.yml", this);
+
+        // Get all message names and their mapped messages. Useful when sending named messages to players (eg: see below)
+        Map<String, String> messages = messaging.getMessages();
+
         final PlayerGoals playerGoals = new PlayerGoals();
         final HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
         final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
@@ -65,6 +74,8 @@ public class BetterNav extends JavaPlugin {
 
         // display a plugin enabled message
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
+
+        getServer().getConsoleSender().sendMessage( messages.getOrDefault("message1", "message1") );
 
         // implement bstats
         BstatsImplementation bstatsImplementation = new BstatsImplementation(this,config);
