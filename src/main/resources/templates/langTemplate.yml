@@ -8,5 +8,7 @@
 #
 # BetterNavigating V${project.version}
 
-# Message 1
-message1 : {message1}
+# BetterNav enabled/disabled message
+BetterNav_enabled : {BetterNav_enabled}
+BetterNav_disabled: {BetterNav_disabled}
+

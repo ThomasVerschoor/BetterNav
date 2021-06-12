@@ -31,27 +31,38 @@ public class BetterNav extends JavaPlugin {
         return instance;
     }
 
+    // BetterLang implementation
+    public Map<String,String> getMessages()
+    {
+
+        // Auto-updates the config on the server and loads a YamlConfiguration and File. Optionally, a boolean can be passed, which enables or disables logging.
+        BetterLang messaging = new BetterLang("langTemplate.yml", "english.yml", this);
+
+        // Get all message names and their mapped messages. Useful when sending named messages to players (eg: see below)
+        Map<String, String> messages = messaging.getMessages();
+
+        return messages;
+    }
+
+
     // run this code when plugin is started
     @Override
-    public void onEnable(){
+    public void onEnable()
+    {
 
         BetterNav.instance = this;
 
         // BetterYaml-config implementation
         YamlConfiguration config = new YamlConfiguration();
-        try {
+        try
+        {
             BetterYaml betterYaml = new BetterYaml("config.yml", this, true);
             config = betterYaml.getYamlConfiguration();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
-
-        // BetterLang-language implementation
-        // Auto-updates the config on the server and loads a YamlConfiguration and File. Optionally, a boolean can be passed, which enables or disables logging.
-        BetterLang messaging = new BetterLang("langTemplate.yml", "template.yml", this);
-
-        // Get all message names and their mapped messages. Useful when sending named messages to players (eg: see below)
-        Map<String, String> messages = messaging.getMessages();
 
         final PlayerGoals playerGoals = new PlayerGoals();
         final HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();
@@ -72,10 +83,11 @@ public class BetterNav extends JavaPlugin {
         getCommand("navplayer").setExecutor(commands);
         getCommand("stopnav").setExecutor(commands);
 
-        // display a plugin enabled message
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "BetterNav plugin enabled");
+        // BetterLang-language implementation
+        Map<String,String> messages = getMessages();
 
-        getServer().getConsoleSender().sendMessage( messages.getOrDefault("message1", "message1") );
+        // display a plugin enabled message
+        getServer().getConsoleSender().sendMessage( messages.getOrDefault("BetterNav_enabled", ChatColor.GREEN+"BetterNav plugin enabled") );
 
         // implement bstats
         BstatsImplementation bstatsImplementation = new BstatsImplementation(this,config);
@@ -90,10 +102,15 @@ public class BetterNav extends JavaPlugin {
 
     // run this code when plugin should be disabled
     @Override
-    public void onDisable(){
+    public void onDisable()
+    {
 
-        // display message when the plugin is disabled
-        getServer().getConsoleSender().sendMessage(ChatColor.RED + "BetterNav plugin disabled");
+        // BetterLang-language implementation
+        Map<String,String> messages = getMessages();
+
+        // display a plugin disabled message
+        getServer().getConsoleSender().sendMessage( messages.getOrDefault("BetterNav_disabled", ChatColor.RED+"BetterNav plugin disabled") );
+
     }
 
 }
