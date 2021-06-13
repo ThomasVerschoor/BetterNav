@@ -31,12 +31,35 @@ public class BetterNav extends JavaPlugin {
         return instance;
     }
 
+    // BetterYaml implementation
+    public YamlConfiguration getConfig()
+    {
+        // BetterYaml-config implementation
+        YamlConfiguration config = new YamlConfiguration();
+        try
+        {
+            BetterYaml betterYaml = new BetterYaml("config.yml", this, true);
+            config = betterYaml.getYamlConfiguration();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return config;
+
+    }
+
     // BetterLang implementation
     public Map<String,String> getMessages()
     {
+        YamlConfiguration config = getConfig();
+
+        // get language out of config file
+        String language = config.getString("language");
 
         // Auto-updates the config on the server and loads a YamlConfiguration and File. Optionally, a boolean can be passed, which enables or disables logging.
-        BetterLang messaging = new BetterLang("langTemplate.yml", "english.yml", this);
+        BetterLang messaging = new BetterLang("langTemplate.yml", language+".yml", this);
 
         // Get all message names and their mapped messages. Useful when sending named messages to players (eg: see below)
         Map<String, String> messages = messaging.getMessages();
@@ -52,17 +75,8 @@ public class BetterNav extends JavaPlugin {
 
         BetterNav.instance = this;
 
-        // BetterYaml-config implementation
-        YamlConfiguration config = new YamlConfiguration();
-        try
-        {
-            BetterYaml betterYaml = new BetterYaml("config.yml", this, true);
-            config = betterYaml.getYamlConfiguration();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        // get BetterYaml config
+        YamlConfiguration config = getConfig();
 
         final PlayerGoals playerGoals = new PlayerGoals();
         final HashMap<UUID, Boolean> actionbarplayers = new HashMap<>();

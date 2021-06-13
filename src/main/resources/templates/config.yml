@@ -26,6 +26,11 @@ Distance : {Distance}
 # Whether or not animations are enabled
 enableAnimations : {enableAnimations}
 
+# language
+language : {language}
+
+
+
 
 
 

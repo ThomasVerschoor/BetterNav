@@ -1,0 +1,43 @@
+# -------------------- #
+# Navigatieberichten   |
+# -------------------- #
+
+BetterNav_enabled: "§2BetterNav plugin ingeschakeld"
+BetterNav_disabled: "§cBetterNav plugin uitgeschakeld"
+
+
+# or word
+or: "§f of "
+
+# ------------------------- #
+# Uitleg /bn commando       |
+# ------------------------- #
+
+getlocation_command: "§c/getlocation"
+toggle_command: "§c/toggle"
+getlocationOrToggleExplanation: "§2 toont of verbergt je huidige locatie"
+
+savelocation_command: "§c/savelocation optioneel:<locatie>"
+save_command: "§c/save optioneel:<locatie>"
+savelocationOrSaveExplanation: "§2 slaat waypoint op"
+
+showlocations_command: "§c/showlocations"
+showpossiblelocations_command: "§c/showpossiblelocations"
+showlocationsOrShowpossiblelocationsExplanation: "§2 toont lijst van alle opgeslagen locaties"
+
+showcoordinates_command: "§c/showcoordinates <locatie>"
+getcoordinates_command: "§c/getcoordinates <locatie>"
+showcoordinatesOrGetcoordinatesExplanation: "§2 toont coördinaten van een opgeslagen locatie"
+
+del_command: "§c/del <locatie>"
+delExplanation: "§2 verwijdert een locatie"
+
+nav_command: "§c/nav <locatie>"
+goto_command: "§c/goto <locatie>"
+navOrGotoExplanation: "§2 start navigatie naar locatie"
+
+navplayer_command: "§c/navplayer <speler>"
+navplayerExplanation: "§2 start navigatie naar speler"
+
+stopnav_command: "§c/stopnav"
+stopnavExplanation: "§2 stopt navigatie"

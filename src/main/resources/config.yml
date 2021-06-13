@@ -4,6 +4,7 @@ welcomeMessage: true
 BossBar: 1
 Distance: 5
 enableAnimations: false
+language: english
 
 
 
