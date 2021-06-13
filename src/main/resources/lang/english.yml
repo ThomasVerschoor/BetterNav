@@ -25,19 +25,19 @@ showlocations_command: "§c/showlocations"
 showpossiblelocations_command: "§c/showpossiblelocations <location>"
 showlocationsOrShowpossiblelocationsExplanation: "§2 shows list of all saved locations"
 
-showcoordinates_command: "§c/showcoordinates <location>";
-getcoordinates_command: "§c/getcoordinates <location>";
+showcoordinates_command: "§c/showcoordinates <location>"
+getcoordinates_command: "§c/getcoordinates <location>"
 showcoordinatesOrGetcoordinatesExplanation: "§2 shows coordinates of a saved location"
 
-del_command: "§c/del";
+del_command: "§c/del"
 delExplanation: "§2 deletes a location"
 
-nav_command: "§c/nav <location>";
-goto_command: "§c/goto <location>";
+nav_command: "§c/nav <location>"
+goto_command: "§c/goto <location>"
 navOrGotoExplanation: "§2 start navigation to location"
 
-navplayer_command: "§c/navplayer <player>";
+navplayer_command: "§c/navplayer <player>"
 navplayerExplanation: "§2 start navigation to player"
 
-stopnav_command: "§c/stopnav";
+stopnav_command: "§c/stopnav"
 stopnavExplanation: "§2 stops navigation"
