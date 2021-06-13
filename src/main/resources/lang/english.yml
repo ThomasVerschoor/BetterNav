@@ -17,19 +17,19 @@ getlocation_command: "§c/getlocation"
 toggle_command: "§c/toggle"
 getlocationOrToggleExplanation: "§2 shows or hides your current location"
 
-savelocation_command: "§c/savelocation <location>"
-save_command: "§c/save"
+savelocation_command: "§c/savelocation optional:<location>"
+save_command: "§c/save optional:<location>"
 savelocationOrSaveExplanation: "§2 saves waypoint"
 
 showlocations_command: "§c/showlocations"
-showpossiblelocations_command: "§c/showpossiblelocations <location>"
+showpossiblelocations_command: "§c/showpossiblelocations"
 showlocationsOrShowpossiblelocationsExplanation: "§2 shows list of all saved locations"
 
 showcoordinates_command: "§c/showcoordinates <location>"
 getcoordinates_command: "§c/getcoordinates <location>"
 showcoordinatesOrGetcoordinatesExplanation: "§2 shows coordinates of a saved location"
 
-del_command: "§c/del"
+del_command: "§c/del <location>"
 delExplanation: "§2 deletes a location"
 
 nav_command: "§c/nav <location>"
