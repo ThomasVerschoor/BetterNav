@@ -5,13 +5,21 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
-public class BnCommand extends BetterNavCommand {
+import java.util.Map;
+
+public class BnCommand extends BetterNavCommand
+{
+
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
-        String command = ChatColor.RED+"/getlocation";
-        String command_1 = ChatColor.WHITE+" or";
-        String command_11 = ChatColor.RED+" /toggle";
-        String explanation = ChatColor.GREEN+" shows or hides your current location";
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
+
+
+
+
+        String command = messages.getOrDefault("getlocation_command", ChatColor.RED+"/getlocation");
+        String command_1 = messages.getOrDefault("or",ChatColor.WHITE+" or ");
+        String command_11 = messages.getOrDefault("toggle_command",ChatColor.RED+"toggle");
+        String explanation = messages.getOrDefault("getlocationOrToggleExplanation",ChatColor.GREEN+" shows or hides your current location");
 
         String command2 = ChatColor.RED+"/savelocation <location>";
         String command_2 = ChatColor.WHITE+" or";

@@ -20,6 +20,7 @@ Command Handler for BetterNavigating Plugin
 public class CommandsHandler implements CommandExecutor {
 
     private final Map<String, BetterNavCommand> commandMap;
+    private final Map<String,String> messages;
 
     /**
      *  Constructor for command handler
@@ -28,9 +29,10 @@ public class CommandsHandler implements CommandExecutor {
      * @param plugin, to get the path extracted
      *
      */
-    public CommandsHandler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist)
+    public CommandsHandler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist,Map<String,String> messages)
     {
         FileHandler fileHandler = new FileHandler(plugin, config);
+        this.messages = messages;
 
         this.commandMap = new HashMap<String, BetterNavCommand>(){{
             put("bn",               new BnCommand());
@@ -70,7 +72,7 @@ public class CommandsHandler implements CommandExecutor {
 
         // Use the command object for cmd execution
         Player player = (Player) sender;
-        return commandMap.get( command ).execute( player, cmd, s, args );
+        return commandMap.get( command ).execute( player, cmd, s, args ,messages);
 
     }
 

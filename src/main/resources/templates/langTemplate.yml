@@ -12,3 +12,11 @@
 BetterNav_enabled : {BetterNav_enabled}
 BetterNav_disabled: {BetterNav_disabled}
 
+# or keyword
+or: {or}
+
+# bn help commands
+getlocation_command: {getlocation_command}
+toggle_command: {toggle_command}
+getlocationOrToggleExplanation: {getlocationOrToggleExplanation}
+

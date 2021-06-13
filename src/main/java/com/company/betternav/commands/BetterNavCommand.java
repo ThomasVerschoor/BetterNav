@@ -1,12 +1,12 @@
 package com.company.betternav.commands;
 
-import com.company.betternav.util.FileHandler;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Map;
 
 public abstract class BetterNavCommand {
 
-    public abstract boolean execute(Player player, Command cmd, String s, String[] args);
+    public abstract boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages);
 
 }

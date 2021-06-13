@@ -8,6 +8,8 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
+
 import static java.lang.Double.parseDouble;
 
 public class SaveLocationCommand extends BetterNavCommand {
@@ -20,7 +22,7 @@ public class SaveLocationCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
         // if location provided
         if (args.length == 1) {
             try {

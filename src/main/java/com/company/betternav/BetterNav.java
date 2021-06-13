@@ -69,7 +69,7 @@ public class BetterNav extends JavaPlugin {
         final HashMap<UUID, NavBossBar> bblist = new HashMap<>();
 
         // start command handler
-        CommandsHandler commands = new CommandsHandler( config, playerGoals, this, actionbarplayers, bblist );
+        CommandsHandler commands = new CommandsHandler( config, playerGoals, this, actionbarplayers, bblist,getMessages());
         getServer().getPluginManager().registerEvents(new Event_Handler( config, playerGoals,this ,actionbarplayers,bblist),this);
 
         // set executor for the commands

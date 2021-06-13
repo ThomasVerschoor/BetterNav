@@ -12,6 +12,7 @@ import org.bukkit.command.Command;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class NavPlayerCommand extends BetterNavCommand {
@@ -26,7 +27,7 @@ public class NavPlayerCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args)
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages)
     {
         // if location provided
         if (args.length == 1) {

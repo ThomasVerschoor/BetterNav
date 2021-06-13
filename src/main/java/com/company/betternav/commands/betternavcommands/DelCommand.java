@@ -5,6 +5,8 @@ import com.company.betternav.util.FileHandler;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
+
 public class DelCommand extends BetterNavCommand {
 
     private final FileHandler fileHandler;
@@ -15,7 +17,7 @@ public class DelCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
         // if location to delete provided
         if (args.length == 1) {
             try {

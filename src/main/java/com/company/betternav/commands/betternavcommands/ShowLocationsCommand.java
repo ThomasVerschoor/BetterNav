@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.Map;
 
 public class ShowLocationsCommand extends BetterNavCommand {
 
@@ -20,7 +21,7 @@ public class ShowLocationsCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
 
         player.sendMessage("saved locations: ");
 

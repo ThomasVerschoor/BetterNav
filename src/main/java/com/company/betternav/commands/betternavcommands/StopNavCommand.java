@@ -8,6 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class StopNavCommand extends BetterNavCommand {
@@ -22,7 +23,7 @@ public class StopNavCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
         try {
 
             // delete player at navigating people

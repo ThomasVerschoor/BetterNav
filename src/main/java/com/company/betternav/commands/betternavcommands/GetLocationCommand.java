@@ -18,7 +18,7 @@ public class GetLocationCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args,Map<String,String> messages) {
         // get the UUID of the player
         UUID PlayersUUID = player.getUniqueId();
 
