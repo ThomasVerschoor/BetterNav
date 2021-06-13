@@ -4,11 +4,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class AdvancedBossbarCalculator implements IBossBarCalculator {
+public class AdvancedBossbarCalculator implements IBossBarCalculator
+{
 
 
     @Override
-    public double calculateBarLevel(Player player, Location goal) {
+    public double calculateBarLevel(Player player, Location goal)
+    {
 
         // Get player location and looking direction
         Location playerLocation = player.getLocation();
@@ -45,7 +47,8 @@ public class AdvancedBossbarCalculator implements IBossBarCalculator {
                 bossbarLevel = 0;
             else
                 bossbarLevel = 1;
-        }else
+        }
+        else
         {
             bossbarLevel = theta;
         }

@@ -4,10 +4,12 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class BasicCalculator implements IBossBarCalculator {
+public class BasicCalculator implements IBossBarCalculator
+{
 
     @Override
-    public double calculateBarLevel(Player player, Location goal) {
+    public double calculateBarLevel(Player player, Location goal)
+    {
 
         // Get player location and looking direction
         Location playerLocation = player.getLocation();
