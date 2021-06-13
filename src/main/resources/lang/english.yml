@@ -2,5 +2,5 @@
 # Navigating messages  |
 # -------------------- #
 
-BetterNav_enabled: "BetterNav plugin enabled"
-BetterNav_disabled: "BetterNav plugin disabled"
+BetterNav_enabled: "§2BetterNav plugin enabled"
+BetterNav_disabled: "§cBetterNav plugin disabled"
