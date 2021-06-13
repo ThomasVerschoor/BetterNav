@@ -20,3 +20,27 @@ getlocation_command: {getlocation_command}
 toggle_command: {toggle_command}
 getlocationOrToggleExplanation: {getlocationOrToggleExplanation}
 
+savelocation_command: {savelocation_command}
+save_command: {save_command}
+savelocationOrSaveExplanation: {savelocationOrSaveExplanation}
+
+showlocations_command: {showlocations_command}
+showpossiblelocations_command: {showpossiblelocations_command}
+showlocationsOrShowpossiblelocationsExplanation: {showlocationsOrShowpossiblelocationsExplanation}
+
+showcoordinates_command: {showcoordinates_command}
+getcoordinates_command: {getcoordinates_command}
+showcoordinatesOrGetcoordinatesExplanation: {showcoordinatesOrGetcoordinatesExplanation}
+
+del_command: {del_command}
+delExplanation: {delExplanation}
+
+nav_command: {nav_command}
+goto_command: {goto_command}
+navOrGotoExplanation: {navOrGotoExplanation}
+
+navplayer_command: {navplayer_command}
+navplayerExplanation: {navplayerExplanation}
+
+stopnav_command: {stopnav_command}
+stopnavExplanation: {stopnavExplanation}
