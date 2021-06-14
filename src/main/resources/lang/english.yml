@@ -55,6 +55,7 @@ could_not_delete: "could not delete location"
 #  Nav commands     |
 #------------------ #
 navigating_to: "navigating to"
+player_not_found: "could not find player"
 
 
 

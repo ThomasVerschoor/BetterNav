@@ -53,3 +53,4 @@ could_not_delete: {could_not_delete}
 
 # navigation commands
 navigating_to: {navigating_to}
+player_not_found: {player_not_found}
