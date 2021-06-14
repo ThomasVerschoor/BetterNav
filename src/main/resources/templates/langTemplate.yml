@@ -14,6 +14,8 @@ BetterNav_disabled: {BetterNav_disabled}
 
 # or keyword
 or: {or}
+# error
+error: {error}
 
 # bn help commands
 getlocation_command: {getlocation_command}
@@ -47,4 +49,7 @@ stopnavExplanation: {stopnavExplanation}
 
 # delete commands
 is_deleted: {is_deleted}
-could_not_delete: {could_not_delete }
+could_not_delete: {could_not_delete}
+
+# navigation commands
+navigating_to: {navigating_to}

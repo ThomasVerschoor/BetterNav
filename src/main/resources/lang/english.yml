@@ -9,6 +9,9 @@ BetterNav_disabled: "§cBetterNav plugin disabled"
 # or word
 or: "§f or "
 
+# error command
+error: "/bn to get information about how to use Betternav commands"
+
 # ------------------------- #
 # Explanation /bn command   |
 # ------------------------- #
@@ -47,3 +50,11 @@ stopnavExplanation: "§2 stops navigation"
 #------------------ #
 is_deleted: "is deleted"
 could_not_delete: "could not delete location"
+
+# ----------------- #
+#  Nav commands     |
+#------------------ #
+navigating_to: "navigating to"
+
+
+

@@ -40,7 +40,7 @@ public class DelCommand extends BetterNavCommand
             }
             catch (IllegalArgumentException e)
             {
-                player.sendMessage( messages.getOrDefault("could_not_delete", "Could not delete location"));
+                player.sendMessage( messages.getOrDefault("error", "/bn to get information about how to use Betternav commands"));
             }
         }
         return true;

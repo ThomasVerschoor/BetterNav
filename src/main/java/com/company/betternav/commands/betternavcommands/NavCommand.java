@@ -5,7 +5,6 @@ import com.company.betternav.navigation.Goal;
 import com.company.betternav.navigation.LocationWorld;
 import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.util.FileHandler;
-import com.company.betternav.util.animation.Animation;
 import com.company.betternav.util.animation.LineAnimation;
 import com.company.betternav.util.animation.location.PlayerLocation;
 import com.company.betternav.util.animation.location.StaticLocation;
@@ -19,29 +18,30 @@ import org.bukkit.entity.Player;
 import java.util.Map;
 import java.util.UUID;
 
-public class NavCommand extends BetterNavCommand {
+public class NavCommand extends BetterNavCommand
+{
 
     private final YamlConfiguration config;
-
     private final FileHandler fileHandler;
     private final PlayerGoals playerGoals;
 
-    public NavCommand(FileHandler fileHandler, PlayerGoals playerGoals, YamlConfiguration config) {
+    public NavCommand(FileHandler fileHandler, PlayerGoals playerGoals, YamlConfiguration config)
+    {
         this.fileHandler = fileHandler;
         this.playerGoals = playerGoals;
-
         this.config = config;
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages)
+    {
         // if location provided
-        if (args.length == 1) {
-            try {
-
+        if (args.length == 1)
+        {
+            try
+            {
                 // get the UUID of the player
                 UUID PlayersUUID = player.getUniqueId();
-
 
                 // get the location needed
                 String location = args[0];
@@ -50,8 +50,9 @@ public class NavCommand extends BetterNavCommand {
                 LocationWorld coordinates = fileHandler.readFile(location,player);
 
                 // error handling when location is wrong
-                if(coordinates==null){
-                    player.sendMessage("/bn to get information about how to use bn commands");
+                if(coordinates==null)
+                {
+                    player.sendMessage( messages.getOrDefault("error", "/bn to get information about how to use Betternav commands"));
                     return true;
                 }
 
@@ -63,8 +64,8 @@ public class NavCommand extends BetterNavCommand {
 
                 Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld(player.getWorld().getName()), x, y, z ) );
 
-                player.sendMessage("Navigating to "+goal);
-                player.sendMessage("Navigating to "+x+" "+z);
+                player.sendMessage( messages.getOrDefault("navigating_to"+" "+goal, "Navigating to "+goal));
+                player.sendMessage( messages.getOrDefault("navigating_to"+" "+x+" "+z, "Navigating to "+x+" "+z));
 
                 this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
 
@@ -74,8 +75,10 @@ public class NavCommand extends BetterNavCommand {
                             Particle.COMPOSTER, 7.0, 0.05, 0.5, 500, 3
                     ).startAnimation();
 
-            } catch (IllegalArgumentException e) {
-                player.sendMessage("§c§l(!) §cThat is not a valid entity!");
+            }
+            catch (IllegalArgumentException e)
+            {
+                player.sendMessage( messages.getOrDefault("error", "/bn to get information about how to use Betternav commands"));
             }
         }
         return true;
