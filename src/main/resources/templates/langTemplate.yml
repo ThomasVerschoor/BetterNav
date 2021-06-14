@@ -44,3 +44,7 @@ navplayerExplanation: {navplayerExplanation}
 
 stopnav_command: {stopnav_command}
 stopnavExplanation: {stopnavExplanation}
+
+# delete commands
+is_deleted: {is_deleted}
+could_not_delete: {could_not_delete }

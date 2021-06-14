@@ -59,7 +59,7 @@ public class BetterNav extends JavaPlugin {
         String language = config.getString("language");
 
         // Auto-updates the config on the server and loads a YamlConfiguration and File. Optionally, a boolean can be passed, which enables or disables logging.
-        BetterLang messaging = new BetterLang("langTemplate.yml", language+".yml", this);
+        BetterLang messaging = new BetterLang("messages.yml", language+".yml", this);
 
         // Get all message names and their mapped messages. Useful when sending named messages to players (eg: see below)
         Map<String, String> messages = messaging.getMessages();
@@ -112,7 +112,6 @@ public class BetterNav extends JavaPlugin {
         updateChecker.start();
 
     }
-
 
     // run this code when plugin should be disabled
     @Override

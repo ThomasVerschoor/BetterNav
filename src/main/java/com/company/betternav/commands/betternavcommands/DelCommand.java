@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-public class DelCommand extends BetterNavCommand {
+public class DelCommand extends BetterNavCommand
+{
 
     private final FileHandler fileHandler;
 
@@ -17,23 +18,30 @@ public class DelCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages)
+    {
         // if location to delete provided
-        if (args.length == 1) {
-            try {
+        if (args.length == 1)
+        {
+            try
+            {
                 String location = args[0];
                 boolean deleted = fileHandler.deleteFile(location,player);
-                if(deleted){
-                    player.sendMessage(location+" is deleted");
+                if(deleted)
+                {
+                    player.sendMessage( messages.getOrDefault(location+" "+"is_deleted", location+" is deleted"));
+
                 }
-                else{
-                    player.sendMessage("Could not delete location "+location);
+                else
+                {
+                    player.sendMessage( messages.getOrDefault("could_not_delete"+" "+location, "Could not delete location "+location));
                 }
 
-            }catch (IllegalArgumentException e){
-                player.sendMessage("§c§l(!) §cThat is not a valid entity!");
             }
-
+            catch (IllegalArgumentException e)
+            {
+                player.sendMessage( messages.getOrDefault("could_not_delete", "Could not delete location"));
+            }
         }
         return true;
     }

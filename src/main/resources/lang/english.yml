@@ -41,3 +41,9 @@ navplayerExplanation: "§2 start navigation to player"
 
 stopnav_command: "§c/stopnav"
 stopnavExplanation: "§2 stops navigation"
+
+# ----------------- #
+#  Delete command   |
+#------------------ #
+is_deleted: "is deleted"
+could_not_delete: "could not delete location"
