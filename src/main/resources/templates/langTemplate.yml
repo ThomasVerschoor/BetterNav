@@ -67,3 +67,7 @@ has_coordinates: {has_coordinates}
 saved_locations: {saved_locations}
 no_saved_locations: {no_saved_locations}
 locationindex: {locationindex}
+
+# stop navigation commands
+ending_navigation: {ending_navigation}
+cannot_end_navigation: {cannot_end_navigation}

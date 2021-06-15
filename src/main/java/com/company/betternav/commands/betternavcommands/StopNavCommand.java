@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class StopNavCommand extends BetterNavCommand {
-
+public class StopNavCommand extends BetterNavCommand
+{
     private final PlayerGoals playerGoals;
     // hashmap to keep track of players with their bossbar
     private final HashMap<UUID, NavBossBar> bblist;
@@ -23,9 +23,10 @@ public class StopNavCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages) {
-        try {
-
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages)
+    {
+        try
+        {
             // delete player at navigating people
             this.playerGoals.removePlayerGoal(player.getUniqueId());
 
@@ -37,12 +38,12 @@ public class StopNavCommand extends BetterNavCommand {
             bblist.remove(player.getUniqueId());
 
             // set locationname in different color
-            String endMessage = ChatColor.LIGHT_PURPLE + "ending navigation";
+            player.sendMessage( messages.getOrDefault("ending_navigation", ChatColor.LIGHT_PURPLE + "ending navigation"));
 
-            // send player the message
-            player.sendMessage(endMessage);
-        }catch (Exception e){
-            player.sendMessage("Cannot end navigation");
+        }
+        catch (Exception e)
+        {
+            player.sendMessage( messages.getOrDefault("cannot_end_navigation", "Cannot end navigation"));
         }
 
         return true;

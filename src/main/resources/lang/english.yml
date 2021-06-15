@@ -77,6 +77,12 @@ saved_locations: "saved locations:"
 no_saved_locations: "There are no saved locations"
 locationindex: "§c§l - §c "
 
+# -------------------------- #
+#  Stopnav commands          |
+#--------------------------- #
+ending_navigation: "ending navigation"
+cannot_end_navigation: "cannot end navigation"
+
 
 
 
