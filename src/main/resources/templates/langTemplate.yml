@@ -62,3 +62,8 @@ savelocation_coordinates: {savelocation_coordinates}
 
 # showlocation commands
 has_coordinates: {has_coordinates}
+
+# show location commands
+saved_locations: {saved_locations}
+no_saved_locations: {no_saved_locations}
+locationindex: {locationindex}

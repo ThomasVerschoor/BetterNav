@@ -70,6 +70,13 @@ savelocation_coordinates: "§c§l(!) §c/savelocation <name of your location> <X
 #--------------------------- #
 has_coordinates: "has coordinates"
 
+# -------------------------- #
+#  Show locations           |
+#--------------------------- #
+saved_locations: "saved locations:"
+no_saved_locations: "There are no saved locations"
+locationindex: "§c§l - §c "
+
 
 
 
