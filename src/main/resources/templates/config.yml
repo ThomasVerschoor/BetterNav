@@ -29,7 +29,8 @@ enableAnimations : {enableAnimations}
 # language
 language : {language}
 
-
+# check for height
+height_check: {height_check}
 
 
 

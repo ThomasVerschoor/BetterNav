@@ -71,3 +71,14 @@ locationindex: {locationindex}
 # stop navigation commands
 ending_navigation: {ending_navigation}
 cannot_end_navigation: {cannot_end_navigation}
+
+# event handler commands
+welcome_message: {welcome_message}
+X: {X}
+Y: {Y}
+Z: {Z}
+different_world: {different_world}
+arrived: {arrived}
+your_goal: {your_goal}
+higher: {higher}
+lower: {lower}

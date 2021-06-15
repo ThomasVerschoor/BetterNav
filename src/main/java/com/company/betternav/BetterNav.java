@@ -84,7 +84,7 @@ public class BetterNav extends JavaPlugin {
 
         // start command handler
         CommandsHandler commands = new CommandsHandler( config, playerGoals, this, actionbarplayers, bblist,getMessages());
-        getServer().getPluginManager().registerEvents(new Event_Handler( config, playerGoals,this ,actionbarplayers,bblist),this);
+        getServer().getPluginManager().registerEvents(new Event_Handler( config, playerGoals,this ,actionbarplayers,bblist,getMessages()),this);
 
         // set executor for the commands
         getCommand("bn").setExecutor(commands);

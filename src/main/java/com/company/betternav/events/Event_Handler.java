@@ -1,6 +1,5 @@
 package com.company.betternav.events;
 
-import be.dezijwegel.betteryaml.BetterYaml;
 import com.company.betternav.navigation.Goal;
 import com.company.betternav.bossbarcalculators.IBossBarCalculator;
 import com.company.betternav.navigation.PlayerGoals;
@@ -14,7 +13,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,31 +21,30 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-
 import static java.lang.String.valueOf;
 
 
-public class Event_Handler implements Listener {
+public class Event_Handler implements Listener
+{
 
     private final JavaPlugin plugin;
-
     private final PlayerGoals playerGoals;
     private HashMap<UUID, NavBossBar> bblist = new HashMap<>();
-
     private final IBossBarCalculator bossBarCalculator;
     private HashMap<UUID,Boolean> actionbarplayers = new HashMap<>();
-
     private final YamlConfiguration config;
     private final int distance_to_goal;
+    private final Map<String,String> messages;
+    private final boolean heightCheck;
 
-
-
-    public double round(double value, int places) {
+    // rounding function
+    public double round(double value, int places)
+    {
         if (places < 0) throw new IllegalArgumentException();
 
         BigDecimal bd = BigDecimal.valueOf(value);
@@ -55,50 +52,60 @@ public class Event_Handler implements Listener {
         return bd.doubleValue();
     }
 
-
-    public Event_Handler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers,HashMap<UUID,NavBossBar> bblist)
+    public Event_Handler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID, Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist, Map<String, String> messages)
     {
         this.config = config;
         this.playerGoals = playerGoals;
         this.plugin = plugin;
         this.actionbarplayers = actionbarplayers;
-
         this.bblist = bblist;
+        this.messages = messages;
 
+        // get bb value out of config file
         int bbcalc = config.getInt("BossBar");
 
-        if(bbcalc==1){
+        if(bbcalc==1)
+        {
             this.bossBarCalculator = new IdeaBossBarCalculator();
-
-
         }
-        else if (bbcalc==2){
+        else if (bbcalc==2)
+        {
             this.bossBarCalculator = new BasicCalculator();
         }
-        else{
+        else
+        {
             this.bossBarCalculator = new AdvancedBossbarCalculator();
         }
 
+        // get distance to goal value out of config file
         distance_to_goal = config.getInt("Distance");
+
+        // get boolean heightcheck out of config file
+        heightCheck = config.getBoolean("height_check");
 
     }
 
 
+    // send welcome message when player joined
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event){
-
+    public void onPlayerJoin(PlayerJoinEvent event)
+    {
+        // check if welcomeMessage is enabled in config file
         boolean message = config.getBoolean("welcomeMessage");
 
+        // get the player that joined
         Player player = event.getPlayer();
-        if(message){
 
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help");
-
+        // send him message
+        if(message)
+        {
+            player.sendMessage( messages.getOrDefault("welcome_message", ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help"));
         }
 
+        // check if player had a navigation set
         Goal hadNav = playerGoals.getPlayerGoal(player.getUniqueId());
-        if(hadNav!=null){
-
+        if(hadNav!=null)
+        {
             NavBossBar bb = new NavBossBar(plugin);
 
             // put the bar on the list
@@ -112,37 +119,30 @@ public class Event_Handler implements Listener {
 
             // add player to the bar
             bb.addPlayer(player);
-
         }
-
     }
 
     //check if player has moved
     @EventHandler
-    public void onPlayerWalk(PlayerMoveEvent event){
-
+    public void onPlayerWalk(PlayerMoveEvent event)
+    {
 
         Location loc = event.getTo();
-        if(loc == null) {
+        if(loc == null)
+        {
             return;
         }
-
-
-
-        //loop over the players that are navigating
-
-        //playersNavigating.forEach((UUID,goal) -> player.sendMessage("User "+UUID +" navigated to" +goal.toString()));
 
         Player navPlayer = event.getPlayer();
         UUID uuid = navPlayer.getUniqueId();
 
         // check for action bar
-
-        if (actionbarplayers.containsKey(uuid)){
-
+        if (actionbarplayers.containsKey(uuid))
+        {
             // get boolean for player
             boolean actionbar = actionbarplayers.get(uuid);
-            if(actionbar){
+            if(actionbar)
+            {
                 int X_Coordinate = navPlayer.getLocation().getBlockX();
                 int Y_Coordinate = navPlayer.getLocation().getBlockY();
                 int Z_Coordinate = navPlayer.getLocation().getBlockZ();
@@ -151,14 +151,11 @@ public class Event_Handler implements Listener {
                 String Y = valueOf(Y_Coordinate);
                 String Z = valueOf(Z_Coordinate);
 
-                //player.sendMessage("Your current location is X " + X + " Z " + Z);
-                navPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.WHITE+"X "+X +"          Y "+ Y + "          Z " + Z));
+                String message = messages.getOrDefault("X"+" ", ChatColor.WHITE + "X ")+X+"          "+messages.getOrDefault("Y"+" ", ChatColor.WHITE + "Y ")+Y+"          "+messages.getOrDefault("Z"+" ", ChatColor.WHITE + "Z ")+Z;
+
+                navPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
             }
         }
-
-
-
-
 
         //check for bossbar
         Goal goal = this.playerGoals.getPlayerGoal( uuid );
@@ -169,40 +166,35 @@ public class Event_Handler implements Listener {
 
         //get name of the goal
         String goalName = goal.getName();
-
         String ownWorld = navPlayer.getWorld().getName();
         String worldGoal = goal.getLocation().getWorld().getName();
 
         // if on different world
-        if(ownWorld!=worldGoal){
-            navPlayer.sendMessage("Target on different world");
+        if(ownWorld!=worldGoal)
+        {
+            navPlayer.sendMessage( messages.getOrDefault("different_world", "Target on different world"));
             // delete player at navigating people
             this.playerGoals.removePlayerGoal( uuid );
 
-            try {
+            try
+            {
                 // delete the bossbar
                 NavBossBar delbb = bblist.get(uuid);
                 delbb.delete(navPlayer);
 
                 // remove the bar of the list
                 bblist.remove(navPlayer.getUniqueId());
-            }catch(Exception e){
+            }catch(Exception e)
+            {
 
             }
             return;
         }
 
-        //get x value
+        //get x,y and z value
         double x = goal.getLocation().getX();
-
-        // get y value
         double y = goal.getLocation().getY();
-
-        //get z value
         double z = goal.getLocation().getZ();
-
-        //navPlayer.sendMessage("UUID "+uuid +" is navigating to " + goalName + " at (" +x +", "+z + ")");
-
 
         //get current coordinates
         int x_nav = navPlayer.getLocation().getBlockX();
@@ -210,18 +202,15 @@ public class Event_Handler implements Listener {
         int z_nav = navPlayer.getLocation().getBlockZ();
 
         //calculate euclidean distance
-
         double distance = Math.sqrt(Math.pow(((Math.round( x-x_nav ))),2)+(Math.pow(Math.round(z-z_nav),2)));
         distance = round(distance,2);
-        //navPlayer.sendMessage(String.valueOf(distance));
 
         //create new bossbar
-
         NavBossBar bb = new NavBossBar(plugin);
 
         //check if player exists
-        if(bblist.containsKey(uuid)){
-
+        if(bblist.containsKey(uuid))
+        {
             // get bossbar of player
             NavBossBar navbb = bblist.get(uuid);
 
@@ -229,13 +218,10 @@ public class Event_Handler implements Listener {
             navbb.updateDistance(goalName,distance);
 
             // get vector of the player
-            double barLevel = this.bossBarCalculator.calculateBarLevel( navPlayer, goal.getLocation() );
-
-            //System.out.println(angle2);
+            double barLevel = this.bossBarCalculator.calculateBarLevel( navPlayer, goal.getLocation());
 
             // update the progress on the bar
             navbb.setProgress(barLevel);
-
         }
 
         //else create bossbar
@@ -249,42 +235,43 @@ public class Event_Handler implements Listener {
 
             // add player to the bar
             bb.addPlayer(navPlayer);
-
         }
 
-        if(distance < distance_to_goal){
+        if(distance < distance_to_goal)
+        {
 
             // set welcome message
-            String message = "You arrived at ";
-
-            // set locationname in different color
-            String goalMessage = ChatColor.LIGHT_PURPLE + goalName;
+            String message = messages.getOrDefault("arrived"+" ", "You arrived at ")+ goalName;
 
             // send player the message
-            navPlayer.sendMessage(message + goalMessage);
+            navPlayer.sendMessage(message);
 
             // calculate absolute height
             double height = y_nav-y;
             double absheight = Math.abs(height);
 
-            // if target is more than 5 levels higher or lower
-            if(absheight>5)
+            if(heightCheck)
             {
-                // if lower
-                if(height>0)
+                // if target is more than 5 levels higher or lower
+                if(absheight>5)
                 {
-                    String messageHeight = "Your goal is "+absheight+" blocks lower";
+                    absheight = round(absheight,2);
+                    String messageHeight = messages.getOrDefault("your_goal"+" ", "Your goal is")+absheight+" ";
+
+                    // if lower
+                    if(height>0)
+                    {
+                        messageHeight = messageHeight+messages.getOrDefault("lower", "blocks lower");
+                    }
+
+                    // else higher
+                    else
+                    {
+                        messageHeight = messageHeight+messages.getOrDefault("higher", "blocks higher");
+                    }
+
                     navPlayer.sendMessage(messageHeight);
-
                 }
-
-                // else higher
-                else
-                {
-                    String messageHeight = "Your goal is "+absheight+" blocks higher";
-                    navPlayer.sendMessage(messageHeight);
-                }
-
             }
 
             // delete player at navigating people
@@ -304,9 +291,6 @@ public class Event_Handler implements Listener {
                         Particle.COMPOSTER,
                         1.3,1.8,5000, 1000,5
                 ).startAnimation();
-
         }
-
     }
-
 }
