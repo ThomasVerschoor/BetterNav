@@ -59,3 +59,6 @@ player_not_found: {player_not_found}
 usage: {usage}
 savelocation_current: {savelocation_current}
 savelocation_coordinates: {savelocation_coordinates}
+
+# showlocation commands
+has_coordinates: {has_coordinates}

@@ -65,6 +65,12 @@ usage: "§c§l(!) §cusage "
 savelocation_current: "§c§l(!) §c/savelocation <name of your location> "
 savelocation_coordinates: "§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> "
 
+# -------------------------- #
+#  Showlocation commands     |
+#--------------------------- #
+has_coordinates: "has coordinates"
+
+
 
 
 
