@@ -4,17 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class PlayerGoals {
+public class PlayerGoals
+{
 
     private final Map<UUID, Goal > playerGoals;
-
 
     public PlayerGoals()
     {
         this.playerGoals = new HashMap<>();
 
     }
-
 
     /**
      * Add a Player UUID and a corresponding goal
@@ -28,7 +27,6 @@ public class PlayerGoals {
         return this.playerGoals.put( uuid, goal );
     }
 
-
     /**
      * Get the goal of the player with given UUID
      * Will return null if the player has no Goal at this time
@@ -41,7 +39,6 @@ public class PlayerGoals {
         return playerGoals.get( uuid );
     }
 
-
     /**
      * Remove a player's goal from storage
      *
@@ -52,6 +49,5 @@ public class PlayerGoals {
     {
         return playerGoals.remove( uuid );
     }
-
 
 }

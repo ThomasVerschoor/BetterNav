@@ -31,8 +31,8 @@ public class CommandsHandler implements CommandExecutor
      */
     public CommandsHandler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist,Map<String,String> messages)
     {
-        FileHandler fileHandler = new FileHandler(plugin, config);
         this.messages = messages;
+        FileHandler fileHandler = new FileHandler(plugin, config,messages);
 
         this.commandMap = new HashMap<String, BetterNavCommand>()
         {

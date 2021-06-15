@@ -41,3 +41,77 @@ navplayerExplanation: "§2 start navigatie naar speler"
 
 stopnav_command: "§c/stopnav"
 stopnavExplanation: "§2 stopt navigatie"
+
+# ----------------- #
+#  Delete command   |
+#------------------ #
+is_deleted: "is verwijderd"
+could_not_delete: "kon locatie niet verwijderen"
+
+# ----------------- #
+#  Nav commands     |
+#------------------ #
+navigating_to: "navigeren naar"
+player_not_found: "kon speler niet vinden"
+
+# -------------------------- #
+#  Savelocation commands     |
+#--------------------------- #
+
+usage: "§c§l(!) §cgebruik "
+savelocation_current: "§c§l(!) §c/savelocation <naam van jouw locatie> "
+savelocation_coordinates: "§c§l(!) §c/savelocation <naam van jouw locatie> <X coordinaat><Y coordinaat><Z coordinaat>"
+
+# -------------------------- #
+#  Showlocation commands     |
+#--------------------------- #
+has_coordinates: "heef coordinaten"
+
+# -------------------------- #
+#  Show locations           |
+#--------------------------- #
+saved_locations: "opgeslagen locaties :"
+no_saved_locations: "Er zijn geen opgeslagen locaties"
+locationindex: "§c§l - §c "
+
+# -------------------------- #
+#  Stopnav commands          |
+#--------------------------- #
+ending_navigation: "Einde navigatie"
+cannot_end_navigation: "kan navigatie niet beëindigen"
+
+# ------------------------------- #
+#  EventHandler commands          |
+#-------------------------------- #
+welcome_message: "Betternav plugin ingeschakeld: /bn om hulp te krijgen"
+X: "X"
+Y: "Y"
+Z: "Z"
+different_world: "Doelwit op andere wereld"
+arrived: "Je bent aangekomen bij"
+your_goal: "Je doel is"
+higher: "blokken hoger"
+lower: "blokken lager"
+
+# ------------------------------- #
+#  Bossbar                        |
+#-------------------------------- #
+
+destination_text: "Bestemming: "
+distance_text: "Afstand: "
+
+# these are only important for coloring: <location> or <distance> will be filled in
+destination_location_color: "§d <location>"
+distance_to_location_color: "§d <distance>"
+
+# only players can send that command
+only_players: "Alleen spelers kunnen dat commando sturen"
+
+# ------------------------------- #
+#  File handling                  |
+#-------------------------------- #
+
+location_saved: "§c§l(!) §c Locatie <location> opgeslagen op :"
+maximum_amount: "Maximum aantal van <number> waypointen bereikt"
+error_saving: "Er is een fout opgetreden bij het schrijven van een bestand voor uw coördinaten"
+error_navplayer: "Kon waypoint <location> niet vinden, misschien bedoel je navplayer <player>?"

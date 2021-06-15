@@ -1,14 +1,15 @@
 package com.company.betternav.navigation;
 
-public class LocationWorld {
-
+public class LocationWorld
+{
     private String world;
     private String name;
     private int X;
     private int Y;
     private int Z;
 
-    public LocationWorld(String world, String name, int X, int Y, int Z){
+    public LocationWorld(String world, String name, int X, int Y, int Z)
+    {
         this.world = world;
         this.name = name;
         this.X = X;
@@ -55,7 +56,5 @@ public class LocationWorld {
     public int getZ() {
         return Z;
     }
-
-
 
 }

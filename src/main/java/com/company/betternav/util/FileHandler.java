@@ -2,32 +2,31 @@ package com.company.betternav.util;
 
 import com.company.betternav.navigation.Goal;
 import com.company.betternav.navigation.LocationWorld;
-import com.company.betternav.navigation.PlayerGoal;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
+import java.util.Map;
 import java.util.UUID;
-
 import static java.lang.String.valueOf;
 
-public class FileHandler {
-
+public class FileHandler
+{
 
     // local path, where the files will need to be stored
     private final String path;
     private final YamlConfiguration config;
+    private final Map<String,String> messages;
 
-    public FileHandler(JavaPlugin plugin, YamlConfiguration config)
+    public FileHandler(JavaPlugin plugin, YamlConfiguration config, Map<String,String> messages)
     {
         // File.separator to get correct separation, depending on OS
         this.path = plugin.getDataFolder().getAbsolutePath() + File.separator;
         this.config = config;
+        this.messages = messages;
     }
 
     public String getPath()
@@ -38,8 +37,8 @@ public class FileHandler {
     /**
      * Makes a directory in the certain path if the directory doesn't exist
      */
-    public void makeDirectory(String newPath){
-
+    public void makeDirectory(String newPath)
+    {
         // Create missing folder at path
         File folder = new File(newPath);
         if (!folder.exists()) folder.mkdir();
@@ -52,14 +51,13 @@ public class FileHandler {
      * @param playerGoal the name of the goal and Location location
      */
 
-
-    public void writeLocationFile(Player player, Goal playerGoal) {
-
+    public void writeLocationFile(Player player, Goal playerGoal)
+    {
         // initiate json parser Gson
         Gson json = new GsonBuilder().setPrettyPrinting().create();
 
-
-        try {
+        try
+        {
 
             // if it does not exist: create missing folder Betternav
             makeDirectory(path);
@@ -81,7 +79,8 @@ public class FileHandler {
 
 
             // if private waypoints is enabled, attach player information
-            if(privateWayPoints){
+            if(privateWayPoints)
+            {
 
                 // get player uuid
                 UUID uuid = player.getUniqueId();
@@ -95,7 +94,8 @@ public class FileHandler {
             }
 
             // use the shared directory
-            else{
+            else
+            {
 
                 // create/use the shared directory
                 PlayerPath = PlayerPath+File.separator+"shared";
@@ -117,7 +117,8 @@ public class FileHandler {
             int fileCount = directory.list().length;
 
             // check if the number of files
-            if(fileCount<=maximumWayPoints){
+            if(fileCount<=maximumWayPoints)
+            {
 
                 // get x and z location (string)
                 int X_Coordinate = playerGoal.getLocation().getBlockX();
@@ -142,24 +143,26 @@ public class FileHandler {
                 myWriter.close();
 
                 // send player verification message
-                player.sendMessage("§c§l(!) §c Location " + playerGoal.getName() + " saved on: X: " + X + " Y: "+Y+" Z: " + Z);
+                String locsaved = messages.getOrDefault("location_saved"+" X:"+X+" Y: "+Y+" Z: "+Z, "§c§l(!) §c Location <location> saved on: X: " + X + " Y: "+Y+" Z: " + Z);
+                player.sendMessage(locsaved.replace("<location>", playerGoal.getName()));
             }
 
-            else{
+            else
+            {
 
                 // send player message if limit is reached
-                player.sendMessage("Maximum amount of "+maximumWayPoints +" waypoints reached");
+                String message = messages.getOrDefault("maximum_amount", "Maximum amount of <number> waypoints reached");
+                player.sendMessage(message.replace("<number>",String.valueOf(maximumWayPoints)));
             }
 
 
-        } catch (IOException e) {
-            // send player message if error occurred
-            player.sendMessage("An error occurred by writing a file for your coordinates");
-
         }
-
+        catch (IOException e)
+        {
+            // send player message if error occurred
+            player.sendMessage(messages.getOrDefault("error_saving", "An error occurred by writing a file for your coordinates"));
+        }
     }
-
 
     /**
      *
@@ -169,7 +172,8 @@ public class FileHandler {
      * @param player the player who did execute the deletion
      * @return boolean if the file is gone
      */
-    public boolean deleteFile(String location,Player player){
+    public boolean deleteFile(String location,Player player)
+    {
 
         // get the player id and world
         String id = player.getUniqueId().toString();
@@ -184,12 +188,13 @@ public class FileHandler {
 
 
         // if private enabled, add uuid of player
-        if(privateWayPoints){
+        if(privateWayPoints)
+        {
             readPath = readPath + id + File.separator;
         }
 
-        else{
-
+        else
+        {
             //use shared directory
             readPath = readPath+"shared"+File.separator;
         }
@@ -204,16 +209,14 @@ public class FileHandler {
         File file = new File(readPath);
 
         // if the file is deleted
-        if(file.delete()){
-
+        if(file.delete())
+        {
             return true;
-
-        }else {
-
-            return false;
-
         }
-
+        else
+        {
+            return false;
+        }
     }
 
     /**
@@ -225,8 +228,8 @@ public class FileHandler {
      * @return object of class LocationWorld
      */
 
-    public LocationWorld readFile(String location,Player player) {
-
+    public LocationWorld readFile(String location,Player player)
+    {
         // start a new json parser Gson
         Gson gson = new Gson();
 
@@ -243,8 +246,8 @@ public class FileHandler {
         boolean privateWayPoints = config.getBoolean("privateWayPoints");
 
         // if it is enabled: PlayerPath will be needed the uuid of the player
-        if(privateWayPoints){
-
+        if(privateWayPoints)
+        {
             // add the uuid of the player
             String playerPath = worldPath+uuid;
 
@@ -252,8 +255,8 @@ public class FileHandler {
             worldPath = playerPath;
         }
 
-        else{
-
+        else
+        {
             //create shared directory
             worldPath = worldPath+File.separator+"shared";
         }
@@ -265,7 +268,8 @@ public class FileHandler {
         String readPath = worldPath+File.separator+location+".json";
 
         // try to read the file (if exists)
-        try (Reader reader = new FileReader(readPath)) {
+        try (Reader reader = new FileReader(readPath))
+        {
 
             // Convert JSON File to Java Object
             // return the class
@@ -274,7 +278,8 @@ public class FileHandler {
         } catch (IOException e) {
 
             // send player error message if the waypoint couldn't be found
-            player.sendMessage("Could not find waypoint "+location +", maybe you mean navplayer <player>?");
+            String message = messages.getOrDefault("error_navplayer", "Could not find waypoint <location>, maybe you mean navplayer <player>?");
+            player.sendMessage(message.replace("<location>",location));
             return null;
 
         }

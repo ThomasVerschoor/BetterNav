@@ -6,9 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 
-import java.io.OutputStream;
-
-public class LineAnimation extends Animation {
+public class LineAnimation extends Animation
+{
 
     private final IVariableLocation goal;
 

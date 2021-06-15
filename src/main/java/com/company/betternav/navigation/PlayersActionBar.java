@@ -1,11 +1,13 @@
 package com.company.betternav.navigation;
 
-public class PlayersActionBar {
+public class PlayersActionBar
+{
 
     String UUID;
     boolean enabled;
 
-    public PlayersActionBar(String UUID,boolean enabled){
+    public PlayersActionBar(String UUID,boolean enabled)
+    {
         this.UUID = UUID;
         this.enabled = enabled;
     }

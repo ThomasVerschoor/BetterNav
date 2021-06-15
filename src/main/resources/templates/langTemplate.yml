@@ -91,3 +91,9 @@ distance_to_location_color: {distance_to_location_color}
 
 #only players can send that command
 only_players: {only_players}
+
+# location commands
+location_saved: {location_saved}
+maximum_amount: {maximum_amount}
+error_saving: {error_saving}
+error_navplayer: {error_navplayer}

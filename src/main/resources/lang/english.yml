@@ -97,7 +97,7 @@ higher: "blocks higher"
 lower: "blocks lower"
 
 # ------------------------------- #
-#  Bosbar                         |
+#  Bossbar                        |
 #-------------------------------- #
 
 destination_text: "Destination: "
@@ -110,4 +110,11 @@ distance_to_location_color: "§d <distance>"
 # only players can send that command
 only_players: "Only players can send that command"
 
+# ------------------------------- #
+#  File handling                  |
+#-------------------------------- #
 
+location_saved: "§c§l(!) §c Location <location> saved on:"
+maximum_amount: "Maximum amount of <number> waypoints reached"
+error_saving: "An error occurred by writing a file for your coordinates"
+error_navplayer: "Could not find waypoint <location>, maybe you mean navplayer <player>?"
