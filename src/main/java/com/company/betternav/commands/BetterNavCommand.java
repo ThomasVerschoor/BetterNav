@@ -5,8 +5,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-public abstract class BetterNavCommand {
-
+public abstract class BetterNavCommand
+{
     public abstract boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages);
-
 }
