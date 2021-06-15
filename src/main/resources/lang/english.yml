@@ -57,5 +57,14 @@ could_not_delete: "could not delete location"
 navigating_to: "navigating to"
 player_not_found: "could not find player"
 
+# -------------------------- #
+#  Savelocation commands     |
+#--------------------------- #
+
+usage: "§c§l(!) §cusage "
+savelocation_current: "§c§l(!) §c/savelocation <name of your location> "
+savelocation_coordinates: "§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> "
+
+
 
 

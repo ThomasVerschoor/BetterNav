@@ -54,3 +54,8 @@ could_not_delete: {could_not_delete}
 # navigation commands
 navigating_to: {navigating_to}
 player_not_found: {player_not_found}
+
+# savelocation commands
+usage: {usage}
+savelocation_current: {savelocation_current}
+savelocation_coordinates: {savelocation_coordinates}
