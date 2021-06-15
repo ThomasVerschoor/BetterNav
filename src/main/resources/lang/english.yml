@@ -96,4 +96,15 @@ your_goal: "Your goal is"
 higher: "blocks higher"
 lower: "blocks lower"
 
+# ------------------------------- #
+#  Bosbar                         |
+#-------------------------------- #
+
+destination_text: "Destination: "
+distance_text: "Distance: "
+
+# these are only important for coloring: <location> or <distance> will be filled in
+destination_location_color: "§d <location>"
+distance_to_location_color: "§d <distance>"
+
 

@@ -82,3 +82,9 @@ arrived: {arrived}
 your_goal: {your_goal}
 higher: {higher}
 lower: {lower}
+
+# bossbar implementation
+destination_text: {destination}
+destination_location_color: {destination_location_color}
+distance_text: {distance_text}
+distance_to_location_color: {distance_to_location_color}
