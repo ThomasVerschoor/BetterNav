@@ -107,4 +107,7 @@ distance_text: "Distance: "
 destination_location_color: "§d <location>"
 distance_to_location_color: "§d <distance>"
 
+# only players can send that command
+only_players: "Only players can send that command"
+
 

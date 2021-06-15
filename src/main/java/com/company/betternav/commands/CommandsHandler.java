@@ -61,12 +61,10 @@ public class CommandsHandler implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args)
     {
-
         // check if a player was the sender of the command
         if (!(sender instanceof Player))
         {
-            sender.sendMessage("only players can use that command");
-
+            sender.sendMessage( messages.getOrDefault("only_players", "only players can use that command"));
             return true;
         }
 
@@ -80,5 +78,4 @@ public class CommandsHandler implements CommandExecutor
         return commandMap.get( command ).execute( player, cmd, s, args ,messages);
 
     }
-
 }
