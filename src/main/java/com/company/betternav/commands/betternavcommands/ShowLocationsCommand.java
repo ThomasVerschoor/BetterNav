@@ -24,7 +24,11 @@ public class ShowLocationsCommand extends BetterNavCommand
     @Override
     public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages)
     {
-        player.sendMessage( messages.getOrDefault("saved_locations", "saved locations: "));
+        String primaryColor = messages.getOrDefault("primary_color", "§d");
+        String secondaryColor = messages.getOrDefault("secondary_color", "§2");
+
+        String message = primaryColor+messages.getOrDefault("saved_locations", "saved locations: ");
+        player.sendMessage(message);
 
         String id = player.getUniqueId().toString();
         String world = player.getWorld().getName();
@@ -46,7 +50,8 @@ public class ShowLocationsCommand extends BetterNavCommand
 
         if(listOfFiles==null||listOfFiles.length==0)
         {
-            player.sendMessage( messages.getOrDefault("no_saved_locations", "There are no saved locations"));
+            String message_no_locations = primaryColor + messages.getOrDefault("no_saved_locations", "There are no saved locations");
+            player.sendMessage(message_no_locations);
             return true;
         }
 
@@ -64,7 +69,8 @@ public class ShowLocationsCommand extends BetterNavCommand
                     //System.out.println(file.getName());
 
                     //send message to the player
-                    player.sendMessage( messages.getOrDefault("locationindex"+" "+location, "§c§l - §c " + location));
+                    String locationInList = secondaryColor + messages.getOrDefault("locationindex", " - ")+ location;
+                    player.sendMessage(locationInList);
                 }
             }
         }

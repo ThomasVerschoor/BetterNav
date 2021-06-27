@@ -77,7 +77,7 @@ has_coordinates: "heeft coordinaten"
 #--------------------------- #
 saved_locations: "opgeslagen locaties :"
 no_saved_locations: "Er zijn geen opgeslagen locaties"
-locationindex: "§c§l - §c "
+locationindex: " - "
 
 # -------------------------- #
 #  Stopnav commands          |
