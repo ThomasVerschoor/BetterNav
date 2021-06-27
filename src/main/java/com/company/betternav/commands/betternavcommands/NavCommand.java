@@ -64,8 +64,23 @@ public class NavCommand extends BetterNavCommand
 
                 Goal playerGoal = new Goal( goal, new Location( Bukkit.getWorld(player.getWorld().getName()), x, y, z ) );
 
-                player.sendMessage( messages.getOrDefault("navigating_to"+" "+goal, "Navigating to "+goal));
-                player.sendMessage( messages.getOrDefault("navigating_to"+" "+x+" "+z, "Navigating to "+x+" "+z));
+                // send message to player
+                String primaryColor = messages.getOrDefault("primary_color", "§d");
+                String secondaryColor = messages.getOrDefault("secondary_color", "§2");
+
+                String message = primaryColor + messages.getOrDefault("navigating_to", "Navigating to") + " " + location;
+
+                // only send x and z if height check is not enabled
+                if(config.getBoolean("height_check"))
+                {
+                    message = message + secondaryColor+ " "+x+" "+y+" "+z;
+                }
+                else
+                {
+                    message = message + secondaryColor+ " "+x+" "+z;
+                }
+
+                player.sendMessage(message);
 
                 this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
 
