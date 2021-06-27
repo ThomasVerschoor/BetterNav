@@ -33,13 +33,15 @@ public class DelCommand extends BetterNavCommand
                     String secondaryColor = messages.getOrDefault("secondary_color", "§6");
                     String message = messages.getOrDefault("is_deleted", "is deleted");
 
-                    message = primaryColor+location+ secondaryColor+" "+message;
+                    message = primaryColor + location + secondaryColor +" "+ message;
                     player.sendMessage(message);
-
                 }
                 else
                 {
-                    player.sendMessage( messages.getOrDefault("could_not_delete", "Could not delete location "+location));
+                    String primaryColor = messages.getOrDefault("primary_color", "§d");
+                    String message = primaryColor + messages.getOrDefault("could_not_delete", "Could not delete location ");
+
+                    player.sendMessage(message);
                 }
 
             }
