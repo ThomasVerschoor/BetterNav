@@ -6,11 +6,11 @@ betterNav_enabled: "§2BetterNav plugin enabled"
 betterNav_disabled: "§cBetterNav plugin disabled"
 
 # Primary and secondary color scheme
-primary_color: {primary_color}
-secondary_color: {secondary_color}
+primary_color: "§d"
+secondary_color: "§6"
 
 # or word
-or: "§f or "
+or: "§for"
 
 # error command
 error: "/bn to get information about how to use Betternav commands"
@@ -19,34 +19,34 @@ error: "/bn to get information about how to use Betternav commands"
 # Explanation /bn command   |
 # ------------------------- #
 
-getlocation_command: "§c/getlocation"
-toggle_command: "§c/toggle"
-getlocationOrToggleExplanation: "§2 shows or hides your current location"
+getlocation_command: "/getlocation"
+toggle_command: "/toggle"
+getlocationOrToggleExplanation: "shows or hides your current location"
 
-savelocation_command: "§c/savelocation optional:<location>"
-save_command: "§c/save optional:<location>"
-savelocationOrSaveExplanation: "§2 saves waypoint"
+savelocation_command: "/savelocation optional:<location>"
+save_command: "/save optional:<location>"
+savelocationOrSaveExplanation: "saves waypoint"
 
-showlocations_command: "§c/showlocations"
-showpossiblelocations_command: "§c/showpossiblelocations"
-showlocationsOrShowpossiblelocationsExplanation: "§2 shows list of all saved locations"
+showlocations_command: "/showlocations"
+showpossiblelocations_command: "/showpossiblelocations"
+showlocationsOrShowpossiblelocationsExplanation: "shows list of all saved locations"
 
-showcoordinates_command: "§c/showcoordinates <location>"
-getcoordinates_command: "§c/getcoordinates <location>"
-showcoordinatesOrGetcoordinatesExplanation: "§2 shows coordinates of a saved location"
+showcoordinates_command: "/showcoordinates <location>"
+getcoordinates_command: "/getcoordinates <location>"
+showcoordinatesOrGetcoordinatesExplanation: "shows coordinates of a saved location"
 
-del_command: "§c/del <location>"
-delExplanation: "§2 deletes a location"
+del_command: "/del <location>"
+delExplanation: "deletes a location"
 
-nav_command: "§c/nav <location>"
-goto_command: "§c/goto <location>"
-navOrGotoExplanation: "§2 start navigation to location"
+nav_command: "/nav <location>"
+goto_command: "/goto <location>"
+navOrGotoExplanation: "start navigation to location"
 
-navplayer_command: "§c/navplayer <player>"
-navplayerExplanation: "§2 start navigation to player"
+navplayer_command: "/navplayer <player>"
+navplayerExplanation: "start navigation to player"
 
-stopnav_command: "§c/stopnav"
-stopnavExplanation: "§2 stops navigation"
+stopnav_command: "/stopnav"
+stopnavExplanation: "stops navigation"
 
 # ----------------- #
 #  Delete command   |

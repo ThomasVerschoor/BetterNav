@@ -9,7 +9,7 @@ primary_color: "§d"
 secondary_color: "§6"
 
 # or word
-or: "§f of "
+or: "§fof"
 
 # error command
 error: "/bn om informatie te krijgen over de Betternav commando's"
@@ -18,34 +18,34 @@ error: "/bn om informatie te krijgen over de Betternav commando's"
 # Uitleg /bn commando       |
 # ------------------------- #
 
-getlocation_command: "§c/getlocation"
-toggle_command: "§c/toggle"
-getlocationOrToggleExplanation: "§2 toont of verbergt je huidige locatie"
+getlocation_command: "/getlocation"
+toggle_command: "/toggle"
+getlocationOrToggleExplanation: "toont of verbergt je huidige locatie"
 
-savelocation_command: "§c/savelocation optioneel:<locatie>"
-save_command: "§c/save optioneel:<locatie>"
-savelocationOrSaveExplanation: "§2 slaat waypoint op"
+savelocation_command: "/savelocation optioneel:<locatie>"
+save_command: "/save optioneel:<locatie>"
+savelocationOrSaveExplanation: "slaat waypoint op"
 
-showlocations_command: "§c/showlocations"
-showpossiblelocations_command: "§c/showpossiblelocations"
-showlocationsOrShowpossiblelocationsExplanation: "§2 toont lijst van alle opgeslagen locaties"
+showlocations_command: "/showlocations"
+showpossiblelocations_command: "/showpossiblelocations"
+showlocationsOrShowpossiblelocationsExplanation: "toont lijst van alle opgeslagen locaties"
 
-showcoordinates_command: "§c/showcoordinates <locatie>"
-getcoordinates_command: "§c/getcoordinates <locatie>"
-showcoordinatesOrGetcoordinatesExplanation: "§2 toont coördinaten van een opgeslagen locatie"
+showcoordinates_command: "/showcoordinates <locatie>"
+getcoordinates_command: "/getcoordinates <locatie>"
+showcoordinatesOrGetcoordinatesExplanation: "toont coördinaten van een opgeslagen locatie"
 
-del_command: "§c/del <locatie>"
-delExplanation: "§2 verwijdert een locatie"
+del_command: "/del <locatie>"
+delExplanation: "verwijdert een locatie"
 
-nav_command: "§c/nav <locatie>"
-goto_command: "§c/goto <locatie>"
-navOrGotoExplanation: "§2 start navigatie naar locatie"
+nav_command: "/nav <locatie>"
+goto_command: "/goto <locatie>"
+navOrGotoExplanation: "start navigatie naar locatie"
 
-navplayer_command: "§c/navplayer <speler>"
-navplayerExplanation: "§2 start navigatie naar speler"
+navplayer_command: "/navplayer <speler>"
+navplayerExplanation: "start navigatie naar speler"
 
-stopnav_command: "§c/stopnav"
-stopnavExplanation: "§2 stopt navigatie"
+stopnav_command: "/stopnav"
+stopnavExplanation: "stopt navigatie"
 
 # ----------------- #
 #  Delete command   |
