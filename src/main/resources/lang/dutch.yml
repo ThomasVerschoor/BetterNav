@@ -2,12 +2,17 @@
 # Navigatieberichten   |
 # -------------------- #
 
-BetterNav_enabled: "§2BetterNav plugin ingeschakeld"
-BetterNav_disabled: "§cBetterNav plugin uitgeschakeld"
+betternav_enabled: "§2BetterNav plugin ingeschakeld"
+betternav_disabled: "§cBetterNav plugin uitgeschakeld"
 
+primary_color: "§d"
+secondary_color: "§6"
 
 # or word
 or: "§f of "
+
+# error command
+error: "/bn om informatie te krijgen over de Betternav commando's"
 
 # ------------------------- #
 # Uitleg /bn commando       |

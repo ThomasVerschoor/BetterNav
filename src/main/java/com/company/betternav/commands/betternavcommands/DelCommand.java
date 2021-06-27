@@ -29,12 +29,17 @@ public class DelCommand extends BetterNavCommand
                 boolean deleted = fileHandler.deleteFile(location,player);
                 if(deleted)
                 {
-                    player.sendMessage( messages.getOrDefault(location+" "+"is_deleted", location+" is deleted"));
+                    String primaryColor = messages.getOrDefault("primary_color", "§d");
+                    String secondaryColor = messages.getOrDefault("secondary_color", "§6");
+                    String message = messages.getOrDefault("is_deleted", "is deleted");
+
+                    message = primaryColor+location+ secondaryColor+" "+message;
+                    player.sendMessage(message);
 
                 }
                 else
                 {
-                    player.sendMessage( messages.getOrDefault("could_not_delete"+" "+location, "Could not delete location "+location));
+                    player.sendMessage( messages.getOrDefault("could_not_delete", "Could not delete location "+location));
                 }
 
             }

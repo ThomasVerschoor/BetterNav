@@ -45,7 +45,7 @@
         <dependency>
             <groupId>com.github.BetterPluginsSpigot</groupId>
             <artifactId>BetterYaml</artifactId>
-            <version>1.0.7</version>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- JSON EN-DECODER GSON-->

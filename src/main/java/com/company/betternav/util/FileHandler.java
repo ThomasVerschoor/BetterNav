@@ -143,7 +143,10 @@ public class FileHandler
                 myWriter.close();
 
                 // send player verification message
-                String locsaved = messages.getOrDefault("location_saved"+" X:"+X+" Y: "+Y+" Z: "+Z, "§c§l(!) §c Location <location> saved on: X: " + X + " Y: "+Y+" Z: " + Z);
+                String locsaved = messages.getOrDefault("location_saved", "§c§l(!) §c Location <location> saved on: X: " + X + " Y: "+Y+" Z: " + Z);
+
+                // append data to location save command
+                locsaved = locsaved +" X:"+X+" Y: "+Y+" Z: "+Z;
                 player.sendMessage(locsaved.replace("<location>", playerGoal.getName()));
             }
 
@@ -275,7 +278,9 @@ public class FileHandler
             // return the class
             return gson.fromJson(reader, LocationWorld.class);
 
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
 
             // send player error message if the waypoint couldn't be found
             String message = messages.getOrDefault("error_navplayer", "Could not find waypoint <location>, maybe you mean navplayer <player>?");

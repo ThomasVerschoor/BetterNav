@@ -101,7 +101,7 @@ public class BetterNav extends JavaPlugin {
         Map<String,String> messages = getMessages();
 
         // display a plugin enabled message
-        getServer().getConsoleSender().sendMessage( messages.getOrDefault("BetterNav_enabled", ChatColor.GREEN+"BetterNav plugin enabled") );
+        getServer().getConsoleSender().sendMessage( messages.getOrDefault("betternav_enabled", ChatColor.GREEN+"BetterNav plugin enabled") );
 
         // implement bstats
         BstatsImplementation bstatsImplementation = new BstatsImplementation(this,config);
@@ -122,7 +122,7 @@ public class BetterNav extends JavaPlugin {
         Map<String,String> messages = getMessages();
 
         // display a plugin disabled message
-        getServer().getConsoleSender().sendMessage( messages.getOrDefault("BetterNav_disabled", ChatColor.RED+"BetterNav plugin disabled") );
+        getServer().getConsoleSender().sendMessage( messages.getOrDefault("betternav_disabled", ChatColor.RED+"BetterNav plugin disabled") );
 
     }
 
