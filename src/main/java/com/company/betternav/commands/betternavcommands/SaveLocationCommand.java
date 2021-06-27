@@ -64,7 +64,6 @@ public class SaveLocationCommand extends BetterNavCommand
 
                 fileHandler.writeLocationFile(player,pg);
 
-
             }
             catch (IllegalArgumentException e)
             {

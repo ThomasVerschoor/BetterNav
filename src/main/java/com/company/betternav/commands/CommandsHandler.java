@@ -42,7 +42,7 @@ public class CommandsHandler implements CommandExecutor
             put("showlocations",    new ShowLocationsCommand(fileHandler, config));
             put("savelocation",     new SaveLocationCommand(fileHandler));
             put("del",              new DelCommand(fileHandler));
-            put("showcoordinates",  new ShowCoordinatesCommand(fileHandler));
+            put("showcoordinates",  new ShowCoordinatesCommand(fileHandler,config));
             put("nav",              new NavCommand(fileHandler, playerGoals, config));
             put("navplayer",        new NavPlayerCommand(config, playerGoals));
             put("stopnav",          new StopNavCommand(playerGoals, bblist));

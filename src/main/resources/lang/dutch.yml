@@ -70,7 +70,7 @@ savelocation_coordinates: "§c§l(!) §c/savelocation <naam van jouw locatie> <X
 # -------------------------- #
 #  Showlocation commands     |
 #--------------------------- #
-has_coordinates: "heef coordinaten"
+has_coordinates: "heeft coordinaten"
 
 # -------------------------- #
 #  Show locations           |
