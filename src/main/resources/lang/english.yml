@@ -90,9 +90,7 @@ cannot_end_navigation: "cannot end navigation"
 #  EventHandler commands          |
 #-------------------------------- #
 welcome_message: "Betternav plugin enabled: /bn to get help"
-X: "X"
-Y: "Y"
-Z: "Z"
+actionbar_color: "§f"
 different_world: "Target on different world"
 arrived: "You arrived at"
 your_goal: "Your goal is"

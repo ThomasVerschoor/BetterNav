@@ -79,9 +79,7 @@ cannot_end_navigation: {cannot_end_navigation}
 
 # event handler commands
 welcome_message: {welcome_message}
-X: {X}
-Y: {Y}
-Z: {Z}
+actionbar_color: {actionbar_color}
 different_world: {different_world}
 arrived: {arrived}
 your_goal: {your_goal}

@@ -151,7 +151,8 @@ public class Event_Handler implements Listener
                 String Y = valueOf(Y_Coordinate);
                 String Z = valueOf(Z_Coordinate);
 
-                String message = messages.getOrDefault("X"+" ", ChatColor.WHITE + "X ")+X+"          "+messages.getOrDefault("Y"+" ", ChatColor.WHITE + "Y ")+Y+"          "+messages.getOrDefault("Z"+" ", ChatColor.WHITE + "Z ")+Z;
+                String actionbarColor = messages.getOrDefault("actionbar_color", "§f");
+                String message = actionbarColor+"X "+X+"          "+"Y "+Y+"          "+"Z "+Z;
 
                 navPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
             }

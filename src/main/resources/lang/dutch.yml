@@ -89,9 +89,7 @@ cannot_end_navigation: "kan navigatie niet beëindigen"
 #  EventHandler commands          |
 #-------------------------------- #
 welcome_message: "Betternav plugin ingeschakeld: /bn om hulp te krijgen"
-X: "X"
-Y: "Y"
-Z: "Z"
+actionbar_color: "§f"
 different_world: "Doelwit op andere wereld"
 arrived: "Je bent aangekomen bij"
 your_goal: "Je doel is"
