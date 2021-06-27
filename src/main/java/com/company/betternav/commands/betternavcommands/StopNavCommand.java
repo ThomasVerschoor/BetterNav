@@ -37,13 +37,17 @@ public class StopNavCommand extends BetterNavCommand
             // remove the bar of the list
             bblist.remove(player.getUniqueId());
 
-            // set locationname in different color
-            player.sendMessage( messages.getOrDefault("ending_navigation", ChatColor.LIGHT_PURPLE + "ending navigation"));
+            // send ending navigation message
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+            String message = primaryColor + messages.getOrDefault("ending_navigation", ChatColor.LIGHT_PURPLE + "ending navigation");
+            player.sendMessage(message);
 
         }
         catch (Exception e)
         {
-            player.sendMessage( messages.getOrDefault("cannot_end_navigation", "Cannot end navigation"));
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+            String message = primaryColor + messages.getOrDefault("cannot_end_navigation", "Cannot end navigation");
+            player.sendMessage(message);
         }
 
         return true;
