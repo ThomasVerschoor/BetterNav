@@ -2,8 +2,8 @@
 # Navigating messages  |
 # -------------------- #
 
-betterNav_enabled: "§2BetterNav plugin enabled"
-betterNav_disabled: "§cBetterNav plugin disabled"
+betternav_enabled: "§2BetterNav plugin enabled"
+betternav_disabled: "§cBetterNav plugin disabled"
 
 # Primary and secondary color scheme
 primary_color: "§d"

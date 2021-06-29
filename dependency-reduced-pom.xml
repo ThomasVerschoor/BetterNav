@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.company.betternav</groupId>
   <artifactId>BetterNav</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <build>
     <resources>
       <resource>
@@ -63,10 +63,6 @@
       <version>1.16.5-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
       <exclusions>
-        <exclusion>
-          <artifactId>commons-lang</artifactId>
-          <groupId>commons-lang</groupId>
-        </exclusion>
         <exclusion>
           <artifactId>guava</artifactId>
           <groupId>com.google.guava</groupId>

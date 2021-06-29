@@ -5,6 +5,7 @@
 betternav_enabled: "§2BetterNav plugin ingeschakeld"
 betternav_disabled: "§cBetterNav plugin uitgeschakeld"
 
+# Primary and secondary color scheme
 primary_color: "§d"
 secondary_color: "§6"
 

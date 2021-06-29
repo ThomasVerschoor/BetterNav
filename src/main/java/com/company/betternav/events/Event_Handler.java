@@ -173,7 +173,11 @@ public class Event_Handler implements Listener
         // if on different world
         if(ownWorld!=worldGoal)
         {
-            navPlayer.sendMessage( messages.getOrDefault("different_world", "Target on different world"));
+            // send message to navigating person
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+            String message = primaryColor + messages.getOrDefault("different_world", "Target on different world");
+            navPlayer.sendMessage(message);
+
             // delete player at navigating people
             this.playerGoals.removePlayerGoal( uuid );
 
@@ -185,7 +189,8 @@ public class Event_Handler implements Listener
 
                 // remove the bar of the list
                 bblist.remove(navPlayer.getUniqueId());
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
 
             }
@@ -241,8 +246,10 @@ public class Event_Handler implements Listener
         if(distance < distance_to_goal)
         {
 
-            // set welcome message
-            String message = messages.getOrDefault("arrived"+" ", "You arrived at ")+ goalName;
+
+            // set arrived message
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+            String message = primaryColor + messages.getOrDefault("arrived", "You arrived at")+" "+ goalName;
 
             // send player the message
             navPlayer.sendMessage(message);
@@ -257,7 +264,8 @@ public class Event_Handler implements Listener
                 if(absheight>5)
                 {
                     absheight = round(absheight,2);
-                    String messageHeight = messages.getOrDefault("your_goal"+" ", "Your goal is")+absheight+" ";
+                    String secondaryColor = messages.getOrDefault("secondary_color", "§2");
+                    String messageHeight = secondaryColor + messages.getOrDefault("your_goal", "Your goal is")+" "+absheight+" ";
 
                     // if lower
                     if(height>0)
