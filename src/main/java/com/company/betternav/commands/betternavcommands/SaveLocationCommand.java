@@ -73,9 +73,16 @@ public class SaveLocationCommand extends BetterNavCommand
         }
         else
         {
-            player.sendMessage( messages.getOrDefault("usage", "§c§l(!) §cusage "));
-            player.sendMessage( messages.getOrDefault("savelocation_current", "§c§l(!) §c/savelocation <name of your location> "));
-            player.sendMessage( messages.getOrDefault("savelocation_coordinates", "§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> "));
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+
+            String message = primaryColor + messages.getOrDefault("usage", "§c§l(!) §cusage ");
+            player.sendMessage(message);
+
+            String message2 = primaryColor + messages.getOrDefault("savelocation_current", "§c§l(!) §c/savelocation <name of your location> ");
+            player.sendMessage(message2);
+
+            String message3 = primaryColor + messages.getOrDefault("savelocation_coordinates", "§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> ");
+            player.sendMessage(message3);
         }
         return true;
     }

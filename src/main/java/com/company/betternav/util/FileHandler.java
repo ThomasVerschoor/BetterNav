@@ -144,10 +144,12 @@ public class FileHandler
 
                 // send player verification message
                 String primaryColor = messages.getOrDefault("primary_color", "§d");
+                String secondaryColor = messages.getOrDefault("secondary_color", "§2");
+
                 String locsaved = primaryColor + messages.getOrDefault("location_saved", "§c§l(!) §c Location <location> saved on:");
 
                 // append data to location save command
-                locsaved = locsaved +" X:"+X+" Y: "+Y+" Z: "+Z;
+                locsaved = locsaved + secondaryColor + " X:"+X+" Y: "+Y+" Z: "+Z;
 
                 String message = locsaved.replace("<location>", playerGoal.getName());
                 player.sendMessage(message);
