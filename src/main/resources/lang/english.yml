@@ -101,12 +101,8 @@ lower: "blocks lower"
 #  Bossbar                        |
 #-------------------------------- #
 
-destination_text: "Destination: "
-distance_text: "Distance: "
-
-# these are only important for coloring: <location> or <distance> will be filled in
-destination_location_color: "§d <location>"
-distance_to_location_color: "§d <distance>"
+destination_text: "Destination:"
+distance_text: "Distance:"
 
 # only players can send that command
 only_players: "Only players can send that command"

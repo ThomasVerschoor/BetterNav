@@ -19,16 +19,16 @@ public class NavBossBar
 
     public String createMsg(String goal,double distance)
     {
-        String destination = messages.getOrDefault("destination_text", ChatColor.BLUE + "Destination : ");
-        String g = messages.getOrDefault("destination_location_color"+goal, ChatColor.GREEN +"<location>"+ goal);
-        g.replace("<location>"," ");
 
-        String distanceString = messages.getOrDefault("distance_text", ChatColor.BLUE + "Distance : ");
-        String d = messages.getOrDefault("distance_to_location_color"+Double.toString(distance), ChatColor.GREEN +"<distance>"+ goal);
-        d.replace("<distance>"," ");
-        String msg = destination + g + distanceString + d;
+        String primaryColor = messages.getOrDefault("primary_color", "§d");
+        String secondaryColor = messages.getOrDefault("secondary_color", "§2");
+        String destinationText = messages.getOrDefault("destination_text", ChatColor.BLUE + "Destination :");
+        String distanceText = messages.getOrDefault("distance_text", ChatColor.BLUE + "Distance :");
 
-        return msg;
+        // Fill in values
+        String message = primaryColor+destinationText + " " + secondaryColor + goal + "      " + primaryColor + distanceText + " " + secondaryColor + Double.toString(distance);
+
+        return message;
     }
 
     public NavBossBar(JavaPlugin plugin, Map<String,String> messages){

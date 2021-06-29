@@ -88,9 +88,7 @@ lower: {lower}
 
 # bossbar implementation
 destination_text: {destination}
-destination_location_color: {destination_location_color}
 distance_text: {distance_text}
-distance_to_location_color: {distance_to_location_color}
 
 #only players can send that command
 only_players: {only_players}

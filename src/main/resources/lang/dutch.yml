@@ -101,12 +101,8 @@ lower: "blokken lager"
 #  Bossbar                        |
 #-------------------------------- #
 
-destination_text: "Bestemming: "
-distance_text: "Afstand: "
-
-# these are only important for coloring: <location> or <distance> will be filled in
-destination_location_color: "§d <location>"
-distance_to_location_color: "§d <distance>"
+destination_text: "Bestemming:"
+distance_text: "Afstand:"
 
 # only players can send that command
 only_players: "Alleen spelers kunnen dat commando sturen"
