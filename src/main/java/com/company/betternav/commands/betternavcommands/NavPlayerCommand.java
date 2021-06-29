@@ -46,14 +46,20 @@ public class NavPlayerCommand extends BetterNavCommand
 
                 if(navto==null)
                 {
-                    player.sendMessage( messages.getOrDefault("player_not_found"+" "+playerName, "Could not find player "+playerName));
+                    String primaryColor = messages.getOrDefault("primary_color", "§d");
+                    String message = primaryColor + messages.getOrDefault("player_not_found", "Could not find player");
+                    player.sendMessage(message);
                     return true;
                 }
 
                 //get coordinates to the goal
                 PlayerGoal playerGoal = new PlayerGoal(playerName, navto);
 
-                player.sendMessage( messages.getOrDefault("navigating_to"+" "+playerName, "Navigating to "+ playerName));
+                String primaryColor = messages.getOrDefault("primary_color", "§d");
+                String secondaryColor = messages.getOrDefault("secondary_color", "§2");
+                String message = primaryColor+messages.getOrDefault("navigating_to", "Navigating to")+" "+secondaryColor+ playerName;
+
+                player.sendMessage(message);
 
                 this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
 
@@ -66,7 +72,8 @@ public class NavPlayerCommand extends BetterNavCommand
             }
             catch (IllegalArgumentException e)
             {
-                player.sendMessage( messages.getOrDefault("error", "/bn to get information about how to use Betternav commands"));
+                String primaryColor = messages.getOrDefault("primary_color", "§d");
+                player.sendMessage( primaryColor +messages.getOrDefault("error", "/bn to get information about how to use Betternav commands"));
             }
         }
         return true;
