@@ -69,9 +69,19 @@ public class ShowCoordinatesCommand extends BetterNavCommand
             }
             catch (IllegalArgumentException e)
             {
-                player.sendMessage( messages.getOrDefault("error", "/bn to get information about how to use Betternav commands"));
+                String primaryColor = messages.getOrDefault("primary_color", "§d");
+                String message = primaryColor + messages.getOrDefault("error", "/bn to get information about how to use Betternav commands");
+                player.sendMessage(message);
             }
         }
+
+        else
+        {
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+            String message = primaryColor + messages.getOrDefault("error", "/bn to get information about how to use Betternav commands");
+            player.sendMessage(message);
+        }
+
         return true;
     }
 }
