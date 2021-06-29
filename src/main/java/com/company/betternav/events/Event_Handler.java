@@ -249,7 +249,8 @@ public class Event_Handler implements Listener
 
             // set arrived message
             String primaryColor = messages.getOrDefault("primary_color", "§d");
-            String message = primaryColor + messages.getOrDefault("arrived", "You arrived at")+" "+ goalName;
+            String secondaryColor = messages.getOrDefault("secondary_color", "§2");
+            String message = primaryColor + messages.getOrDefault("arrived", "You arrived at") + " " + secondaryColor + goalName;
 
             // send player the message
             navPlayer.sendMessage(message);
@@ -264,7 +265,6 @@ public class Event_Handler implements Listener
                 if(absheight>5)
                 {
                     absheight = round(absheight,2);
-                    String secondaryColor = messages.getOrDefault("secondary_color", "§2");
                     String messageHeight = secondaryColor + messages.getOrDefault("your_goal", "Your goal is")+" "+absheight+" ";
 
                     // if lower

@@ -143,19 +143,23 @@ public class FileHandler
                 myWriter.close();
 
                 // send player verification message
-                String locsaved = messages.getOrDefault("location_saved", "§c§l(!) §c Location <location> saved on: X: " + X + " Y: "+Y+" Z: " + Z);
+                String primaryColor = messages.getOrDefault("primary_color", "§d");
+                String locsaved = primaryColor + messages.getOrDefault("location_saved", "§c§l(!) §c Location <location> saved on:");
 
                 // append data to location save command
                 locsaved = locsaved +" X:"+X+" Y: "+Y+" Z: "+Z;
-                player.sendMessage(locsaved.replace("<location>", playerGoal.getName()));
+
+                String message = locsaved.replace("<location>", playerGoal.getName());
+                player.sendMessage(message);
             }
 
             else
             {
-
                 // send player message if limit is reached
-                String message = messages.getOrDefault("maximum_amount", "Maximum amount of <number> waypoints reached");
-                player.sendMessage(message.replace("<number>",String.valueOf(maximumWayPoints)));
+                String primaryColor = messages.getOrDefault("primary_color", "§d");
+                String message = primaryColor + messages.getOrDefault("maximum_amount", "Maximum amount of <number> waypoints reached");
+                message = message.replace("<number>",String.valueOf(maximumWayPoints));
+                player.sendMessage(message);
             }
 
 
@@ -163,7 +167,9 @@ public class FileHandler
         catch (IOException e)
         {
             // send player message if error occurred
-            player.sendMessage(messages.getOrDefault("error_saving", "An error occurred by writing a file for your coordinates"));
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+            String message = primaryColor + messages.getOrDefault("error_saving", "An error occurred by writing a file for your coordinates");
+            player.sendMessage(message);
         }
     }
 
@@ -281,10 +287,12 @@ public class FileHandler
         }
         catch (IOException e)
         {
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
 
             // send player error message if the waypoint couldn't be found
-            String message = messages.getOrDefault("error_navplayer", "Could not find waypoint <location>, maybe you mean navplayer <player>?");
-            player.sendMessage(message.replace("<location>",location));
+            String message = primaryColor + messages.getOrDefault("error_navplayer", "Could not find waypoint <location>, maybe you mean navplayer <player>?");
+            message = message.replace("<location>",location);
+            player.sendMessage(message);
             return null;
 
         }
