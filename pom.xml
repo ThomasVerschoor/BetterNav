@@ -6,7 +6,7 @@
 
     <groupId>com.company.betternav</groupId>
     <artifactId>BetterNav</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <!-- Force Maven to consistently use JDK 8 and UTF-8 encoding to prevent warnings -->
     <properties>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>com.github.BetterPluginsSpigot</groupId>
             <artifactId>BetterYaml</artifactId>
-            <version>1.0.6</version>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- JSON EN-DECODER GSON-->

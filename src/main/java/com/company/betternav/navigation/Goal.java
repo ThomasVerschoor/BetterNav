@@ -2,8 +2,8 @@ package com.company.betternav.navigation;
 
 import org.bukkit.Location;
 
-public class Goal {
-
+public class Goal
+{
     private final String name;
     private final Location location;
 
@@ -12,7 +12,6 @@ public class Goal {
         this.name = name;
         this.location = location;
     }
-
 
     /**
      * Get the name of this goal
@@ -24,7 +23,6 @@ public class Goal {
         // String is immutable so can be safely returned, no copy required
         return name;
     }
-
 
     /**
      * Get the location of this goal

@@ -1,0 +1,100 @@
+#
+#  ____       _   _            _   _
+# |  _ \     | | | |          | \ | |
+# | |_) | ___| |_| |_ ___ _ __|  \| | __ ___   __
+# |  _ < / _ \ __| __/ _ \ '__| . ` |/ _` \ \ / /
+# | |_) |  __/ |_| ||  __/ |  | |\  | (_| |\ V /
+# |____/ \___|\__|\__\___|_|  |_| \_|\__,_| \_/
+#
+# BetterNavigating V${project.version}
+
+# BetterNav enabled/disabled message
+betternav_enabled : {betternav_enabled}
+betternav_disabled: {betternav_disabled}
+
+# Primary and secondary color scheme
+primary_color: {primary_color}
+secondary_color: {secondary_color}
+
+# or keyword
+or: {or}
+
+# error
+error: {error}
+
+# bn help commands
+getlocation_command: {getlocation_command}
+toggle_command: {toggle_command}
+getlocationOrToggleExplanation: {getlocationOrToggleExplanation}
+
+savelocation_command: {savelocation_command}
+save_command: {save_command}
+savelocationOrSaveExplanation: {savelocationOrSaveExplanation}
+
+showlocations_command: {showlocations_command}
+showpossiblelocations_command: {showpossiblelocations_command}
+showlocationsOrShowpossiblelocationsExplanation: {showlocationsOrShowpossiblelocationsExplanation}
+
+showcoordinates_command: {showcoordinates_command}
+getcoordinates_command: {getcoordinates_command}
+showcoordinatesOrGetcoordinatesExplanation: {showcoordinatesOrGetcoordinatesExplanation}
+
+del_command: {del_command}
+delExplanation: {delExplanation}
+
+nav_command: {nav_command}
+goto_command: {goto_command}
+navOrGotoExplanation: {navOrGotoExplanation}
+
+navplayer_command: {navplayer_command}
+navplayerExplanation: {navplayerExplanation}
+
+stopnav_command: {stopnav_command}
+stopnavExplanation: {stopnavExplanation}
+
+# delete commands
+is_deleted: {is_deleted}
+could_not_delete: {could_not_delete}
+
+# navigation commands
+navigating_to: {navigating_to}
+player_not_found: {player_not_found}
+
+# savelocation commands
+usage: {usage}
+savelocation_current: {savelocation_current}
+savelocation_coordinates: {savelocation_coordinates}
+
+# showlocation commands
+has_coordinates: {has_coordinates}
+
+# show location commands
+saved_locations: {saved_locations}
+no_saved_locations: {no_saved_locations}
+locationindex: {locationindex}
+
+# stop navigation commands
+ending_navigation: {ending_navigation}
+cannot_end_navigation: {cannot_end_navigation}
+
+# event handler commands
+welcome_message: {welcome_message}
+actionbar_color: {actionbar_color}
+different_world: {different_world}
+arrived: {arrived}
+your_goal: {your_goal}
+higher: {higher}
+lower: {lower}
+
+# bossbar implementation
+destination_text: {destination_text}
+distance_text: {distance_text}
+
+#only players can send that command
+only_players: {only_players}
+
+# location commands
+location_saved: {location_saved}
+maximum_amount: {maximum_amount}
+error_saving: {error_saving}
+error_navplayer: {error_navplayer}

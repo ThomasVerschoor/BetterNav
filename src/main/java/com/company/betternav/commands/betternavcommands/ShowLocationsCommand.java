@@ -7,8 +7,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.Map;
 
-public class ShowLocationsCommand extends BetterNavCommand {
+public class ShowLocationsCommand extends BetterNavCommand
+{
 
     private final FileHandler fileHandler;
     private final YamlConfiguration config;
@@ -20,43 +22,45 @@ public class ShowLocationsCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages)
+    {
+        String primaryColor = messages.getOrDefault("primary_color", "§d");
+        String secondaryColor = messages.getOrDefault("secondary_color", "§2");
 
-        player.sendMessage("saved locations: ");
+        String message = primaryColor+messages.getOrDefault("saved_locations", "saved locations: ");
+        player.sendMessage(message);
 
         String id = player.getUniqueId().toString();
         String world = player.getWorld().getName();
 
-
         String readPath = fileHandler.getPath() + File.separator+world+File.separator;
         boolean privateWayPoints = config.getBoolean("privateWayPoints");
-        if(privateWayPoints){
+        if(privateWayPoints)
+        {
             readPath = readPath+id+File.separator;
-
         }
-        else{
+        else
+        {
             //create shared directory
             readPath = readPath+File.separator+"shared";
         }
 
-
-
         File folder = new File(readPath);
         File[] listOfFiles = folder.listFiles();
 
-        if(listOfFiles==null){
-            player.sendMessage("There are no saved locations.");
+        if(listOfFiles==null||listOfFiles.length==0)
+        {
+            String message_no_locations = primaryColor + messages.getOrDefault("no_saved_locations", "There are no saved locations");
+            player.sendMessage(message_no_locations);
             return true;
         }
 
-        if (listOfFiles.length==0){
-            player.sendMessage("There are no saved locations.");
-        }
-
-        else{
-            for (File file : listOfFiles) {
-                if (file.isFile()) {
-
+        else
+        {
+            for (File file : listOfFiles)
+            {
+                if (file.isFile())
+                {
                     // get full filename of file
                     String[] fileName = file.getName().split(".json");
 
@@ -65,8 +69,8 @@ public class ShowLocationsCommand extends BetterNavCommand {
                     //System.out.println(file.getName());
 
                     //send message to the player
-                    player.sendMessage("§c§l - §c " + location);
-
+                    String locationInList = secondaryColor + messages.getOrDefault("locationindex", " - ")+ location;
+                    player.sendMessage(locationInList);
                 }
             }
         }

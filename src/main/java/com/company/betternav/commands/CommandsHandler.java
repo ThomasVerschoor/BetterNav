@@ -1,6 +1,5 @@
 package com.company.betternav.commands;
 
-import be.dezijwegel.betteryaml.BetterYaml;
 import com.company.betternav.commands.betternavcommands.*;
 import com.company.betternav.events.NavBossBar;
 import com.company.betternav.navigation.PlayerGoals;
@@ -17,9 +16,11 @@ import java.util.*;
 /*
 Command Handler for BetterNavigating Plugin
  */
-public class CommandsHandler implements CommandExecutor {
+public class CommandsHandler implements CommandExecutor
+{
 
     private final Map<String, BetterNavCommand> commandMap;
+    private final Map<String,String> messages;
 
     /**
      *  Constructor for command handler
@@ -28,21 +29,25 @@ public class CommandsHandler implements CommandExecutor {
      * @param plugin, to get the path extracted
      *
      */
-    public CommandsHandler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist)
+    public CommandsHandler(YamlConfiguration config, PlayerGoals playerGoals, JavaPlugin plugin, HashMap<UUID,Boolean> actionbarplayers, HashMap<UUID, NavBossBar> bblist,Map<String,String> messages)
     {
-        FileHandler fileHandler = new FileHandler(plugin, config);
+        this.messages = messages;
+        FileHandler fileHandler = new FileHandler(plugin, config,messages);
 
-        this.commandMap = new HashMap<String, BetterNavCommand>(){{
+        this.commandMap = new HashMap<String, BetterNavCommand>()
+        {
+            {
             put("bn",               new BnCommand());
             put("getlocation",      new GetLocationCommand(actionbarplayers));
             put("showlocations",    new ShowLocationsCommand(fileHandler, config));
             put("savelocation",     new SaveLocationCommand(fileHandler));
             put("del",              new DelCommand(fileHandler));
-            put("showcoordinates",  new ShowCoordinatesCommand(fileHandler));
+            put("showcoordinates",  new ShowCoordinatesCommand(fileHandler,config));
             put("nav",              new NavCommand(fileHandler, playerGoals, config));
             put("navplayer",        new NavPlayerCommand(config, playerGoals));
             put("stopnav",          new StopNavCommand(playerGoals, bblist));
-        }};
+            }
+        };
     }
 
     /**
@@ -54,12 +59,12 @@ public class CommandsHandler implements CommandExecutor {
      * @return
      */
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
-
+    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args)
+    {
         // check if a player was the sender of the command
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("only players can use that command");
-
+        if (!(sender instanceof Player))
+        {
+            sender.sendMessage( messages.getOrDefault("only_players", "only players can use that command"));
             return true;
         }
 
@@ -70,16 +75,7 @@ public class CommandsHandler implements CommandExecutor {
 
         // Use the command object for cmd execution
         Player player = (Player) sender;
-        return commandMap.get( command ).execute( player, cmd, s, args );
+        return commandMap.get( command ).execute( player, cmd, s, args ,messages);
 
     }
-
-
 }
-
-
-
-
-
-
-

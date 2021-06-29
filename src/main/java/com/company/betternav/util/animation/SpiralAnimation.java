@@ -7,7 +7,8 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 
-public class SpiralAnimation extends Animation {
+public class SpiralAnimation extends Animation
+{
 
     private final Particle particle;
     private final double radius;
@@ -52,7 +53,8 @@ public class SpiralAnimation extends Animation {
             double yOffset = 0;
             while( yOffset <= height)
             {
-                for (double t = 0; t < 2 * Math.PI && yOffset <= height; t += tIncrement) {
+                for (double t = 0; t < 2 * Math.PI && yOffset <= height; t += tIncrement)
+                {
 
                     // Stop execution when the animation is stopped
                     if (!super.isPlaying) return;
@@ -73,10 +75,12 @@ public class SpiralAnimation extends Animation {
 
                     yOffset += yIncrement;
 
-                    try {
+                    try
+                    {
                         Thread.sleep(timePerSpawn);
-                    } catch (InterruptedException ignored) {
                     }
+                    catch (InterruptedException ignored)
+                    {}
                 }
             }
 

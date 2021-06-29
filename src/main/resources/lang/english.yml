@@ -1,0 +1,117 @@
+# -------------------- #
+# Navigating messages  |
+# -------------------- #
+
+betternav_enabled: "§2BetterNav plugin enabled"
+betternav_disabled: "§cBetterNav plugin disabled"
+
+# Primary and secondary color scheme
+primary_color: "§d"
+secondary_color: "§6"
+
+# or word
+or: "§for"
+
+# error command
+error: "/bn to get information about how to use Betternav commands"
+
+# ------------------------- #
+# Explanation /bn command   |
+# ------------------------- #
+
+getlocation_command: "/getlocation"
+toggle_command: "/toggle"
+getlocationOrToggleExplanation: "shows or hides your current location"
+
+savelocation_command: "/savelocation optional:<location>"
+save_command: "/save optional:<location>"
+savelocationOrSaveExplanation: "saves waypoint"
+
+showlocations_command: "/showlocations"
+showpossiblelocations_command: "/showpossiblelocations"
+showlocationsOrShowpossiblelocationsExplanation: "shows list of all saved locations"
+
+showcoordinates_command: "/showcoordinates <location>"
+getcoordinates_command: "/getcoordinates <location>"
+showcoordinatesOrGetcoordinatesExplanation: "shows coordinates of a saved location"
+
+del_command: "/del <location>"
+delExplanation: "deletes a location"
+
+nav_command: "/nav <location>"
+goto_command: "/goto <location>"
+navOrGotoExplanation: "start navigation to location"
+
+navplayer_command: "/navplayer <player>"
+navplayerExplanation: "start navigation to player"
+
+stopnav_command: "/stopnav"
+stopnavExplanation: "stops navigation"
+
+# ----------------- #
+#  Delete command   |
+#------------------ #
+is_deleted: "is deleted"
+could_not_delete: "could not delete location"
+
+# ----------------- #
+#  Nav commands     |
+#------------------ #
+navigating_to: "navigating to"
+player_not_found: "could not find player"
+
+# -------------------------- #
+#  Savelocation commands     |
+#--------------------------- #
+
+usage: "§c§l(!) §cusage "
+savelocation_current: "§c§l(!) §c/savelocation <name of your location> "
+savelocation_coordinates: "§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> "
+
+# -------------------------- #
+#  Showlocation commands     |
+#--------------------------- #
+has_coordinates: "has coordinates"
+
+# -------------------------- #
+#  Show locations           |
+#--------------------------- #
+saved_locations: "saved locations:"
+no_saved_locations: "There are no saved locations"
+locationindex: " - "
+
+# -------------------------- #
+#  Stopnav commands          |
+#--------------------------- #
+ending_navigation: "ending navigation"
+cannot_end_navigation: "cannot end navigation"
+
+# ------------------------------- #
+#  EventHandler commands          |
+#-------------------------------- #
+welcome_message: "Betternav plugin enabled: /bn to get help"
+actionbar_color: "§f"
+different_world: "Target on different world"
+arrived: "You arrived at"
+your_goal: "Your goal is"
+higher: "blocks higher"
+lower: "blocks lower"
+
+# ------------------------------- #
+#  Bossbar                        |
+#-------------------------------- #
+
+destination_text: "Destination:"
+distance_text: "Distance:"
+
+# only players can send that command
+only_players: "Only players can send that command"
+
+# ------------------------------- #
+#  File handling                  |
+#-------------------------------- #
+
+location_saved: "§c§l(!) §c Location <location> saved on:"
+maximum_amount: "Maximum amount of <number> waypoints reached"
+error_saving: "An error occurred by writing a file for your coordinates"
+error_navplayer: "Could not find waypoint <location>, maybe you mean navplayer <player>?"

@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 import java.util.Map;
 import java.util.UUID;
 
-public class GetLocationCommand extends BetterNavCommand {
+public class GetLocationCommand extends BetterNavCommand
+{
 
     // hashmap to hold the players with action bar enabled or not
     private final Map<UUID, Boolean> actionbarPlayers;
@@ -18,7 +19,8 @@ public class GetLocationCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args,Map<String,String> messages)
+    {
         // get the UUID of the player
         UUID PlayersUUID = player.getUniqueId();
 

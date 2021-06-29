@@ -5,15 +5,16 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class BstatsImplementation {
+public class BstatsImplementation
+{
 
     JavaPlugin javaPlugin;
     YamlConfiguration config;
 
-    public BstatsImplementation(JavaPlugin javaPlugin, YamlConfiguration config){
+    public BstatsImplementation(JavaPlugin javaPlugin, YamlConfiguration config)
+    {
         this.javaPlugin = javaPlugin;
         this.config = config;
-
     }
 
     public void run()

@@ -5,7 +5,10 @@ import com.company.betternav.util.FileHandler;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
-public class DelCommand extends BetterNavCommand {
+import java.util.Map;
+
+public class DelCommand extends BetterNavCommand
+{
 
     private final FileHandler fileHandler;
 
@@ -15,23 +18,37 @@ public class DelCommand extends BetterNavCommand {
     }
 
     @Override
-    public boolean execute(Player player, Command cmd, String s, String[] args) {
+    public boolean execute(Player player, Command cmd, String s, String[] args, Map<String,String> messages)
+    {
         // if location to delete provided
-        if (args.length == 1) {
-            try {
+        if (args.length == 1)
+        {
+            try
+            {
                 String location = args[0];
                 boolean deleted = fileHandler.deleteFile(location,player);
-                if(deleted){
-                    player.sendMessage(location+" is deleted");
+                if(deleted)
+                {
+                    String primaryColor = messages.getOrDefault("primary_color", "§d");
+                    String secondaryColor = messages.getOrDefault("secondary_color", "§6");
+                    String message = messages.getOrDefault("is_deleted", "is deleted");
+
+                    message = primaryColor + location + secondaryColor +" "+ message;
+                    player.sendMessage(message);
                 }
-                else{
-                    player.sendMessage("Could not delete location "+location);
+                else
+                {
+                    String primaryColor = messages.getOrDefault("primary_color", "§d");
+                    String message = primaryColor + messages.getOrDefault("could_not_delete", "Could not delete location ");
+
+                    player.sendMessage(message);
                 }
 
-            }catch (IllegalArgumentException e){
-                player.sendMessage("§c§l(!) §cThat is not a valid entity!");
             }
-
+            catch (IllegalArgumentException e)
+            {
+                player.sendMessage( messages.getOrDefault("error", "/bn to get information about how to use Betternav commands"));
+            }
         }
         return true;
     }
