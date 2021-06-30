@@ -99,7 +99,9 @@ public class Event_Handler implements Listener
         // send him message
         if(message)
         {
-            player.sendMessage( messages.getOrDefault("welcome_message", ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help"));
+            String primaryColor = messages.getOrDefault("primary_color", "§d");
+            String welcomeMessage = primaryColor + messages.getOrDefault("welcome_message", ChatColor.LIGHT_PURPLE + "Betternav plugin enabled: /bn to get help");
+            player.sendMessage(welcomeMessage);
         }
 
         // check if player had a navigation set
