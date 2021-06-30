@@ -7,7 +7,7 @@ betternav_disabled: "§cBetterNav plugin disabled"
 
 # Primary and secondary color scheme
 primary_color: "§d"
-secondary_color: "§6"
+secondary_color: "§7"
 
 # or word
 or: "§for"
@@ -64,7 +64,7 @@ player_not_found: "could not find player"
 #  Savelocation commands     |
 #--------------------------- #
 
-usage: "§c§l(!) §cusage "
+usage: "§c§l(!) §cUsage "
 savelocation_current: "§c§l(!) §c/savelocation <name of your location> "
 savelocation_coordinates: "§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> "
 
@@ -76,15 +76,15 @@ has_coordinates: "has coordinates"
 # -------------------------- #
 #  Show locations           |
 #--------------------------- #
-saved_locations: "saved locations:"
+saved_locations: "Saved locations:"
 no_saved_locations: "There are no saved locations"
 locationindex: " - "
 
 # -------------------------- #
 #  Stopnav commands          |
 #--------------------------- #
-ending_navigation: "ending navigation"
-cannot_end_navigation: "cannot end navigation"
+ending_navigation: "Ending navigation"
+cannot_end_navigation: "Cannot end navigation"
 
 # ------------------------------- #
 #  EventHandler commands          |

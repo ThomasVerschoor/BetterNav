@@ -7,7 +7,7 @@ betternav_disabled: "§cBetterNav plugin uitgeschakeld"
 
 # Primary and secondary color scheme
 primary_color: "§d"
-secondary_color: "§6"
+secondary_color: "§7"
 
 # or word
 or: "§fof"
@@ -52,19 +52,19 @@ stopnavExplanation: "stopt navigatie"
 #  Delete command   |
 #------------------ #
 is_deleted: "is verwijderd"
-could_not_delete: "kon locatie niet verwijderen"
+could_not_delete: "Kon locatie niet verwijderen"
 
 # ----------------- #
 #  Nav commands     |
 #------------------ #
-navigating_to: "navigeren naar"
-player_not_found: "kon speler niet vinden"
+navigating_to: "Navigeren naar"
+player_not_found: "Kon speler niet vinden"
 
 # -------------------------- #
 #  Savelocation commands     |
 #--------------------------- #
 
-usage: "§c§l(!) §cgebruik "
+usage: "§c§l(!) §cGebruik "
 savelocation_current: "§c§l(!) §c/savelocation <naam van jouw locatie> "
 savelocation_coordinates: "§c§l(!) §c/savelocation <naam van jouw locatie> <X coordinaat><Y coordinaat><Z coordinaat>"
 
@@ -76,7 +76,7 @@ has_coordinates: "heeft coordinaten"
 # -------------------------- #
 #  Show locations           |
 #--------------------------- #
-saved_locations: "opgeslagen locaties :"
+saved_locations: "Opgeslagen locaties :"
 no_saved_locations: "Er zijn geen opgeslagen locaties"
 locationindex: " - "
 
