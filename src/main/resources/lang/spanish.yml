@@ -6,11 +6,11 @@ betternav_enabled: "§2Plugin BetterNav activado"
 betternav_disabled: "§cPlugin BetterNav desactivado"
 
 # Primary and secondary color scheme
-primary_color: "§d"
-secondary_color: "§7"
+primary_color: "&d"
+secondary_color: "&7"
 
 # or word
-or: "§fo"
+or: "&fo"
 
 # error command
 error: "/bn para obtener información sobre cómo utilizar los comandos de Betternav"

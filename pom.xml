@@ -48,6 +48,13 @@
             <version>1.1.0</version>
         </dependency>
 
+        <!-- BetterCore -->
+        <dependency>
+            <groupId>com.github.betterpluginsspigot</groupId>
+            <artifactId>bettercore</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
         <!-- JSON EN-DECODER GSON-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -86,10 +93,19 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.1</version>
                 <configuration>
+                    <minimizeJar>true</minimizeJar>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>com.company.betternav</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>be.dezijwegel.betteryaml</pattern>
+                            <shadedPattern>com.company.betternav.shade.betteryaml</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>be.betterplugins.core</pattern>
+                            <shadedPattern>com.company.betternav.shade.bettercore</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>

@@ -25,10 +25,19 @@
           </execution>
         </executions>
         <configuration>
+          <minimizeJar>true</minimizeJar>
           <relocations>
             <relocation>
               <pattern>org.bstats</pattern>
               <shadedPattern>com.company.betternav</shadedPattern>
+            </relocation>
+            <relocation>
+              <pattern>be.dezijwegel.betteryaml</pattern>
+              <shadedPattern>com.company.betternav.shade.betteryaml</shadedPattern>
+            </relocation>
+            <relocation>
+              <pattern>be.betterplugins.core</pattern>
+              <shadedPattern>com.company.betternav.shade.bettercore</shadedPattern>
             </relocation>
           </relocations>
           <filters>

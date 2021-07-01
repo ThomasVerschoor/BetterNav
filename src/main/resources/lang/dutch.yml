@@ -6,11 +6,11 @@ betternav_enabled: "§2BetterNav plugin ingeschakeld"
 betternav_disabled: "§cBetterNav plugin uitgeschakeld"
 
 # Primary and secondary color scheme
-primary_color: "§d"
-secondary_color: "§7"
+primary_color: "&d"
+secondary_color: "&7"
 
 # or word
-or: "§fof"
+or: "&fof"
 
 # error command
 error: "/bn om informatie te krijgen over de Betternav commando's"

@@ -2,15 +2,15 @@
 # Navigating messages  |
 # -------------------- #
 
-betternav_enabled: "§2BetterNav plugin enabled"
-betternav_disabled: "§cBetterNav plugin disabled"
+betternav_enabled: "&2BetterNav plugin enabled"
+betternav_disabled: "&cBetterNav plugin disabled"
 
 # Primary and secondary color scheme
-primary_color: "§d"
-secondary_color: "§7"
+primary_color: "&d"
+secondary_color: "&7"
 
 # or word
-or: "§for"
+or: "&for"
 
 # error command
 error: "/bn to get information about how to use Betternav commands"
@@ -64,9 +64,9 @@ player_not_found: "could not find player"
 #  Savelocation commands     |
 #--------------------------- #
 
-usage: "§c§l(!) §cUsage "
-savelocation_current: "§c§l(!) §c/savelocation <name of your location> "
-savelocation_coordinates: "§c§l(!) §c/savelocation <name of your location> <X coordinate> <Z coordinate> "
+usage: "&c&l(!) &cUsage "
+savelocation_current: "&c&l(!) &c/savelocation <name of your location> "
+savelocation_coordinates: "&c&l(!) &c/savelocation <name of your location> <X coordinate> <Z coordinate> "
 
 # -------------------------- #
 #  Showlocation commands     |
@@ -90,7 +90,7 @@ cannot_end_navigation: "Cannot end navigation"
 #  EventHandler commands          |
 #-------------------------------- #
 welcome_message: "Betternav plugin enabled: /bn to get help"
-actionbar_color: "§f"
+actionbar_color: "&f"
 different_world: "Target on different world"
 arrived: "You arrived at"
 your_goal: "Your goal is"
@@ -111,7 +111,7 @@ only_players: "Only players can send that command"
 #  File handling                  |
 #-------------------------------- #
 
-location_saved: "§c§l(!) §c Location <location> saved on:"
+location_saved: "&c&l(!) &c Location <location> saved on:"
 maximum_amount: "Maximum amount of <number> waypoints reached"
 error_saving: "An error occurred by writing a file for your coordinates"
 error_navplayer: "Could not find waypoint <location>, maybe you mean navplayer <player>?"
