@@ -1,0 +1,114 @@
+# -------------------- #
+# Navigating messages  |
+# -------------------- #
+
+# Primary and secondary color scheme
+primary_color: "&d"
+secondary_color: "&7"
+
+# or word
+or: "&fou"
+
+# error command
+error: "/bn pour obtenir des informations sur l'utilisation des commandes Betternav"
+
+# ------------------------- #
+# Explanation /bn command   |
+# ------------------------- #
+
+getlocation_command: "/getlocation"
+toggle_command: "/toggle"
+getlocationOrToggleExplanation: "affiche ou masque votre position actuelle"
+
+savelocation_command: "/savelocation optional:<location>"
+save_command: "/save optional:<location>"
+savelocationOrSaveExplanation: "sauve le waypoint"
+
+showlocations_command: "/showlocations"
+showpossiblelocations_command: "/showpossiblelocations"
+showlocationsOrShowpossiblelocationsExplanation: "affiche la liste de tous les emplacements enregistrés"
+
+showcoordinates_command: "/showcoordinates <location>"
+getcoordinates_command: "/getcoordinates <location>"
+showcoordinatesOrGetcoordinatesExplanation: "affiche les coordonnées d'un emplacement enregistré"
+
+del_command: "/del <location>"
+delExplanation: "supprime un emplacement"
+
+nav_command: "/nav <location>"
+goto_command: "/goto <location>"
+navOrGotoExplanation: "lancer la navigation vers l'emplacement"
+
+navplayer_command: "/navplayer <player>"
+navplayerExplanation: "lancer la navigation vers le lecteur"
+
+stopnav_command: "/stopnav"
+stopnavExplanation: "arrête la navigation"
+
+# ----------------- #
+#  Delete command   |
+#------------------ #
+is_deleted: "est supprimé"
+could_not_delete: "Impossible de supprimer l'emplacement"
+
+# ----------------- #
+#  Nav commands     |
+#------------------ #
+navigating_to: "naviguer vers"
+player_not_found: "Impossible de trouver le joueur"
+
+# -------------------------- #
+#  Savelocation commands     |
+#--------------------------- #
+
+usage: "&c&l(!) &cUsage "
+savelocation_current: "&c&l(!) &c/savelocation <nom de votre emplacement> "
+savelocation_coordinates: "&c&l(!) &c/savelocation <nom de votre emplacement> <X coordonner> <Z coordonner> "
+
+# -------------------------- #
+#  Showlocation commands     |
+#--------------------------- #
+has_coordinates: "a des coordonnées"
+
+# -------------------------- #
+#  Show locations           |
+#--------------------------- #
+saved_locations: "Lieux enregistrés:"
+no_saved_locations: "Il n'y a pas de lieux enregistrés"
+locationindex: " - "
+
+# -------------------------- #
+#  Stopnav commands          |
+#--------------------------- #
+ending_navigation: "Terminer la navigation"
+cannot_end_navigation: "Impossible de terminer la navigation"
+
+# ------------------------------- #
+#  EventHandler commands          |
+#-------------------------------- #
+welcome_message: "Plugin Betternav activé: /bn pour obtenir de l'aide"
+actionbar_color: "&f"
+different_world: "Cible sur un monde différent"
+arrived: "Vous êtes arrivé à"
+your_goal: "Votre objectif est"
+higher: "blocs plus haut"
+lower: "blocs plus bas"
+
+# ------------------------------- #
+#  Bossbar                        |
+#-------------------------------- #
+
+destination_text: "Destination:"
+distance_text: "Distance:"
+
+# only players can send that command
+only_players: "Seuls les joueurs peuvent envoyer cette commande"
+
+# ------------------------------- #
+#  File handling                  |
+#-------------------------------- #
+
+location_saved: "&c&l(!) &c Emplacement <location> enregistré le:"
+maximum_amount: "Nombre maximum de <number> waypoints atteints"
+error_saving: "Une erreur s'est produite lors de l'écriture d'un fichier pour vos coordonnées"
+error_navplayer: "Impossible de trouver le waypoint <location>, peut-être voulez-vous dire navplayer <joueur>?"
