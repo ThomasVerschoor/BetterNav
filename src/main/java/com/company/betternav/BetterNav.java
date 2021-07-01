@@ -97,7 +97,7 @@ public class BetterNav extends JavaPlugin {
         getCommand("stopnav").setExecutor(commands);
 
         // display a plugin enabled message
-        getServer().getConsoleSender().sendMessage( messages.getOrDefault("betternav_enabled", ChatColor.GREEN+"BetterNav plugin enabled") );
+        getServer().getConsoleSender().sendMessage( ChatColor.GREEN+"BetterNav plugin enabled" );
 
         // implement bstats
         BstatsImplementation bstatsImplementation = new BstatsImplementation(this,config);

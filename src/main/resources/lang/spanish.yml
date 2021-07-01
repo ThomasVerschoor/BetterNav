@@ -2,9 +2,6 @@
 # Navigating messages  |
 # -------------------- #
 
-betternav_enabled: "§2Plugin BetterNav activado"
-betternav_disabled: "§cPlugin BetterNav desactivado"
-
 # Primary and secondary color scheme
 primary_color: "&d"
 secondary_color: "&7"

@@ -2,9 +2,6 @@
 # Navigating messages  |
 # -------------------- #
 
-betternav_enabled: "&2BetterNav plugin enabled"
-betternav_disabled: "&cBetterNav plugin disabled"
-
 # Primary and secondary color scheme
 primary_color: "&d"
 secondary_color: "&7"
