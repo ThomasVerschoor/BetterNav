@@ -20,7 +20,8 @@ welcomeMessage : {welcomeMessage}
 # BossBar Navigating style
 BossBar : {BossBar}
 
-# BossBar coloring
+# BossBar coloring: possible colors are: blue, green, pink, white, purple, red, yellow
+# More information can be found over here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
 BossBar_color: {BossBar_color}
 
 # Distance to waypoint before ending navigation
@@ -29,7 +30,8 @@ Distance : {Distance}
 # Whether or not animations are enabled
 enableAnimations : {enableAnimations}
 
-# language
+# language: implemented languages are dutch, english, german & spanish
+# More information can be found over here: https://github.com/ThomasVerschoor/BetterNav/tree/main/src/main/resources/lang
 language : {language}
 
 # check for height
