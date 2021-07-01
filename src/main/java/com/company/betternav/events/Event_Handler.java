@@ -108,7 +108,7 @@ public class Event_Handler implements Listener
         Goal hadNav = playerGoals.getPlayerGoal(player.getUniqueId());
         if(hadNav!=null)
         {
-            NavBossBar bb = new NavBossBar(plugin,messages);
+            NavBossBar bb = new NavBossBar(plugin,config,messages);
 
             // put the bar on the list
             bblist.put(player.getUniqueId(),bb);
@@ -214,7 +214,7 @@ public class Event_Handler implements Listener
         distance = round(distance,2);
 
         //create new bossbar
-        NavBossBar bb = new NavBossBar(plugin,messages);
+        NavBossBar bb = new NavBossBar(plugin,config,messages);
 
         //check if player exists
         if(bblist.containsKey(uuid))

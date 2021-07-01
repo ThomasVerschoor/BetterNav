@@ -20,6 +20,9 @@ welcomeMessage : {welcomeMessage}
 # BossBar Navigating style
 BossBar : {BossBar}
 
+# BossBar coloring
+BossBar_color: {BossBar_color}
+
 # Distance to waypoint before ending navigation
 Distance : {Distance}
 

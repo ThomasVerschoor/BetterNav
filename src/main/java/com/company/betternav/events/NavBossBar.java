@@ -5,16 +5,21 @@ import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 
+import static org.bukkit.Bukkit.getServer;
+
 public class NavBossBar
 {
+
     private int taskID = -1;
     private final JavaPlugin plugin;
     private BossBar bar;
+    private final YamlConfiguration config;
     private final Map<String,String>messages;
 
     public String createMsg(String goal,double distance)
@@ -31,8 +36,9 @@ public class NavBossBar
         return message;
     }
 
-    public NavBossBar(JavaPlugin plugin, Map<String,String> messages){
+    public NavBossBar(JavaPlugin plugin, YamlConfiguration config, Map<String,String> messages){
         this.plugin = plugin;
+        this.config = config;
         this.messages = messages;
     }
 
@@ -47,7 +53,7 @@ public class NavBossBar
     public void createBar(String goal, double distance)
     {
         String msg = createMsg(goal,distance);
-        bar = Bukkit.createBossBar(msg,BarColor.BLUE,BarStyle.SOLID);
+        bar = Bukkit.createBossBar(msg,getBarcolor(),BarStyle.SOLID);
         bar.setVisible(true);
     }
 
@@ -64,5 +70,25 @@ public class NavBossBar
     public void delete(Player player)
     {
         bar.removePlayer(player);
+    }
+
+    /**
+     * Allows users to change color of bossbar
+     *
+     */
+    public BarColor getBarcolor()
+    {
+        BarColor color = null;
+        try
+        {
+            color = BarColor.valueOf(config.getString("BossBar_color", "blue").toUpperCase());
+        }
+        catch (IllegalArgumentException ex)
+        {
+            getServer().getConsoleSender().sendMessage("Color '" + config.getString("BarColor") + "' doesn't exist, supported colors are pink, blue, red, green, yellow, purple, white");
+            color = BarColor.BLUE;
+        }
+        return color;
+
     }
 }
