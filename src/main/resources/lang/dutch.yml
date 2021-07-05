@@ -61,9 +61,9 @@ player_not_found: "Kon speler niet vinden"
 #  Savelocation commands     |
 #--------------------------- #
 
-usage: "§c§l(!) §cGebruik "
-savelocation_current: "§c§l(!) §c/savelocation <naam van jouw locatie> "
-savelocation_coordinates: "§c§l(!) §c/savelocation <naam van jouw locatie> <X coordinaat><Y coordinaat><Z coordinaat>"
+usage: "&c&l(!) §cGebruik "
+savelocation_current: "&c&l(!) &c/savelocation <naam van jouw locatie> "
+savelocation_coordinates: "&c&l(!) &c/savelocation <naam van jouw locatie> <X coordinaat><Y coordinaat><Z coordinaat>"
 
 # -------------------------- #
 #  Showlocation commands     |
@@ -87,7 +87,7 @@ cannot_end_navigation: "kan navigatie niet beëindigen"
 #  EventHandler commands          |
 #-------------------------------- #
 welcome_message: "Betternav plugin ingeschakeld: /bn om hulp te krijgen"
-actionbar_color: "§f"
+actionbar_color: "&f"
 different_world: "Doelwit op andere wereld"
 arrived: "Je bent aangekomen bij"
 your_goal: "Je doel is"
@@ -108,7 +108,7 @@ only_players: "Alleen spelers kunnen dat commando sturen"
 #  File handling                  |
 #-------------------------------- #
 
-location_saved: "§c§l(!) §c Locatie <location> opgeslagen op :"
+location_saved: "&c&l(!) &c Locatie <location> opgeslagen op :"
 maximum_amount: "Maximum aantal van <number> waypointen bereikt"
 error_saving: "Er is een fout opgetreden bij het schrijven van een bestand voor uw coördinaten"
 error_navplayer: "Kon waypoint <location> niet vinden, misschien bedoel je navplayer <player>?"

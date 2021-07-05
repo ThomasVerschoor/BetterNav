@@ -61,9 +61,9 @@ player_not_found: "no se pudo encontrar al jugador"
 #  Savelocation commands     |
 #--------------------------- #
 
-usage: "§c§l(!) §cUso "
-savelocation_current: "§c§l(!) §c/savelocation <name of your location> "
-savelocation_coordinates: "§c§l(!) §c/savelocation <nombre de su localidad> <X coordenadas> <Z coordenadas> "
+usage: "&c&l(!) &cUso "
+savelocation_current: "&c&l(!) &c/savelocation <name of your location> "
+savelocation_coordinates: "&c&l(!) &c/savelocation <nombre de su localidad> <X coordenadas> <Z coordenadas> "
 
 # -------------------------- #
 #  Showlocation commands     |
@@ -87,7 +87,7 @@ cannot_end_navigation: "No se puede terminar la navegación"
 #  EventHandler commands          |
 #-------------------------------- #
 welcome_message: "Plugin Betternav habilitado: /bn para obtener ayuda"
-actionbar_color: "§f"
+actionbar_color: "&f"
 different_world: "Objetivo en un mundo diferente"
 arrived: "Has llegado a"
 your_goal: "Su objetivo es"
@@ -108,7 +108,7 @@ only_players: "Sólo los jugadores pueden enviar esa orden"
 #  File handling                  |
 #-------------------------------- #
 
-location_saved: "§c§l(!) §c Ubicación <location> guardada en:"
+location_saved: "&c&l(!) &c Ubicación <location> guardada en:"
 maximum_amount: "Máxima cantidad de <number> waypoints alcanzados"
 error_saving: "Se ha producido un error al escribir un archivo para sus coordenadas"
 error_navplayer: "No se ha podido encontrar el waypoint <location>, ¿quizás te refieres al navplayer <jugador>?"

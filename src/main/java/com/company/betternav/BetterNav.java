@@ -46,6 +46,11 @@ public class BetterNav extends JavaPlugin {
         ValidationHandler validation = new ValidationHandler()
                 .addValidator("primary_color", colorValidator)
                 .addValidator("secondary_color", colorValidator)
+                .addValidator("usage",colorValidator)
+                .addValidator("savelocation_current",colorValidator)
+                .addValidator("savelocation_coordinates",colorValidator)
+                .addValidator("actionbar_color",colorValidator)
+                .addValidator("location_saved",colorValidator)
                 .addValidator("or", colorValidator);
 
         // Auto-updates the config on the server and loads a YamlConfiguration and File. Optionally, a boolean can be passed, which enables or disables logging.
