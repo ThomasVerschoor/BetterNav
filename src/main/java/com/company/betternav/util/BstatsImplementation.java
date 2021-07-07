@@ -47,5 +47,19 @@ public class BstatsImplementation
         boolean welcome_message = config.getBoolean("welcomeMessage");
         metrics.addCustomChart(new SimplePie("welcome_message",()-> String.valueOf(welcome_message)));
 
+        // get the setting if animations are enabled or not
+        boolean enableAnimations = config.getBoolean("enableAnimations");
+        metrics.addCustomChart(new SimplePie("animations",()-> String.valueOf(enableAnimations)));
+
+        // get the color of the bossbar
+        String bossbarColor = config.getString("BossBar_color");
+        metrics.addCustomChart(new SimplePie("bossbar_color",()-> bossbarColor));
+
+        String language = config.getString("language");
+        metrics.addCustomChart(new SimplePie("language",()-> language));
+
+        Boolean heightCheck = config.getBoolean("height_check");
+        metrics.addCustomChart(new SimplePie("height_check",()-> String.valueOf(heightCheck)));
+
     }
 }
