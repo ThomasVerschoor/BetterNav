@@ -1,7 +1,6 @@
 package com.company.betternav;
 
 import be.dezijwegel.betteryaml.BetterLang;
-import be.dezijwegel.betteryaml.BetterYaml;
 import be.dezijwegel.betteryaml.OptionalBetterYaml;
 import be.dezijwegel.betteryaml.validation.ValidationHandler;
 import be.dezijwegel.betteryaml.validation.validator.Validator;
@@ -16,7 +15,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
