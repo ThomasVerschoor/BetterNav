@@ -1,4 +1,4 @@
-# BetterNav (240 downloads)
+# BetterNav (350 downloads)
 Source code of the spigot navigation plugin "BetterNav"
 
 What is BetterNav?
@@ -17,6 +17,7 @@ This plugin is functional and has been tested on several Spigot versions. Bukkit
 | Spigot version        | BetterNav version           |
 | ------------- |:-------------:| 
 | 1.16      | All current versions | 
+| 1.17      | All current versions | 
 
 
 BetterNav versions with key upgrades
@@ -28,6 +29,8 @@ BetterNav versions with key upgrades
 | V1.0.1    | Implemented Permissions      | 
 | V1.0.2 | Bug fix when servers are using custom worlds and proper Y-coordinate handling. Illegal characters in your location string are replaced as well.    |   
 | V1.0.3    | Added possibility to see if your goal is higher or lower than your current location. Particle animations when people start navigating or get at their goal | 
+| V1.0.4    | Implemented Language or custom file and possibility to change color scheme      | 
+| V1.0.5    | Implemented extended Bstats statistics & bug fixes (validators on files)     | 
 
 How to contribute
 --------------------
