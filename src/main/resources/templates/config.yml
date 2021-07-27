@@ -38,6 +38,12 @@ language : {language}
 # check for height
 height_check: {height_check}
 
+# automatically save your deathlocations
+death_location_save: {death_location_save}
+
+# start navigation to deathlocation on death
+death_nav: {death_nav}
+
 
 
 
