@@ -96,7 +96,6 @@ public class FileHandler
             // use the shared directory
             else
             {
-
                 // create/use the shared directory
                 PlayerPath = PlayerPath+File.separator+"shared";
             }
@@ -117,7 +116,7 @@ public class FileHandler
             int fileCount = directory.list().length;
 
             // check if the number of files
-            if(fileCount<=maximumWayPoints)
+            if(fileCount<=maximumWayPoints || playerGoal.getName().equals("death_location"))
             {
 
                 // get x and z location (string)
