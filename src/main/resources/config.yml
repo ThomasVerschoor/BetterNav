@@ -2,7 +2,7 @@ privateWayPoints: true
 maximumWaypoints: 10
 welcomeMessage: true
 BossBar: 1
-BossBar_color: blue
+BossBar_color: purple
 Distance: 5
 enableAnimations: true
 language: english
