@@ -2,10 +2,13 @@ package com.company.betternav.events;
 
 import com.company.betternav.navigation.Goal;
 import com.company.betternav.bossbarcalculators.IBossBarCalculator;
+import com.company.betternav.navigation.Navigation;
+import com.company.betternav.navigation.PlayerGoal;
 import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.bossbarcalculators.AdvancedBossbarCalculator;
 import com.company.betternav.bossbarcalculators.BasicCalculator;
 import com.company.betternav.bossbarcalculators.IdeaBossBarCalculator;
+import com.company.betternav.util.FileHandler;
 import com.company.betternav.util.animation.SpiralAnimation;
 import com.company.betternav.util.animation.location.PlayerLocation;
 import net.md_5.bungee.api.ChatMessageType;
@@ -17,6 +20,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -303,5 +307,39 @@ public class Event_Handler implements Listener
                         1.3,1.8,5000, 1000,5
                 ).startAnimation();
         }
+    }
+
+    /**
+     * Save death locations on death of player
+     * **/
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event)
+    {
+        // if saving deatlocations is true
+        if(config.getBoolean("death_location_save"))
+        {
+            // get the player who died
+            Player player = event.getEntity().getPlayer();
+
+            // get his deathlocation
+            assert player != null;
+            PlayerGoal deathloc = new PlayerGoal("death_location",player);
+
+            FileHandler fileHandler = new FileHandler(plugin,config,messages);
+            fileHandler.writeLocationFile(player,deathloc);
+
+            // if needed to automatically start navigation to deathlocation is enabled
+            if(config.getBoolean("death_nav"))
+            {
+
+                Goal playerGoal = new Goal("death_location",deathloc.getLocation());
+
+                Navigation nav = new Navigation(playerGoals,player,playerGoal,config);
+                nav.startNavigation();
+            }
+
+        }
+
+
     }
 }

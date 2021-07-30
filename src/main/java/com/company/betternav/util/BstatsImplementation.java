@@ -61,5 +61,11 @@ public class BstatsImplementation
         Boolean heightCheck = config.getBoolean("height_check");
         metrics.addCustomChart(new SimplePie("height_check",()-> String.valueOf(heightCheck)));
 
+        Boolean deathLoc = config.getBoolean("death_location_save");
+        metrics.addCustomChart(new SimplePie("death_locations",()-> String.valueOf(deathLoc)));
+
+        Boolean deathNav = config.getBoolean("death_nav");
+        metrics.addCustomChart(new SimplePie("death_nav",()-> String.valueOf(deathNav)));
+
     }
 }

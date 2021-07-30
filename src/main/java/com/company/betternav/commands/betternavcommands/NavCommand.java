@@ -3,6 +3,7 @@ package com.company.betternav.commands.betternavcommands;
 import com.company.betternav.commands.BetterNavCommand;
 import com.company.betternav.navigation.Goal;
 import com.company.betternav.navigation.LocationWorld;
+import com.company.betternav.navigation.Navigation;
 import com.company.betternav.navigation.PlayerGoals;
 import com.company.betternav.util.FileHandler;
 import com.company.betternav.util.animation.LineAnimation;
@@ -82,13 +83,18 @@ public class NavCommand extends BetterNavCommand
 
                 player.sendMessage(message);
 
-                this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
+                Navigation nav = new Navigation(playerGoals,player,playerGoal,config);
+                nav.startNavigation();
+
+                /*this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
 
                 if (config.getBoolean("enableAnimations"))
                     new LineAnimation(
                             new PlayerLocation(player), new StaticLocation(playerGoal.getLocation()),
                             Particle.COMPOSTER, 7.0, 0.05, 0.5, 500, 3
                     ).startAnimation();
+
+                 */
 
             }
             catch (IllegalArgumentException e)
