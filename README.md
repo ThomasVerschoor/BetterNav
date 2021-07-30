@@ -1,4 +1,4 @@
-# BetterNav (350 downloads)
+# BetterNav (400 downloads)
 Source code of the spigot navigation plugin "BetterNav"
 
 What is BetterNav?
@@ -31,6 +31,7 @@ BetterNav versions with key upgrades
 | V1.0.3    | Added possibility to see if your goal is higher or lower than your current location. Particle animations when people start navigating or get at their goal | 
 | V1.0.4    | Implemented Language or custom file and possibility to change color scheme      | 
 | V1.0.5    | Implemented extended Bstats statistics & bug fixes (validators on files)     | 
+| V1.0.6    | Added saving of death_location & start of navigating on respawn. Changed basic coloring scheme     | 
 
 How to contribute
 --------------------
