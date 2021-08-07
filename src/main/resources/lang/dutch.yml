@@ -56,6 +56,7 @@ could_not_delete: "Kon locatie niet verwijderen"
 #------------------ #
 navigating_to: "Navigeren naar"
 player_not_found: "Kon speler niet vinden"
+nav_to_yourself: "Kan niet naar jezelf navigeren"
 
 # -------------------------- #
 #  Savelocation commands     |

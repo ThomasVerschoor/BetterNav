@@ -4,11 +4,7 @@ import com.company.betternav.commands.BetterNavCommand;
 import com.company.betternav.navigation.Navigation;
 import com.company.betternav.navigation.PlayerGoal;
 import com.company.betternav.navigation.PlayerGoals;
-import com.company.betternav.util.animation.LineAnimation;
-import com.company.betternav.util.animation.location.PlayerLocation;
-import com.company.betternav.util.animation.location.StaticLocation;
 import org.bukkit.Bukkit;
-import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -37,18 +33,25 @@ public class NavPlayerCommand extends BetterNavCommand
             try
             {
 
-                // get the UUID of the player
-                UUID PlayersUUID = player.getUniqueId();
-
                 // get the location needed
                 String playerName = args[0];
 
                 Player navto = Bukkit.getPlayer(playerName);
 
+                // if location is null
                 if(navto==null)
                 {
                     String primaryColor = messages.getOrDefault("primary_color", "§d");
                     String message = primaryColor + messages.getOrDefault("player_not_found", "Could not find player");
+                    player.sendMessage(message);
+                    return true;
+                }
+
+                //if player casts navplayer command to himself
+                if(playerName.equals(navto.getName()))
+                {
+                    String primaryColor = messages.getOrDefault("primary_color", "§d");
+                    String message = primaryColor + messages.getOrDefault("nav_to_yourself", "Cannot cast navigation to yourself");
                     player.sendMessage(message);
                     return true;
                 }
@@ -64,17 +67,6 @@ public class NavPlayerCommand extends BetterNavCommand
 
                 Navigation nav = new Navigation(playerGoals,player,playerGoal,config);
                 nav.startNavigation();
-                /*
-
-                this.playerGoals.addPlayerGoal(PlayersUUID, playerGoal);
-
-                if (config.getBoolean("enableAnimations"))
-                    new LineAnimation(
-                            new PlayerLocation(player), new StaticLocation(playerGoal.getLocation()),
-                            Particle.COMPOSTER, 7.0, 0.05, 0.5, 500, 3
-                    ).startAnimation();
-
-                 */
 
             }
             catch (IllegalArgumentException e)

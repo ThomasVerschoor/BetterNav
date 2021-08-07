@@ -56,6 +56,7 @@ could_not_delete: "konnte Standort nicht löschen"
 #------------------ #
 navigating_to: "navigieren zu"
 player_not_found: "konnte keinen Player finden"
+nav_to_yourself: "Kann Navigation nicht auf sich selbst übertragen"
 
 # -------------------------- #
 #  Savelocation commands     |

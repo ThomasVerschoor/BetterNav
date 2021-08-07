@@ -56,6 +56,7 @@ could_not_delete: "Impossible de supprimer l'emplacement"
 #------------------ #
 navigating_to: "naviguer vers"
 player_not_found: "Impossible de trouver le joueur"
+nav_to_yourself: "Impossible de diffuser la navigation sur vous-même"
 
 # -------------------------- #
 #  Savelocation commands     |

@@ -56,6 +56,7 @@ could_not_delete: "no se pudo borrar la ubicación"
 #------------------ #
 navigating_to: "navegando hacia"
 player_not_found: "no se pudo encontrar al jugador"
+nav_to_yourself: "No se puede enviar la navegación a ti mismo"
 
 # -------------------------- #
 #  Savelocation commands     |
