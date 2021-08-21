@@ -18,6 +18,7 @@ This plugin is functional and has been tested on several Spigot versions. Bukkit
 | ------------- |:-------------:| 
 | 1.16      | All current versions | 
 | 1.17      | All current versions | 
+| 1.17.1      | All current versions | 
 
 
 BetterNav versions with key upgrades
