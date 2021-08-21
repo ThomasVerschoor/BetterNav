@@ -1,0 +1,97 @@
+#
+#  ____       _   _            _   _
+# |  _ \     | | | |          | \ | |
+# | |_) | ___| |_| |_ ___ _ __|  \| | __ ___   __
+# |  _ < / _ \ __| __/ _ \ '__| . ` |/ _` \ \ / /
+# | |_) |  __/ |_| ||  __/ |  | |\  | (_| |\ V /
+# |____/ \___|\__|\__\___|_|  |_| \_|\__,_| \_/
+#
+# BetterNavigating V1.0.1
+
+# 主次颜色
+primary_color: "§d"
+secondary_color: "§b"
+
+# or keyword
+or: "§for"
+
+# 错误
+error: "/bn 获取如何使用Betternav命令的信息"
+
+# bn帮助命令
+getlocation_command: "/getlocation"
+toggle_command: "/toggle"
+getlocationOrToggleExplanation: "显示或隐藏当前位置"
+
+savelocation_command: "/savelocation optional:<坐标>"
+save_command: "/save optional:<坐标>"
+savelocationOrSaveExplanation: "保存路径"
+
+showlocations_command: "/showlocations"
+showpossiblelocations_command: "/showpossiblelocations"
+showlocationsOrShowpossiblelocationsExplanation: "显示所有保存位置的列表"
+
+showcoordinates_command: "/showcoordinates <坐标>"
+getcoordinates_command: "/getcoordinates <坐标>"
+showcoordinatesOrGetcoordinatesExplanation: "shows coordinates of a saved 坐标"
+
+del_command: "/del <坐标>"
+delExplanation: "deletes a 坐标"
+
+nav_command: "/nav <坐标>"
+goto_command: "/goto <坐标>"
+navOrGotoExplanation: "开始导航 坐标"
+
+navplayer_command: "/navplayer <玩家>"
+navplayerExplanation: "开始导航到玩家"
+
+stopnav_command: "/stopnav"
+stopnavExplanation: "停止导航"
+
+# 删除命令
+is_deleted: "被删除"
+could_not_delete: "不能删除坐标"
+
+# 导航命令
+navigating_to: "导航到"
+player_not_found: "找不到玩家"
+nav_to_yourself: "無法將導航投射給自己"
+
+# 保存坐标 命令
+usage: "§c§l(!) §c使用 "
+savelocation_current: "§c§l(!) §c/savelocation <坐标> "
+savelocation_coordinates: "§c§l(!) §c/savelocation <坐标> <X> <Z> "
+
+# 显示坐标
+has_coordinates: "有坐标"
+
+# 显示坐标命令
+saved_locations: "保存坐标:"
+no_saved_locations: "没有保存的坐标"
+locationindex: " - "
+
+# stop navigation commands
+ending_navigation: "结束导航"
+cannot_end_navigation: "不能结束的导航"
+
+# event handler commands
+welcome_message: "Betternav插件启用: /bn 获取帮助"
+actionbar_color: "§f"
+different_world: "针对不同的世界"
+arrived: "你到达"
+your_goal: "你的目标是"
+higher: "方块高度"
+lower: "方块低度"
+
+# bossbar实现
+destination_text: "目的地:"
+distance_text: "距离:"
+
+#只有玩家才能发送这个命令
+only_players: "只有玩家才能发送这个命令"
+
+# 坐标 命令
+location_saved: "§c§l(!) §c 坐标 <location> 保存:"
+maximum_amount: "达到的路径点的最大数量 <number>"
+error_saving: "为坐标写入文件时发生错误"
+error_navplayer: "无法找到导航点 <location>, 也许你是指玩家 <player>?"

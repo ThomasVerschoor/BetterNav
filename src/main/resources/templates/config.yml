@@ -30,7 +30,7 @@ Distance : {Distance}
 # Whether or not animations are enabled
 enableAnimations : {enableAnimations}
 
-# language: implemented languages are "dutch", "english", "german","french" & "spanish"
+# language: implemented languages are "dutch", "english", "german","french","spanish" & "chinese"
 # delete your messages.yml file and reload the plugin to change the language file
 # More information can be found over here: https://github.com/ThomasVerschoor/BetterNav/tree/main/src/main/resources/lang
 language : {language}
