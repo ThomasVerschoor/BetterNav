@@ -1,4 +1,4 @@
-# BetterNav (400 downloads)
+# BetterNav (500+ downloads)
 Source code of the spigot navigation plugin "BetterNav"
 
 What is BetterNav?
@@ -32,6 +32,7 @@ BetterNav versions with key upgrades
 | V1.0.4    | Implemented Language or custom file and possibility to change color scheme      | 
 | V1.0.5    | Implemented extended Bstats statistics & bug fixes (validators on files)     | 
 | V1.0.6    | Added saving of death_location & start of navigating on respawn. Changed basic coloring scheme     | 
+| V1.0.7    | Bug fixed on navigating to yourself & added Chinese language support     | 
 
 How to contribute
 --------------------
