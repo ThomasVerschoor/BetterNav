@@ -48,7 +48,7 @@ public class NavPlayerCommand extends BetterNavCommand
                 }
 
                 //if player casts navplayer command to himself
-                if(playerName.equals(navto.getName()))
+                if(player.getName().equals(navto.getName()))
                 {
                     String primaryColor = messages.getOrDefault("primary_color", "§d");
                     String message = primaryColor + messages.getOrDefault("nav_to_yourself", "Cannot cast navigation to yourself");

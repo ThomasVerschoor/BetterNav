@@ -6,7 +6,7 @@
 
     <groupId>com.company.betternav</groupId>
     <artifactId>BetterNav</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 
     <!-- Force Maven to consistently use JDK 8 and UTF-8 encoding to prevent warnings -->
     <properties>
