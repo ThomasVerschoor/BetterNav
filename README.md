@@ -1,4 +1,4 @@
-# BetterNav (800+ downloads)
+# BetterNav (1300+ downloads)
 Source code of the spigot navigation plugin "BetterNav"
 
 What is BetterNav?
@@ -19,6 +19,7 @@ This plugin is functional and has been tested on several Spigot versions. Bukkit
 | 1.16      | All current versions | 
 | 1.17      | All current versions | 
 | 1.18      | Latest releases tested, previous versions should still work (no guarantees) | 
+| 1.19      | Latest releases tested, previous versions should still work (no guarantees) | 
 
 
 BetterNav versions with key upgrades
@@ -35,6 +36,7 @@ BetterNav versions with key upgrades
 | V1.0.6    | Added saving of death_location & start of navigating on respawn. Changed basic coloring scheme     | 
 | V1.0.7    | Bug fixed on navigating to yourself & added Chinese language support     | 
 | V1.0.8    | Solved navplayer bug (Minecraft 1.18)     | 
+| V1.0.9    | Required update dependencies + improved Chinese translation     | 
 
 How to contribute
 --------------------
